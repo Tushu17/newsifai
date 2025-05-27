@@ -12,3 +12,14 @@ Tables :-
    every news would be stored here and it will have many fields
 2. news_fetch_config
    basically a city, country or place name that i want to loop though the function
+
+about text-
+i'm using roboto something
+
+color palettle-
+
+- for background i'll be using bg-gray-950 in dark and bg-200 for light
+- for text i'll be usign gray-100 or 300 in dark and hover is 500 and in light theme 600 and 900
+- for border i'm using gray-600
+- Zarla says logo color is 0e1f3b and 437cd6
+- onhover i'm using orange 500

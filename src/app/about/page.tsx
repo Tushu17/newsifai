@@ -19,7 +19,8 @@ const About = () => {
         starts doing it i'll update the website but till then i'm planning to
         make it completly automated no touching to code, will just add state,
         city or place whatever if somebody ask in supabase but apart from it i
-        dont think i'll do anything much.
+        dont think i'll do anything much. and why the fuck my local host eating
+        this much data.🤨
       </p>
     </div>
   );
