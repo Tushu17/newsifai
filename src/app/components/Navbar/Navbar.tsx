@@ -11,9 +11,9 @@ const Navbar = () => {
     console.log(menuOpen);
   };
   return (
-    <nav className="flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md  sticky top-0 border-b-1   text-gray-900 dark:text-gray-200 backdrop-blur-md border-gray-600 dark:bg-gray-950 bg-gray-200">
-      <div className="container mt-3">
-        {/* This div is for mid and big screen navbar styling */}
+    <nav className="flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md  sticky top-0 border-b-1   text-gray-900  dark:text-gray-200 backdrop-blur-md border-gray-200 dark:border-gray-600 dark:bg-gray-950 bg-gray-200">
+      <div className="container mt-1 md:mt-3">
+        {/* Desktop Navbar */}
         <div className="grid-cols-2 hidden md:block w-screen h-auto">
           <div className="h-15 flex justify-between pr-4 items-end dark:text-gray-200 text-gray-900">
             <div className="logo ml-3">
@@ -52,7 +52,7 @@ const Navbar = () => {
                 href="#"
                 className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
               >
-                Archeives
+                Archives
               </a>
               <a
                 href="#"
@@ -101,47 +101,109 @@ const Navbar = () => {
               </a>
             </div>
           </div>
+        </div>
 
-          {/* this is for small screen navbar styling */}
-          {/* <div className=" dark:bg-gray-900 w-h-screen h-8 md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                id="menu-icon"
-                className={`h-6 w-6 ${menuOpen ? "hidden" : "block"}`}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+        {/* Mobile Navbar */}
+        <div className="md:hidden w-full">
+          {/* Mobile Header Bar */}
+          <div className="flex justify-between items-center px-4 py-3 ">
+            {/* Logo */}
+            <div className="flex items-center">
+              <div className="w-10 h-10 ">
+                <span className="text-gray-900 dark:text-gray-200 font-bold text-lg">
+                  <img
+                    className=""
+                    width={60}
+                    height={40}
+                    src="/logo.png"
+                    alt=""
+                  />
+                </span>
+              </div>
+            </div>
+
+            {/* Action Icons */}
+            <div className="flex items-center space-x-4 gray-900">
+              {/* Search Icon */}
+              <button className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200">
+                <svg
+                  className="w-6 h-6 text-gray-900 dark:text-gray-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+              <button className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200 relative">
+                <svg
+                  className="w-6 h-6 text-gray-900 dark:text-gray-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 17h5l-5 5-5-5h5zm-5-10a5 5 0 110 10h5a5 5 0 01-10 0z"
+                  />
+                </svg>
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+              </button>
+
+              {/* Star/Favorites Icon */}
+              <button className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200">
+                <svg
+                  className="w-6 h-6 text-gray-900 dark:text-gray-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                  />
+                </svg>
+              </button>
+
+              {/* Menu Hamburger */}
+              <button
+                onClick={toggleMenu}
+                className="rounded-full bg-black dark:bg-gray-600 hover:bg-gray-700 transition-colors duration-200 focus:outline-none"
               >
-                <path d="M3 12h18M3 6h18M3 18h18"></path>
-              </svg>
-              <svg
-                id="close-icon"
-                className={`h-6 w-6 ${menuOpen ? "block" : "hidden"}`}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-          </div> */}
+                <div className="flex flex-col space-y-1">
+                  <span
+                    className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+                      menuOpen ? "rotate-45 translate-y-1.5" : ""
+                    }`}
+                  ></span>
+                  <span
+                    className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+                      menuOpen ? "opacity-0" : ""
+                    }`}
+                  ></span>
+                  <span
+                    className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+                      menuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                    }`}
+                  ></span>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      {/* <div
+      <div
         id="menu"
-        className={`fixed top-16 right-0 w-64 h-screen dark:bg-gray-900 shadow-lg transform ${
+        className={`fixed top-16 right-0 w-64 h-screen dark:bg-gray-900 bg-gray-200 shadow-lg transform z-20 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out md:hidden`}
       >
@@ -195,7 +257,7 @@ const Navbar = () => {
             Account
           </a>
         </div>
-      </div> */}
+      </div>
     </nav>
   );
 };
