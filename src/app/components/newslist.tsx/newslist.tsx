@@ -2,9 +2,6 @@
 
 import React from "react";
 
-import { NewsItem } from "./../../../models/data";
-import { createClient } from "@supabase/supabase-js";
-
 const NewsList: React.FC = () => {
   return (
     <section className="container w-1/2 h-96 mt-50 p-20 mx-2  text-slate-50">
