@@ -12,7 +12,7 @@ const Navbar = () => {
   };
   return (
     <nav className="flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md  sticky top-0 border-b-1   text-gray-900  dark:text-gray-200 backdrop-blur-md border-gray-200 dark:border-gray-600 dark:bg-gray-950 bg-gray-200">
-      <div className="container mt-1 md:mt-3">
+      <div className="container mt-1 md:mt-3 z-20">
         {/* Desktop Navbar */}
         <div className="grid-cols-2 hidden md:block w-screen h-auto">
           <div className="h-15 flex justify-between pr-4 items-end dark:text-gray-200 text-gray-900">
@@ -33,9 +33,6 @@ const Navbar = () => {
                   <span className="font-light">-Daily</span>
                 </div>
               </a>
-            </div>
-            <div className="date flex text-lg font-medium">
-              <span>Monday, 23 June 2024</span>
             </div>
           </div>
 

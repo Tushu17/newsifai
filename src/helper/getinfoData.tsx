@@ -1,5 +1,5 @@
+import { infoData } from "@/models/infodata";
 import { createClient } from "@supabase/supabase-js";
-import { NewsItem } from "../models/data";
 
 // Validate environment variables
 if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
@@ -23,25 +23,21 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 
 /**
  * Fetch all news items from the news_items table
- * @returns {Promise<{data: NewsItem[] | null, error: any | null}>} Object with data and error
+ * @returns {Promise<{data: infoData[] | null, error: any | null}>} Object with data and error
  */
-export async function fetchNewsItems(queryTag: string | null = null) {
+export async function fetchInfoData(place: string) {
   try {
-    const query = supabase
-      .from("news_items")
+    const { data, error } = await supabase
+      .from("infobox_data")
       .select("*")
-      .order("published_at", { ascending: false })
-      .limit(50);
-
-    const finalQuery = queryTag ? query.contains("tags", [queryTag]) : query;
-    const { data, error } = await finalQuery;
+      .eq("place", place);
 
     if (error) {
       console.error("Error fetching news_items:", error);
       return { data: null, error };
     }
 
-    return { data: data as NewsItem[], error: null };
+    return { data: data as infoData[], error: null };
   } catch (err) {
     console.error("Unexpected error fetching news_items:", err);
     return { data: null, error: err };
