@@ -11,12 +11,8 @@ interface NewsItem {
 }
 
 // Define the props interface
-interface ScrollerProps {
-  title?: string;
-  newsItems?: NewsItem[];
-}
 
-const Scroller = ({ title }: ScrollerProps) => {
+const Scroller = () => {
   const [newsItems, setNewsItems] = useState([] as any[]);
   const [loading, setLoading] = useState(false);
   const [popUpOpen, setpopUpOpen] = useState(false);
@@ -180,6 +176,10 @@ const Scroller = ({ title }: ScrollerProps) => {
                   Read more →
                 </span>
               </div>
+              <PopupModal
+                newsItem={item}
+                onClose={() => handleOpenPopUp(item)}
+              />
             </div>
           ))}
         </div>

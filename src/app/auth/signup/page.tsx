@@ -31,6 +31,7 @@ const Signup = () => {
         } else {
           console.log("Supabase connection successful");
         }
+        localStorage.setItem("data", data as any);
       } catch (err) {
         console.error("Failed to connect to Supabase:", err);
       }

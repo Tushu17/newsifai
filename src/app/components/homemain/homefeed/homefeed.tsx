@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Infobox from "../infobox/infobox";
 import Feedbox from "../feedbox/feedbox";
 

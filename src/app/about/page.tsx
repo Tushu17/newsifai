@@ -1,10 +1,10 @@
 import React from "react";
-import NewsList from "../components/newslist.tsx/newslist";
 
 const About = () => {
   return (
     <div className="mt-20 p-10">
-      <NewsList /> Hey this is my about page
+      {" "}
+      Hey this is my about page
       <p>
         I wanted to make it like instagram coz visuals are attractice and
         addictive but informative content would be a good addiction. I wanted to

@@ -17,7 +17,7 @@ const Navbar = () => {
         <div className="grid-cols-2 hidden md:block w-screen h-auto">
           <div className="h-15 flex justify-between pr-4 items-end dark:text-gray-200 text-gray-900">
             <div className="logo ml-3">
-              <a
+              <Link
                 href="/"
                 className=" font-bold text-2xl inline-block align-baseline"
               >
@@ -32,7 +32,7 @@ const Navbar = () => {
                   <h2 className="pl-2 text-5xl font-extrabold ">Quicknws</h2>
                   <span className="font-light">-Daily</span>
                 </div>
-              </a>
+              </Link>
             </div>
           </div>
 
