@@ -1,7 +1,5 @@
-import { InfoData } from "@/models/infodata";
 import { createClient } from "@supabase/supabase-js";
 
-// Validate environment variables
 if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
   throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL environment variable");
 }
@@ -20,26 +18,25 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     detectSessionInUrl: true,
   },
 });
-
 /**
  * Fetch all news items from the news_items table
- * @returns {Promise<{data: infoData[] | null, error: any | null}>} Object with data and error
+ * @returns {Promise<{data: authData[] | null, error: any | null}>} Object with data and error
  */
-export async function fetchInfoData(place: string) {
+
+export async function signUpAccount() {
   try {
     const { data, error } = await supabase
-      .from("infobox_data")
-      .select("*")
-      .eq("place", place);
-
+      .from("news_items")
+      .select("count")
+      .limit(1);
     if (error) {
-      console.error("Error fetching news_items:", error);
-      return { data: null, error };
+      console.error("Supabase connection error:", error);
+    } else {
+      console.log("Supabase connection successful");
     }
-
-    return { data: data as InfoData[], error: null };
+    //comback if error
+    localStorage.setItem("data", JSON.stringify(data));
   } catch (err) {
-    console.error("Unexpected error fetching news_items:", err);
-    return { data: null, error: err };
+    console.error("Failed to connect to Supabase:", err);
   }
 }

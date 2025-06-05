@@ -1,85 +1,68 @@
 "use client";
 import Link from "next/link";
-
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+
 import Head from "next/head";
-import { supabase } from "./../../../libs/utils/supabaseClient";
+import { supabase } from "@/helper/getinfoData";
+
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-const Signup = () => {
-  const [name, setName] = useState("");
+
+const Login = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("myuser");
-
     if (token) {
-      toast.success(`you are already signed up`);
-      setTimeout(() => {
-        router.push("/");
-      }, 1000);
+      router.push("/");
     }
   }, [router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name == "name") {
-      setName(e.target.value);
-    } else if (e.target.name == "email") {
+    if (e.target.name == "email") {
       setEmail(e.target.value);
     } else if (e.target.name == "password") {
       setPassword(e.target.value);
     }
   };
 
-  // Supabase handleSubmit
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-    try {
-      // Use Supabase to sign up
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            display_name: name,
-          },
-        },
-      });
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("You have been logged-in successfully!");
+      console.log(data);
 
-      if (error) {
-        console.error("Signup error:", error);
-        toast.error(error.message);
-        return;
-      }
-
-      if (data) {
-        console.log("Signup success:", data);
-        toast.success("Check your email for a confirmation link! Then login.");
-        setName("");
-        setEmail("");
-        setPassword("");
-
-        // Redirect to login page after successful signup
+      if (data.user) {
+        localStorage.setItem(
+          "myuser",
+          JSON.stringify({
+            user_id: data.user.id,
+            token: data.session.access_token,
+            email: data.user.email,
+          })
+        );
         setTimeout(() => {
-          router.push("/auth/login");
-        }, 2000);
+          router.push("/");
+        }, 1000);
       }
-    } catch (err) {
-      console.error("Unexpected error:", err);
-      toast.error("An unexpected error occurred. Please try again.");
     }
   };
 
   return (
     <div>
       <Head>
-        <title>Create Account - Treasrup</title>
-        <meta name="description" content="Create a new account on Treasrup" />
+        <title>Login - Treasrup</title>
+        <meta name="description" content="Login to your Treasrup account" />
       </Head>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <ToastContainer
@@ -96,58 +79,33 @@ const Signup = () => {
         />
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
-            width={100}
-            height={100}
-            className="mx-auto h-[9rem] w-auto"
-            src="/logo.png"
+            className="mx-auto h-[9rem] w-auto
+            "
+            src="/logo-name2.png"
             alt="Your Company"
           />
           <h2 className="mt-3 text-center text-2xl/9 font-bold tracking-tight text-gray-900 dark:text-slate-200">
-            Signup for an account
+            Login to your account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit} className="space-y-6" method="POST">
             <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="name"
-                  className="block text-sm/6 font-medium text-gray-900 dark:text-slate-400"
-                >
-                  Name
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  value={name}
-                  onChange={handleChange}
-                  type="text"
-                  name="name"
-                  id="name"
-                  autoComplete="on"
-                  required
-                  placeholder="John"
-                  className="w-full py-1 px-3 leading-8 text-slate-900 border border-slate-300 rounded-lg bg-slate-100 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-slate-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
-              </div>
-            </div>
-
-            <div>
               <label
-                htmlFor="email"
-                className="block text-sm/6 font-medium text-slate-900 dark:text-slate-400"
+                // for="email"
+                className="block text-sm/6 font-medium text-gray-900 dark:text-slate-400"
               >
                 Email address
               </label>
               <div className="mt-2">
                 <input
                   value={email}
-                  onChange={handleChange}
                   type="email"
                   name="email"
                   id="email"
                   autoComplete="on"
+                  onChange={handleChange}
                   required
                   placeholder="john1234@example.com"
                   className="w-full py-1 px-3 leading-8 text-slate-900 border border-slate-300 rounded-lg bg-slate-100 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-slate-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -158,21 +116,29 @@ const Signup = () => {
             <div>
               <div className="flex items-center justify-between">
                 <label
-                  htmlFor="password"
+                  //   for="password"
                   className="block text-sm/6 font-medium text-gray-900 dark:text-slate-400"
                 >
                   Password
                 </label>
+                <div className="text-sm">
+                  <Link
+                    href="/forgot"
+                    className="font-semibold text-red-600 hover:text-red-500"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
               </div>
               <div className="mt-2">
                 <input
                   value={password}
-                  onChange={handleChange}
                   type="password"
                   name="password"
                   id="password"
                   autoComplete="off"
                   required
+                  onChange={handleChange}
                   placeholder="A!B@c#$@1234"
                   className="w-full py-1 px-3 leading-8 text-slate-900 border border-slate-300 rounded-lg bg-slate-100 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-slate-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
@@ -184,18 +150,18 @@ const Signup = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
               >
-                Sign up
+                sign in
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Already have a Treasrup profile?
+            Don&apos;t have a Treasrup profile?
             <Link
-              href={"/login"}
+              href={"/signup"}
               className="font-semibold text-red-600 hover:text-red-500 mx-1"
             >
-              Login
+              Create Account!
             </Link>
           </p>
         </div>
@@ -204,4 +170,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;

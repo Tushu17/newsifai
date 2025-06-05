@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-y-12 md:gap-x-8">
           <div className="md:col-span-4 lg:col-span-6 max-w-md">
             <h3 className="text-2xl font-normal mb-6 leading-tight">
-              Keep up to date with our quarterly newsletter, "You've got mail."
+              Keep up to date with our quarterly newsletter, You have got mail.
             </h3>
             <div className="mt-4 space-y-4">
               <input

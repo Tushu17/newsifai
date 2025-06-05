@@ -1,14 +1,43 @@
 "use client";
 
+import { supabase } from "@/libs/utils/supabaseClient";
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const Navbar = () => {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     console.log(menuOpen);
+  };
+
+  const logoutUser = async () => {
+    console.log("the function is called");
+
+    const user = localStorage.getItem("myuser");
+
+    if (!user) {
+      console.log("there is no user");
+    }
+
+    const handleLogout = async () => {
+      try {
+        const { error } = await supabase.auth.signOut();
+        if (error) throw error;
+
+        // Clear local storage if used
+        localStorage.removeItem("sb-auth-token");
+        localStorage.removeItem("myuser");
+        router.push("/");
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    };
+    handleLogout();
   };
   return (
     <nav className="flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md  sticky top-0 border-b-1   text-gray-900  dark:text-gray-200 backdrop-blur-md border-gray-200 dark:border-gray-600 dark:bg-gray-950 bg-gray-200">
@@ -22,7 +51,7 @@ const Navbar = () => {
                 className=" font-bold text-2xl inline-block align-baseline"
               >
                 <div className="flex text-center items-end  md:text-2xl font-semibold text-gray-950 dark:text-gray-200 ">
-                  <img
+                  <Image
                     className="mt-1 translate-y-2"
                     width={60}
                     height={40}
@@ -90,12 +119,12 @@ const Navbar = () => {
               >
                 Account
               </a>
-              <a
-                href="#"
+              <button
+                onClick={() => logoutUser()}
                 className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
               >
-                Menu
-              </a>
+                Logout
+              </button>
             </div>
           </div>
         </div>
@@ -108,7 +137,7 @@ const Navbar = () => {
             <div className="flex items-center">
               <div className="w-10 h-10 ">
                 <span className="text-gray-900 dark:text-gray-200 font-bold text-lg">
-                  <img
+                  <Image
                     className=""
                     width={60}
                     height={40}

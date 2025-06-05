@@ -16,11 +16,11 @@ const About = () => {
         from, it will give author website name publisher name etc but it can
         fetch image url or article url which was kinda a essential part of this
         website. It might be able to fetch me those things in the future and if
-        starts doing it i'll update the website but till then i'm planning to
-        make it completly automated no touching to code, will just add state,
+        starts doing it i will update the website but till then i wim planning
+        to make it completly automated no touching to code, will just add state,
         city or place whatever if somebody ask in supabase but apart from it i
-        dont think i'll do anything much. and why the fuck my local host eating
-        this much data.🤨
+        dont think i will do anything much. and why the fuck my local host
+        eating this much data.🤨
       </p>
     </div>
   );

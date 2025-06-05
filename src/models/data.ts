@@ -1,4 +1,5 @@
 export interface NewsItem {
+  id: number;
   headline: string;
   source: string;
   summary: string;
@@ -8,7 +9,8 @@ export interface NewsItem {
   author: string;
   image_url: string;
   content: string;
-  tags: string[];
+  tags: string | string[];
   language: string;
   region: string;
+  time: string;
 }
