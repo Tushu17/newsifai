@@ -49,7 +49,7 @@ const Infobox = () => {
 
   if (loading) {
     return (
-      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[60vh] h-auto md:w-[31vw] md:h-full bg-gray-900 rounded-lg shadow-lg border border-gray-700 text-gray-100">
+      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto md:w-[31vw] md:h-full bg-gray-900 rounded-lg shadow-lg border border-gray-700 text-gray-100">
         <div className="flex flex-col items-center max-w-xl gap-4 mt-20">
           <div className="animate-pulse rounded-full h-20 w-20 bg-gray-400 mb-4"></div>
           <div className="h-5 bg-gray-400 rounded w-1/2"></div>
@@ -64,7 +64,7 @@ const Infobox = () => {
 
   if (!infoData) {
     return (
-      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[60vh] h-auto md:w-[31vw] md:h-full dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
+      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto md:w-[31vw] md:h-full dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
         <div className="p-4 text-center text-gray-950 dark:text-gray-200">
           No data available for {selectedPlace}.
         </div>
@@ -73,7 +73,7 @@ const Infobox = () => {
   }
 
   return (
-    <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[60vh] h-auto md:w-[31vw] md:h-full dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
+    <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto md:w-[31vw] md:h-full dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 rounded-t-lg">
         <div className="flex justify-between items-center">
@@ -204,9 +204,9 @@ const Infobox = () => {
 
         {/* Full Width Market Pulse */}
         <div className="mt-3 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg p-3 border border-blue-700">
-          <div className="text-center mb-2">
+          <div className="text-center mb-1 flex">
             <h3 className="text-white font-bold text-sm">Market Pulse</h3>
-            <p className="text-blue-200 text-xs">
+            <p className="pl-2 text-blue-200 text-xs">
               {infoData?.market_pulse?.date}
             </p>
           </div>

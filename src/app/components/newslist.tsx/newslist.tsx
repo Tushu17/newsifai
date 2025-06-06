@@ -2,14 +2,20 @@
 
 import React from "react";
 
-const NewsList: React.FC = () => {
+const NewsList = () => {
   return (
-    <section className="container w-1/2 h-96 mt-50 p-20 mx-2  text-slate-50">
-      <h2 className="text-xl text-white py-2">Top News - India</h2>
-      <div className="w-full h-full text-slate-50 border-2 border-white grid grid-cols-2 gap-2">
-        <h1>This is is newsList page idont know what to write here</h1>
+    <div className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 min-h-0 dark:bg-gray-900 bg-gray-200">
+      <div className="p-4 space-y-3">
+        <div className="text-center py-8">
+          <p className="text-gray-600 dark:text-gray-400">
+            No news items available
+          </p>
+          <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Refresh
+          </button>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
