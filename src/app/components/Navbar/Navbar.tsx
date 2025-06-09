@@ -4,11 +4,13 @@ import { supabase } from "@/libs/utils/supabaseClient";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { IoMenu, IoCloseCircle } from "react-icons/io5";
 
 const Navbar = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const ref = useRef(null);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -40,8 +42,12 @@ const Navbar = () => {
     handleLogout();
   };
   return (
-    <nav className="flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md  sticky top-0 border-b-1   text-gray-900  dark:text-gray-200 backdrop-blur-md border-gray-200 dark:border-gray-600 dark:bg-gray-950 bg-gray-200">
-      <div className="container mt-1 md:mt-3 z-20">
+    <nav
+      className={`flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md  sticky top-0 border-b-1   text-gray-900 dark:text-gray-200 backdrop-blur-md border-gray-200 dark:border-gray-600 dark:bg-gray-950 bg-gray-200 ${
+        !menuOpen && `overflow-x-hidden`
+      }`}
+    >
+      <div className="container mt-1 md:mt-3">
         {/* Desktop Navbar */}
         <div className="grid-cols-2 hidden md:block w-screen h-auto">
           <div className="h-15 flex justify-between pr-4 items-end dark:text-gray-200 text-gray-900">
@@ -130,7 +136,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Navbar */}
-        <div className="md:hidden w-full">
+        <div className="md:hidden w-screen">
           {/* Mobile Header Bar */}
           <div className="flex justify-between items-center px-4 py-3 ">
             {/* Logo */}
@@ -180,7 +186,7 @@ const Navbar = () => {
                     d="M15 17h5l-5 5-5-5h5zm-5-10a5 5 0 110 10h5a5 5 0 01-10 0z"
                   />
                 </svg>
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-blue-800 rounded-full"></span>
               </button>
 
               {/* Star/Favorites Icon */}
@@ -201,38 +207,26 @@ const Navbar = () => {
               </button>
 
               {/* Menu Hamburger */}
-              <button
+              <IoMenu
+                className="text-4xl cursor-pointer text-slate-800 dark:text-slate-200"
                 onClick={toggleMenu}
-                className="rounded-full bg-black dark:bg-gray-600 hover:bg-gray-700 transition-colors duration-200 focus:outline-none"
-              >
-                <div className="flex flex-col space-y-1">
-                  <span
-                    className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-                      menuOpen ? "rotate-45 translate-y-1.5" : ""
-                    }`}
-                  ></span>
-                  <span
-                    className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-                      menuOpen ? "opacity-0" : ""
-                    }`}
-                  ></span>
-                  <span
-                    className={`w-6 h-0.5 bg-white transition-all duration-300 ${
-                      menuOpen ? "-rotate-45 -translate-y-1.5" : ""
-                    }`}
-                  ></span>
-                </div>
-              </button>
+              />
             </div>
           </div>
         </div>
       </div>
       <div
-        id="menu"
-        className={`fixed top-16 right-0 w-64 h-screen dark:bg-gray-900 bg-gray-200 shadow-lg transform z-20 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 ease-in-out md:hidden`}
+        ref={ref}
+        className={`md:w-[25vw] h-[100vh] fixed top-0 right-0 p-10
+     px-6 shadow translate transition-transform bg-slate-400 dark:bg-slate-950 z-10
+      ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
+        <span
+          onClick={toggleMenu}
+          className="absolute top-2 right-2 cursor-pointer text-3xl text-blue-500"
+        >
+          <IoCloseCircle />
+        </span>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <a
             href="#"

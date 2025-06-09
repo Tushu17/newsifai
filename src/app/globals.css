@@ -24,4 +24,5 @@ body {
   color: var(--foreground);
   font-family: "Inter", "Roboto Serif", "Lugrasimo", Arial, Helvetica,
     sans-serif;
+  overflow-x: hidden;
 }

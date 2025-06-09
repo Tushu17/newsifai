@@ -75,12 +75,13 @@ const Infobox = () => {
   return (
     <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto md:w-[31vw] md:h-full dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 rounded-t-lg">
+
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-2 rounded-t-lg">
         <div className="flex justify-between items-center">
           <h1 className="text-lg font-bold text-gray-200">
             <select
               onChange={handlePlaceChange}
-              className="items-center w-24 h-10 mr-2 cursor-pointer hover:outline"
+              className="items-center w-24 text-sm h-10 mr-2 cursor-pointer hover:outline"
               value={selectedPlace}
               aria-label="Select a place for overview"
             >
@@ -94,7 +95,6 @@ const Infobox = () => {
                 </option>
               ))}
             </select>
-            overview
           </h1>
           <div className="text-gray-200 text-xs">
             {currentTime.toLocaleTimeString()}
@@ -203,34 +203,34 @@ const Infobox = () => {
         </div>
 
         {/* Full Width Market Pulse */}
-        <div className="mt-3 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg p-3 border border-blue-700">
-          <div className="text-center mb-1 flex">
+        <div className="mt-3 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg p-2 border border-blue-700">
+          <div className="flex items-center justify-center mb-2">
             <h3 className="text-white font-bold text-sm">Market Pulse</h3>
             <p className="pl-2 text-blue-200 text-xs">
               {infoData?.market_pulse?.date}
             </p>
           </div>
           <div className="grid grid-cols-4 gap-2 text-center">
-            <div className="bg-black bg-opacity-30 rounded-md p-2">
-              <div className="text-lg font-bold text-white">
+            <div className="bg-black bg-opacity-30 rounded-md p-1.5">
+              <div className="text-base font-bold text-white">
                 {infoData?.market_pulse?.highTemp}
               </div>
               <div className="text-xs text-gray-300">High</div>
             </div>
-            <div className="bg-black bg-opacity-30 rounded-md p-2">
-              <div className="text-lg font-bold text-white">
+            <div className="bg-black bg-opacity-30 rounded-md p-1.5">
+              <div className="text-base font-bold text-white">
                 {infoData?.market_pulse?.lowTemp}
               </div>
               <div className="text-xs text-gray-300">Low</div>
             </div>
-            <div className="bg-black bg-opacity-30 rounded-md p-2">
-              <div className="text-lg font-bold text-white">
+            <div className="bg-black bg-opacity-30 rounded-md p-1.5">
+              <div className="text-base font-bold text-white">
                 {infoData?.market_pulse?.humidity}
               </div>
               <div className="text-xs text-gray-300">Humidity</div>
             </div>
-            <div className="bg-black bg-opacity-30 rounded-md p-2">
-              <div className="text-lg font-bold text-white">
+            <div className="bg-black bg-opacity-30 rounded-md p-1.5">
+              <div className="text-base font-bold text-white">
                 {infoData?.market_pulse?.wind?.trim()}
               </div>
               <div className="text-xs text-gray-300">Wind</div>
