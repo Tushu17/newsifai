@@ -49,7 +49,7 @@ const Infobox = () => {
 
   if (loading) {
     return (
-      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto md:w-[31vw] md:h-full bg-gray-900 rounded-lg shadow-lg border border-gray-700 text-gray-100">
+      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-[80vw] min-h-[50vh] h-auto md:w-[31vw] md:h-full bg-gray-900 rounded-lg shadow-lg border border-gray-700 text-gray-100">
         <div className="flex flex-col items-center max-w-xl gap-4 mt-20">
           <div className="animate-pulse rounded-full h-20 w-20 bg-gray-400 mb-4"></div>
           <div className="h-5 bg-gray-400 rounded w-1/2"></div>
@@ -102,11 +102,11 @@ const Infobox = () => {
         </div>
       </div>
 
-      <div className="p-3 md:h-[calc(100%-3rem)] flex flex-col min-h-[50vh] md:min-h-0">
+      <div className="p-1.5 md:h-[calc(100%-3rem)] flex flex-col min-h-[50vh] md:min-h-0">
         {/* 2x2 Grid */}
         <div className="grid grid-cols-2 gap-3 flex-1 min-h-[35vh] md:min-h-0">
           {/* Quote Section */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-3 border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0 overflow-scroll">
+          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0 overflow-scroll">
             <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
               <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>
               Quote for today
@@ -120,7 +120,7 @@ const Infobox = () => {
           </div>
 
           {/* Transportation */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-3 border border-gray-700 hover:border-green-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0 overflow-scroll">
+          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-green-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0 overflow-scroll">
             <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></span>
               Transportation
@@ -138,7 +138,7 @@ const Infobox = () => {
           </div>
 
           {/* Markets Section */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-3 border border-gray-700 hover:border-yellow-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0">
+          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-yellow-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0">
             <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
               <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-2"></span>
               Markets
@@ -182,7 +182,7 @@ const Infobox = () => {
           </div>
 
           {/* Good to Know */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-3 border border-gray-700 hover:border-purple-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0">
+          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-purple-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0">
             <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
               <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>
               Good to Know
@@ -203,7 +203,7 @@ const Infobox = () => {
         </div>
 
         {/* Full Width Market Pulse */}
-        <div className="mt-3 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg p-2 border border-blue-700">
+        <div className="mt-2 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg p-2 border border-blue-700">
           <div className="flex items-center justify-center mb-2">
             <h3 className="text-white font-bold text-sm">Market Pulse</h3>
             <p className="pl-2 text-blue-200 text-xs">

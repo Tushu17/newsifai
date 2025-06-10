@@ -43,7 +43,7 @@ const Navbar = () => {
   };
   return (
     <nav
-      className={`flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md  sticky top-0 border-b-1   text-gray-900 dark:text-gray-200 backdrop-blur-md border-gray-200 dark:border-gray-600 dark:bg-gray-950 bg-gray-200 ${
+      className={`flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md  sticky top-0 border-b-1 z-50 text-gray-900 dark:text-gray-200 backdrop-blur-md border-gray-200 dark:border-gray-600 dark:bg-gray-950 bg-gray-200 ${
         !menuOpen && `overflow-x-hidden`
       }`}
     >
@@ -138,19 +138,21 @@ const Navbar = () => {
         {/* Mobile Navbar */}
         <div className="md:hidden w-screen">
           {/* Mobile Header Bar */}
-          <div className="flex justify-between items-center px-4 py-3 ">
+          <div className="flex justify-between items-center px-2 py-3 ">
             {/* Logo */}
             <div className="flex items-center">
               <div className="w-10 h-10 ">
-                <span className="text-gray-900 dark:text-gray-200 font-bold text-lg">
-                  <Image
-                    className=""
-                    width={60}
-                    height={40}
-                    src="/logo.png"
-                    alt=""
-                  />
-                </span>
+                <Link href={"/"}>
+                  <span className="text-gray-900 dark:text-gray-200 font-bold text-lg">
+                    <Image
+                      className=""
+                      width={60}
+                      height={40}
+                      src="/logo.png"
+                      alt=""
+                    />
+                  </span>
+                </Link>
               </div>
             </div>
 

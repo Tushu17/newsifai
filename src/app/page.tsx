@@ -18,9 +18,10 @@ const Homepage = () => {
   }, []);
 
   return (
+    // there is the scrolling scene
     <section className="h-screen overflow-scroll">
       <LoadingBar
-        color="#f11946"
+        color="#2719f1"
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
         waitingTime={400}
