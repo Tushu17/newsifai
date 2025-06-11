@@ -17,8 +17,7 @@ const Feedbox = () => {
       ) : (
         <>
           <Scroller />
-
-          <Scroller />
+          <Categorybox />
         </>
       )}
     </div>

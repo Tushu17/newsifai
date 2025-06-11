@@ -64,25 +64,25 @@ const Categorybox = () => {
 
   return (
     <>
-      <div className="w-full min-h-[50vh] h-auto dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200 ">
+      <div className="w-full h-auto dark:bg-gray-900 bg-gray-200  text-gray-950 dark:text-gray-200 md:w-[42%]">
         {/* Header */}
-        <div className="mb-1 p-4">
+        <div className="mb-1">
           <div className="flex items-center">
             <span className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></span>
             <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
-              News Categories
+              Read all news of =&gt;
             </h2>
           </div>
         </div>
 
         {/* Categories Grid */}
-        <div className="p-2 overflow-scroll">
+        <div className="p-2 overflow-scroll rounded-xl shadow-lg border border-gray-700">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {categoryList.map((category) => (
               <button
                 key={category}
                 onClick={() => handleCategoryClick(category)}
-                className={`group relative overflow-hidden rounded-lg p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg bg-white dark:bg-gray-800 border-2 ${getCategoryColor(
+                className={`cursor-pointer group relative overflow-hidden rounded-lg py-2 transition-all duration-300 hover:scale-105 hover:shadow-lg bg-white dark:bg-gray-800 border-2 ${getCategoryColor(
                   category
                 )}`}
               >

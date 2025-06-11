@@ -73,7 +73,7 @@ const Infobox = () => {
   }
 
   return (
-    <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto md:w-[31vw] md:h-full dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
+    <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto md:w-[31vw] md:h-[76vh] dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
       {/* Header */}
 
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-2 rounded-t-lg">
@@ -240,7 +240,7 @@ const Infobox = () => {
       </div>
 
       {/* Animated bottom accent */}
-      <div className="h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-pulse rounded-b-lg"></div>
+      <div className="h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-pulse rounded-b-lg mt-3"></div>
     </div>
   );
 };

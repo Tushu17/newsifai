@@ -5,7 +5,7 @@ import Feedbox from "../feedbox/feedbox";
 
 const Homefeed = () => {
   return (
-    <div className="max-w-screen-xl mx-auto py-2 px-1 lg:py-12 lg:px-2 h-screen ">
+    <div className="max-w-screen-xl mx-auto py-2 px-1 lg:py-10 lg:px-2 h-screen mt-3.5">
       <div className="flex flex-col md:flex-row">
         <div className=" md:mr-5">
           <Infobox />
