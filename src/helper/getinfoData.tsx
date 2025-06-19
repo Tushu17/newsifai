@@ -30,7 +30,7 @@ export async function fetchInfoData(place: string) {
     const { data, error } = await supabase
       .from("infobox_data")
       .select("*")
-      .eq("place", place);
+      .eq("region", place);
 
     if (error) {
       console.error("Error fetching news_items:", error);

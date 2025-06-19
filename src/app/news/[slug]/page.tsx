@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import Image from "next/image";
+
 import { NewsItem } from "@/models/data";
 import { fetchNewsItems } from "@/helper/getData";
 import NewsModal from "@/app/components/newsmodal/newsmodal";
+import Image from "next/image";
 
 const CategoryPage = () => {
   const params = useParams();
@@ -100,8 +101,9 @@ const CategoryPage = () => {
                 <Image
                   src={news.image_url || "/placeholder-news.jpg"}
                   alt={news.headline}
-                  fill
                   className="object-cover"
+                  width={1000}
+                  height={1000}
                 />
                 <div className="absolute top-2 right-2">
                   <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">

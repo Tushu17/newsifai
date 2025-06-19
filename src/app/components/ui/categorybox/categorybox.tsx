@@ -15,7 +15,6 @@ const Categorybox = () => {
     "growth",
     "education",
     "sports",
-    "entertainment",
   ];
 
   const getCategoryColor = (category: string): string => {
@@ -64,13 +63,13 @@ const Categorybox = () => {
 
   return (
     <>
-      <div className="w-full h-auto dark:bg-gray-900 bg-gray-200  text-gray-950 dark:text-gray-200 md:w-[42%]">
+      <div className="w-full h-auto   text-gray-950 dark:text-gray-200 md:w-[42%]">
         {/* Header */}
         <div className="mb-1">
           <div className="flex items-center">
             <span className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></span>
             <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
-              Read all news of =&gt;
+              Read by flair
             </h2>
           </div>
         </div>

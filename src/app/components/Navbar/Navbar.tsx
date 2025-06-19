@@ -1,286 +1,199 @@
 "use client";
-
-import { supabase } from "@/libs/utils/supabaseClient";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { IoMenu, IoCloseCircle } from "react-icons/io5";
+import { VscAccount } from "react-icons/vsc";
+import { toast, ToastContainer } from "react-toastify";
+import { LogoutUser } from "@/helper/logout";
 
 const Navbar = () => {
-  const router = useRouter();
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const ref = useRef(null);
+  const [userLoggedIn, setUserLoggedin] = useState<string | null>(null);
+  const [dropDown, setDropDown] = useState(false);
+  const currentPath = pathname;
+  useEffect(() => {
+    setMenuOpen(false);
+    const data = localStorage.getItem("myuser");
+    setUserLoggedin(data || null);
+  }, [pathname]);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-    console.log(menuOpen);
-  };
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const logoutUser = async () => {
-    console.log("the function is called");
-
-    const user = localStorage.getItem("myuser");
-
-    if (!user) {
-      console.log("there is no user");
+    const userLogout = await LogoutUser();
+    if (userLogout.success) {
+      toast.success(userLogout.message);
+    } else {
+      toast.error(userLogout.message);
     }
 
-    const handleLogout = async () => {
-      try {
-        const { error } = await supabase.auth.signOut();
-        if (error) throw error;
-
-        // Clear local storage if used
-        localStorage.removeItem("sb-auth-token");
-        localStorage.removeItem("myuser");
-        router.push("/");
-      } catch (error) {
-        console.error("Logout failed:", error);
-      }
-    };
-    handleLogout();
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
   };
+
   return (
-    <nav
-      className={`flex flex-col justify-center items-center md:flex-row md:justify-start shadow-md  sticky top-0 border-b-1 z-50 text-gray-900 dark:text-gray-200 backdrop-blur-md border-gray-200 dark:border-gray-600 dark:bg-gray-950 bg-gray-200 ${
-        !menuOpen && `overflow-x-hidden`
-      }`}
-    >
-      <div className="container mt-1 md:mt-3">
-        {/* Desktop Navbar */}
-        <div className="grid-cols-2 hidden md:block w-screen h-auto">
-          <div className="h-15 flex justify-between pr-4 items-end dark:text-gray-200 text-gray-900">
-            <div className="logo ml-3">
-              <Link
-                href="/"
-                className=" font-bold text-2xl inline-block align-baseline"
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <nav className="bg-gray-100 border-gray-200 py-2.5 dark:bg-gray-900 sticky top-0 z-50">
+        <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto border rounded-2xl border-gray-400  lg:p-2 min-h-14">
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              width={36}
+              height={36}
+              className="h-8 mr-3 sm:h-9"
+              alt="Landwind Logo"
+            />
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+              Quicknws
+            </span>
+          </Link>
+          <div className="flex items-center lg:order-2">
+            {userLoggedIn ? (
+              <div
+                className="relative"
+                onMouseOver={() => {
+                  setDropDown(true);
+                }}
+                onMouseLeave={() => {
+                  setDropDown(false);
+                }}
               >
-                <div className="flex text-center items-end  md:text-2xl font-semibold text-gray-950 dark:text-gray-200 ">
-                  <Image
-                    className="mt-1 translate-y-2"
-                    width={60}
-                    height={40}
-                    src="/logo.png"
-                    alt=""
-                  />
-                  <h2 className="pl-2 text-5xl font-extrabold ">Quicknws</h2>
-                  <span className="font-light">-Daily</span>
-                </div>
-              </Link>
-            </div>
-          </div>
-
-          <div className="hidden md:flex justify-between items-baseline pr-4 mb-0 pb-0">
-            {/* left side options */}
-            <div className="ml-4 flex items-baseline md:ml-15 h-8  md:block w-3/6 text-gray-700 dark:text-gray-300 ">
-              <a
-                href="#"
-                className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
-              >
-                Archives
-              </a>
-              <a
-                href="#"
-                className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
-              >
-                About
-              </a>
-              <a
-                href="#"
-                className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
-              >
-                Menu
-              </a>
-              <a
-                href="#"
-                className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
-              >
-                Solar Roof
-              </a>
-              <a
-                href="#"
-                className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
-              >
-                Solar Panels
-              </a>
-            </div>
-            {/* right side options */}
-            <div className="ml-4 flex  md:ml-6  justify-end  w-2/5 items-baseline dark:text-gray-300 text-gray-700">
-              <a
-                href="#"
-                className="text-base font-light  hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
-              >
-                Shop
-              </a>
-              <a
-                href="#"
-                className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
-              >
-                Account
-              </a>
-              <button
-                onClick={() => logoutUser()}
-                className="text-base font-light hover:text-orange-500 px-3 rounded-md transition-colors duration-300"
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Navbar */}
-        <div className="md:hidden w-screen">
-          {/* Mobile Header Bar */}
-          <div className="flex justify-between items-center px-2 py-3 ">
-            {/* Logo */}
-            <div className="flex items-center">
-              <div className="w-10 h-10 ">
-                <Link href={"/"}>
-                  <span className="text-gray-900 dark:text-gray-200 font-bold text-lg">
-                    <Image
-                      className=""
-                      width={60}
-                      height={40}
-                      src="/logo.png"
-                      alt=""
-                    />
-                  </span>
-                </Link>
+                <button
+                  onClick={() => setDropDown((d) => !d)}
+                  className="flex items-center text-gray-700 dark:text-gray-200 focus:outline-none"
+                >
+                  <VscAccount className="text-3xl mr-2" />
+                </button>
+                {dropDown && (
+                  <div className="absolute right-0 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50 ">
+                    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+                      <li>
+                        <Link
+                          href="/myaccount"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 "
+                        >
+                          My Account
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/admin/adminhome"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                          Admin
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          onClick={logoutUser}
+                          className="w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer hover:text-red-700"
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
-            </div>
-
-            {/* Action Icons */}
-            <div className="flex items-center space-x-4 gray-900">
-              {/* Search Icon */}
-              <button className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200">
-                <svg
-                  className="w-6 h-6 text-gray-900 dark:text-gray-200"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            ) : (
+              <Link
+                href="/auth/login"
+                className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
+              >
+                Login
+              </Link>
+            )}
+            <button
+              onClick={toggleMenu}
+              type="button"
+              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="mobile-menu-2"
+              aria-expanded={menuOpen}
+            >
+              <span className="sr-only">Open main menu</span>
+              {menuOpen ? (
+                <IoCloseCircle className="w-6 h-6" />
+              ) : (
+                <IoMenu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
+          <div
+            className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 md:mr-8 ${
+              menuOpen ? "" : "hidden"
+            }`}
+            id="mobile-menu-2"
+          >
+            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 mr-5">
+              <li>
+                <Link
+                  href="/"
+                  className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 ${
+                    currentPath == `/`
+                      ? `text-purple-700 dark:text-white`
+                      : `text-gray-700 dark:text-gray-400`
+                  }`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </button>
-              <button className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200 relative">
-                <svg
-                  className="w-6 h-6 text-gray-900 dark:text-gray-200"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/category"
+                  className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 ${
+                    currentPath == `/category`
+                      ? `text-purple-700 dark:text-white`
+                      : `text-gray-700 dark:text-gray-400`
+                  }`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 17h5l-5 5-5-5h5zm-5-10a5 5 0 110 10h5a5 5 0 01-10 0z"
-                  />
-                </svg>
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-blue-800 rounded-full"></span>
-              </button>
-
-              {/* Star/Favorites Icon */}
-              <button className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200">
-                <svg
-                  className="w-6 h-6 text-gray-900 dark:text-gray-200"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  Category
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 ${
+                    currentPath == `/about`
+                      ? `text-purple-700 dark:text-white`
+                      : `text-gray-700 dark:text-gray-400`
+                  }`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-                  />
-                </svg>
-              </button>
-
-              {/* Menu Hamburger */}
-              <IoMenu
-                className="text-4xl cursor-pointer text-slate-800 dark:text-slate-200"
-                onClick={toggleMenu}
-              />
-            </div>
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 ${
+                    currentPath == `/about`
+                      ? `text-purple-700 dark:text-white`
+                      : `text-gray-700 dark:text-gray-400`
+                  }`}
+                >
+                  Membership
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div
-        ref={ref}
-        className={`md:w-[25vw] h-[100vh] fixed top-0 right-0 p-10
-     px-6 shadow translate transition-transform bg-slate-400 dark:bg-slate-950 z-10
-      ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
-      >
-        <span
-          onClick={toggleMenu}
-          className="absolute top-2 right-2 cursor-pointer text-3xl text-blue-500"
-        >
-          <IoCloseCircle />
-        </span>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a
-            href="#"
-            className="hover:text-orange-500 block px-3 py-2 rounded-md text-base font-light"
-          >
-            Model S
-          </a>
-          <a
-            href="#"
-            className="hover:text-orange-500 block px-3 py-2 rounded-md text-base font-light"
-          >
-            Model 3
-          </a>
-          <a
-            href="#"
-            className="hover:text-orange-500 block px-3 py-2 rounded-md text-base font-light"
-          >
-            Model X
-          </a>
-          <a
-            href="#"
-            className="hover:text-orange-500 block px-3 py-2 rounded-md text-base font-light"
-          >
-            Model Y
-          </a>
-          <a
-            href="#"
-            className="hover:text-orange-500 block px-3 py-2 rounded-md text-base font-light"
-          >
-            Solar Roof
-          </a>
-          <a
-            href="#"
-            className="hover:text-orange-500 block px-3 py-2 rounded-md text-base font-light"
-          >
-            Solar Panels
-          </a>
-          <a
-            href="#"
-            className="hover:text-orange-500 block px-3 py-2 rounded-md text-base font-light"
-          >
-            Shop
-          </a>
-          <a
-            href="#"
-            className="hover:text-orange-500 block px-3 py-2 rounded-md text-base font-light"
-          >
-            Account
-          </a>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 

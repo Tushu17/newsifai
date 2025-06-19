@@ -79,9 +79,10 @@ const Login = () => {
         />
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
-            className="mx-auto h-[9rem] w-auto
-            "
-            src="/logo-name2.png"
+            className="mx-auto h-[9rem] w-auto"
+            width={1000}
+            height={1000}
+            src="/logo.png"
             alt="Your Company"
           />
           <h2 className="mt-3 text-center text-2xl/9 font-bold tracking-tight text-gray-900 dark:text-slate-200">

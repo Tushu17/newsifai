@@ -7,18 +7,18 @@ const Infobox = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [infoData, setInfoData] = useState<InfoData | undefined>();
   const [loading, setLoading] = useState(true);
-  const [selectedPlace, setSelectedPlace] = useState("delhi");
+  const [selectedPlace, setSelectedPlace] = useState("india");
   const placeList = [
     "india",
     "america",
-    "europe",
-    "south africa",
-    "australia",
-    "uae",
-    "france",
-    "africa",
-    "china",
-    "uk",
+    // "europe",
+    // "south africa",
+    // "australia",
+    // "uae",
+    // "france",
+    // "africa",
+    // "china",
+    // "uk",
   ];
 
   const fetchInfodata = useCallback(async () => {
@@ -49,7 +49,7 @@ const Infobox = () => {
 
   if (loading) {
     return (
-      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-[80vw] min-h-[50vh] h-auto md:w-[31vw] md:h-full bg-gray-900 rounded-lg shadow-lg border border-gray-700 text-gray-100">
+      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-[80vw] min-h-[50vh] h-auto md:w-[31vw] md:h-full bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-100 dark:bg-gray-900 dark:text-gray-200">
         <div className="flex flex-col items-center max-w-xl gap-4 mt-20">
           <div className="animate-pulse rounded-full h-20 w-20 bg-gray-400 mb-4"></div>
           <div className="h-5 bg-gray-400 rounded w-1/2"></div>

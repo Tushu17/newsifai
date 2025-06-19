@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Roboto_Serif } from "next/font/google";
 
 import "./globals.css";
+import Loadingbar from "./components/ui/loadingbar/loadingbar";
 
 const geistInter = Geist({
   variable: "--font-geist-inter",
@@ -22,7 +23,7 @@ const robotoSerif = Roboto_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Ai quick news",
+  title: "Quick-nws - All the info you need!",
   description: "Ai that saves!",
 };
 
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${robotoSerif.variable} ${geistInter.variable} ${geistMono.variable} antialiased`}
       >
+        <Loadingbar />
         <Navbar />
         {children}
         <Footer />

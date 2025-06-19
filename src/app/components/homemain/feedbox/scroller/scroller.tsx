@@ -94,7 +94,7 @@ const Scroller = () => {
 
   if (loading) {
     return (
-      <div className="flex-1 flex flex-col min-h-0 mb-5">
+      <div className="flex-1 flex flex-col min-h-0 mb-5 pt-20">
         <div className="mb-1 w-full">
           <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
             Loading News...
@@ -186,7 +186,16 @@ const Scroller = () => {
                         {normalizedTags[0] || "General"}
                       </span>
                       <span className="text-xs text-gray-600 dark:text-gray-400">
-                        {item.time || "Unknown time"}
+                        {new Date(item.published_at).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          }
+                        ) || "Unknown time"}
                       </span>
                     </div>
 

@@ -9,13 +9,15 @@ interface NewsModalProps {
 
 const NewsModal: React.FC<NewsModalProps> = ({ news, onClose }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-gray-100/10 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="relative">
           <Image
             src={news.image_url || "/placeholder-news.jpg"}
             alt={news.headline}
             className="w-full h-64 object-cover"
+            width={1000}
+            height={1000}
           />
           <button
             onClick={onClose}

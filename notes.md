@@ -23,6 +23,11 @@ Tables :-
 - the function will be called periodically with the help of supabase cron jobs by using last_news_fetched_at and last_info_fetched_at colomn in places config, these colomn will store time of last fetched news and info respectively. and we will run news and info fetch function for everyplaces that hasn't been fetched in last 12 hours.
 - now the inserting part is done, with limited space in supabase i've to delete old data, so i'll have to delete any thing over two or three or whatever days old.
 
+- There is an update in plan ai is not doing web crawling part correctly so i've to pivot as there is no other option, now plan is to use a more robust and better approach that actually use ai in its actual game,
+
+1.  use newapi or any thing that give you all the important daily news with correct url, data-content, publisher and everything and store it in one raw_news table,
+2.  then feed ai that data and use it to rank those newes, might alter some tags or category make it more bitable for general public
+
 about text-
 i'm using roboto something
 
@@ -68,3 +73,12 @@ RETURN ONLY UNWRAPPED JSON ARRAY OF 10 ITEMS. DO NOT WRAP IN XML OR OTHER MARKUP
 ]
 
 }
+
+List of pages i'm planning to create:-
+
+1.  about
+2.  contribute
+3.  developer
+4.  resources/stack
+5.  signin/login
+6.  forget password.

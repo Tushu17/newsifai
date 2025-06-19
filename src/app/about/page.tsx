@@ -1,29 +1,185 @@
-import React from "react";
+"use client";
 
-const About = () => {
+import React from "react";
+import Head from "next/head";
+
+const AboutPage = () => {
   return (
-    <div className="mt-20 p-10">
-      {" "}
-      Hey this is my about page
-      <p>
-        I wanted to make it like instagram coz visuals are attractice and
-        addictive but informative content would be a good addiction. I wanted to
-        add so many good features in this app but the truth is ai still have
-        some limitation, in my figma illustruations and even in my imagination i
-        always thought this project or website would give so many more features
-        and visual elements, unfortunatly ai cant fetch url, sounds weird but it
-        cant directly access the internet like it knows where it is fetching
-        from, it will give author website name publisher name etc but it can
-        fetch image url or article url which was kinda a essential part of this
-        website. It might be able to fetch me those things in the future and if
-        starts doing it i will update the website but till then i wim planning
-        to make it completly automated no touching to code, will just add state,
-        city or place whatever if somebody ask in supabase but apart from it i
-        dont think i will do anything much. and why the fuck my local host
-        eating this much data.🤨
-      </p>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+      <Head>
+        <title>About Us - Treasrup</title>
+        <meta
+          name="description"
+          content="Learn about Treasrup's journey and vision"
+        />
+      </Head>
+
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl font-bold mb-4">
+              Your Time-Saving News Companion
+            </h1>
+            <p className="text-xl opacity-90">
+              AI-powered news aggregation that brings you the most relevant
+              updates, saving you hours of browsing.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Features */}
+          <div className="space-y-8">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                  <svg
+                    className="w-6 h-6 text-blue-600 dark:text-blue-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  AI-Powered News Selection
+                </h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300">
+                Our AI algorithms analyze thousands of news sources to bring you
+                only the most relevant and important updates, saving you from
+                information overload.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4">
+                  <svg
+                    className="w-6 h-6 text-purple-600 dark:text-purple-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Daily Essentials at a Glance
+                </h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300">
+                The InfoBox feature provides all the essential information you
+                need for the day - from market updates to weather forecasts - in
+                one convenient location.
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
+                  <svg
+                    className="w-6 h-6 text-green-600 dark:text-green-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Smart Categorization
+                </h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300">
+                News is intelligently categorized, allowing you to quickly find
+                updates in areas that matter most to you - from politics to
+                technology, economy to sports.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column - Stats & Benefits */}
+          <div className="space-y-8">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Why Choose QuickNews?
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Save up to 2 hours daily on news consumption
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Get personalized news recommendations
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Access daily essentials in one place
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Stay informed without information overload
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
+              <p className="opacity-90">
+                To revolutionize how people consume news by leveraging AI to
+                deliver the most relevant information efficiently, helping you
+                make informed decisions without wasting time.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="mt-16 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Ready to Save Time?
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+            Join thousands of users who have transformed their news consumption
+            experience with QuickNews.
+          </p>
+          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300">
+            Get Started Now
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default About;
+export default AboutPage;
