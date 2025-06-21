@@ -13,4 +13,5 @@ export interface NewsItem {
   language: string;
   region: string;
   time: string;
+  news_rating: string;
 }

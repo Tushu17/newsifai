@@ -130,7 +130,7 @@ const Navbar = () => {
               {menuOpen ? (
                 <IoCloseCircle className="w-6 h-6" />
               ) : (
-                <IoMenu className="w-6 h-6" />
+                <IoMenu className="text-3xl w-6 h-6" />
               )}
             </button>
           </div>

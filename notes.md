@@ -82,3 +82,6 @@ List of pages i'm planning to create:-
 4.  resources/stack
 5.  signin/login
 6.  forget password.
+7.  creating multiple pages for about-
+
+- update is we are using Gnews if google to fetch news and feeding all thoses news to ai then filling field that are not traditionally available for anews like rating

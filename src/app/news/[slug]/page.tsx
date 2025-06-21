@@ -105,8 +105,9 @@ const CategoryPage = () => {
                   width={1000}
                   height={1000}
                 />
-                <div className="absolute top-2 right-2">
+                <div className="absolute top-2 right-2 flex flex-col">
                   <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">
+                    {news.news_rating}
                     {Array.isArray(news.tags)
                       ? news.tags[0]
                       : news.tags?.split(",")[0] || "General"}

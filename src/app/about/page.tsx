@@ -56,9 +56,7 @@ const AboutPage = () => {
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                Our AI algorithms analyze thousands of news sources to bring you
-                only the most relevant and important updates, saving you from
-                information overload.
+                page explaing how ai cherry picks the news for you.
               </p>
             </div>
 
@@ -84,9 +82,7 @@ const AboutPage = () => {
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                The InfoBox feature provides all the essential information you
-                need for the day - from market updates to weather forecasts - in
-                one convenient location.
+                Explain the objective of website.
               </p>
             </div>
 
@@ -108,13 +104,11 @@ const AboutPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Smart Categorization
+                  features and upcoming things
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                News is intelligently categorized, allowing you to quickly find
-                updates in areas that matter most to you - from politics to
-                technology, economy to sports.
+                wht is limiting and what is comming
               </p>
             </div>
           </div>
@@ -141,13 +135,36 @@ const AboutPage = () => {
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Access daily essentials in one place
+                    Cost and money
                   </p>
                 </div>
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Stay informed without information overload
+                    We as human persue things for one of the few particular
+                    reasons which are- money, learning or social work. Part of
+                    me wants to try to make money from this website but part of
+                    me wants to take it as a learning experience and help others
+                    but even to keep this website running i need money. right
+                    now website is operable on few places but i want to increase
+                    the content quality by more places like breaking a city into
+                    further places. but i dont want to ask money from people who
+                    can sacrfice my project and its features for not paying i
+                    want to build a good active user base. but somebody gotta
+                    bare the expenses and the problem is people who can afford
+                    to pay will not pay unless i force them to and we are back
+                    to square one where i dont want to force people who can
+                    afford to pay. sure there is a way like "but me a coffee"
+                    kinda thing i'm not sure if people will pay and how much
+                    they will pay and how sustainable will it be, will it be
+                    enough to keep the website running? all these questions are
+                    obviously there but for me i'll do my deeds and will move
+                    ahead, i'll to automate this website as much as i can and
+                    leave it to people if they want to add more features and
+                    places we they will give the money. if i ever get a money
+                    from this website i'll surely reinvest atleast 80% of it in
+                    the website and the rest will be used for my personal
+                    expenses or some other future projects.
                   </p>
                 </div>
               </div>
