@@ -49,7 +49,7 @@ const Navbar = () => {
         pauseOnHover
         theme="light"
       />
-      <nav className="bg-gray-100 border-gray-200 py-2.5 dark:bg-gray-900 sticky top-0 z-50">
+      <nav className="bg-gray-100 border-gray-200 py-1 lg:py-2.5 dark:bg-gray-900 sticky top-0 z-50">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto border rounded-2xl border-gray-400  lg:p-2 min-h-14">
           <Link href="/" className="flex items-center">
             <Image
