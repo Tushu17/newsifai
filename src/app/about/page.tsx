@@ -10,7 +10,7 @@ const AboutPage = () => {
         <title>About Us - Treasrup</title>
         <meta
           name="description"
-          content="Learn about Treasrup's journey and vision"
+          content="Learn about Treasrup&#39;s journey and vision"
         />
       </Head>
 
@@ -154,17 +154,17 @@ const AboutPage = () => {
                     bare the expenses and the problem is people who can afford
                     to pay will not pay unless i force them to and we are back
                     to square one where i dont want to force people who can
-                    afford to pay. sure there is a way like "but me a coffee"
-                    kinda thing i'm not sure if people will pay and how much
-                    they will pay and how sustainable will it be, will it be
-                    enough to keep the website running? all these questions are
-                    obviously there but for me i'll do my deeds and will move
-                    ahead, i'll to automate this website as much as i can and
-                    leave it to people if they want to add more features and
-                    places we they will give the money. if i ever get a money
-                    from this website i'll surely reinvest atleast 80% of it in
-                    the website and the rest will be used for my personal
-                    expenses or some other future projects.
+                    afford to pay. sure there is a way like &#34;but me a coffee
+                    &#34; kinda thing i&#39;m not sure if people will pay and
+                    how much they will pay and how sustainable will it be, will
+                    it be enough to keep the website running? all these
+                    questions are obviously there but for me i&#39;ll do my
+                    deeds and will move ahead, i&#39;ll to automate this website
+                    as much as i can and leave it to people if they want to add
+                    more features and places we they will give the money. if i
+                    ever get a money from this website i&#39;ll surely reinvest
+                    atleast 80% of it in the website and the rest will be used
+                    for my personal expenses or some other future projects.
                   </p>
                 </div>
               </div>
