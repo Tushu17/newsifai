@@ -1,6 +1,7 @@
 import React from "react";
 import { NewsItem } from "@/models/data";
 import Image from "next/image";
+import { FiExternalLink } from "react-icons/fi";
 
 interface NewsModalProps {
   news: NewsItem;
@@ -19,9 +20,20 @@ const NewsModal: React.FC<NewsModalProps> = ({ news, onClose }) => {
             width={1000}
             height={1000}
           />
+          <div className="absolute top-4 left-4">
+            <div className="relative">
+              <div className="absolute top-3 left-3 z-10">
+                <div className="w-10 h-10 rounded-full bg-orange-600 text-white flex items-center justify-center shadow-md text-sm font-bold border-2 border-white">
+                  {news.news_rating}
+                </div>
+              </div>
+
+              {/* Stamp effect shadow */}
+            </div>
+          </div>
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 bg-black bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-75"
+            className="absolute top-4 right-4 bg-black bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-75 cursor-pointer"
           >
             <svg
               className="w-6 h-6"
@@ -62,7 +74,10 @@ const NewsModal: React.FC<NewsModalProps> = ({ news, onClose }) => {
               rel="noopener noreferrer"
               className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
             >
-              Read Full Article
+              <span className="flex items-center">
+                {news.source}
+                <FiExternalLink className="ml-2" />
+              </span>
             </a>
           </div>
         </div>

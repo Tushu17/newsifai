@@ -40,7 +40,6 @@ const Login = () => {
       toast.error(error.message);
     } else {
       toast.success("You have been logged-in successfully!");
-      console.log(data);
 
       if (data.user) {
         localStorage.setItem(

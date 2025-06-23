@@ -5,7 +5,7 @@ import Head from "next/head";
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Head>
         <title>About Us - Treasrup</title>
         <meta

@@ -2,54 +2,38 @@
 import { fetchInfoData } from "@/helper/getinfoData";
 import React, { useCallback, useEffect, useState } from "react";
 import { InfoData } from "@/models/infodata";
-
-const Infobox = () => {
+interface InfoboxProps {
+  selectedPlace: string;
+}
+const Infobox: React.FC<InfoboxProps> = ({ selectedPlace }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [infoData, setInfoData] = useState<InfoData | undefined>();
   const [loading, setLoading] = useState(true);
-  const [selectedPlace, setSelectedPlace] = useState("india");
-  const placeList = [
-    "india",
-    "america",
-    // "europe",
-    // "south africa",
-    // "australia",
-    // "uae",
-    // "france",
-    // "africa",
-    // "china",
-    // "uk",
-  ];
 
-  const fetchInfodata = useCallback(async () => {
+  const fetchInfodata = useCallback(async (place: string) => {
     setLoading(true);
-    const { data, error } = await fetchInfoData(selectedPlace);
+
+    const { data, error } = await fetchInfoData(place);
     if (error) {
       console.error("Error fetching infodata:", error);
     }
     if (data) {
       setInfoData(data && data[0]);
-      console.log(data);
     }
     setLoading(false);
-    return data;
-  }, [selectedPlace]);
+  }, []);
 
   useEffect(() => {
-    fetchInfodata();
+    fetchInfodata(selectedPlace);
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
     return () => clearInterval(timer);
   }, [fetchInfodata, selectedPlace]);
 
-  const handlePlaceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedPlace(e.target.value);
-  };
-
   if (loading) {
     return (
-      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-[80vw] min-h-[50vh] h-auto md:w-[31vw] md:h-full bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-100 dark:bg-gray-900 dark:text-gray-200">
+      <div className="mr-0 lg:mr-2 mb-3 lg:mb-0 w-[80vw] min-h-[70vh] h-auto lg:w-[31vw] lg:h-full bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-100 dark:bg-gray-900 dark:text-gray-200">
         <div className="flex flex-col items-center max-w-xl gap-4 mt-20">
           <div className="animate-pulse rounded-full h-20 w-20 bg-gray-400 mb-4"></div>
           <div className="h-5 bg-gray-400 rounded w-1/2"></div>
@@ -64,7 +48,7 @@ const Infobox = () => {
 
   if (!infoData) {
     return (
-      <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto md:w-[31vw] md:h-full dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
+      <div className="mr-0 lg:mr-2 mb-3 lg:mb-0 w-full min-h-[50vh] h-auto lg:w-[31vw] lg:h-full dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
         <div className="p-4 text-center text-gray-950 dark:text-gray-200">
           No data available for {selectedPlace}.
         </div>
@@ -73,40 +57,20 @@ const Infobox = () => {
   }
 
   return (
-    <div className="mr-0 md:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto md:w-[31vw] md:h-[76vh] dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
-      {/* Header */}
-
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-2 rounded-t-lg">
-        <div className="flex justify-between items-center">
-          <h1 className="text-lg font-bold text-gray-200">
-            <select
-              onChange={handlePlaceChange}
-              className="items-center w-24 text-sm h-10 mr-2 cursor-pointer hover:outline"
-              value={selectedPlace}
-              aria-label="Select a place for overview"
-            >
-              {placeList.map((item) => (
-                <option
-                  key={item}
-                  value={item}
-                  className="items-center pb-1 px-1 w-auto h-auto"
-                >
-                  {item}
-                </option>
-              ))}
-            </select>
-          </h1>
-          <div className="text-gray-200 text-xs">
-            {currentTime.toLocaleTimeString()}
-          </div>
+    <div className="mr-0 lg:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto lg:w-[31vw] lg:h-[77vh] ">
+      {/* <div className="mb-1">
+        <div className="flex items-center">
+          <span className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></span>
+          <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
+            Info for the day in {selectedPlace}
+          </h2>
         </div>
-      </div>
-
-      <div className="p-1.5 md:h-[calc(100%-3rem)] flex flex-col min-h-[50vh] md:min-h-0">
+      </div> */}
+      <div className="p-1.5 lg:h-[calc(100%-3rem)] flex flex-col min-h-[50vh] lg:min-h-0 dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
         {/* 2x2 Grid */}
-        <div className="grid grid-cols-2 gap-3 flex-1 min-h-[35vh] md:min-h-0">
+        <div className="grid grid-cols-2 gap-3 flex-1 min-h-[35vh] lg:min-h-0">
           {/* Quote Section */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0 overflow-scroll">
+          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0 overflow-scroll">
             <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
               <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>
               Quote for today
@@ -120,7 +84,7 @@ const Infobox = () => {
           </div>
 
           {/* Transportation */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-green-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0 overflow-scroll">
+          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-green-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0 overflow-scroll">
             <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></span>
               Transportation
@@ -138,7 +102,7 @@ const Infobox = () => {
           </div>
 
           {/* Markets Section */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-yellow-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0">
+          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-yellow-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0">
             <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
               <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-2"></span>
               Markets
@@ -182,7 +146,7 @@ const Infobox = () => {
           </div>
 
           {/* Good to Know */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-purple-500 transition-all duration-300 flex flex-col min-h-[16vh] md:min-h-0">
+          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-purple-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0">
             <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
               <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>
               Good to Know
@@ -207,7 +171,13 @@ const Infobox = () => {
           <div className="flex items-center justify-center mb-2">
             <h3 className="text-white font-bold text-sm">Market Pulse</h3>
             <p className="pl-2 text-blue-200 text-xs">
-              {infoData?.market_pulse?.date}
+              {currentTime.toLocaleDateString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }) || "Unknown time"}
             </p>
           </div>
           <div className="grid grid-cols-4 gap-2 text-center">

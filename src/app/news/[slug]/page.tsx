@@ -15,7 +15,6 @@ const CategoryPage = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
   useEffect(() => {
-    console.log("params", params);
     const fetchCategoryNews = async () => {
       setLoading(true);
 

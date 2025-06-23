@@ -39,41 +39,6 @@ color palettle-
 - Zarla says logo color is 0e1f3b and 437cd6
 - onhover i'm using orange 500
 
-for testing ai apis-
-
-curl https://openrouter.ai/api/v1/chat/completions \
- -H "Content-Type: application/json" \
- -H "Authorization: Bearer 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" \
- -d '{
-"model": "x-ai/grok-3-mini-beta",
-"messages": [
-{
-"role": "user",
-"content": "Fetch the top 10 news items related to India for today in JSON format with these fields:
-
-- headline (3-5 words)
-- source
-- summary (20-25 words)
-- url
-- place
-- published_date (ISO format)
-- author
-- image_url
-- content (full article)
-- tags
-- language ("en")
-- region ("${config.region}")
-- news_rating (rate importance from 1-10 where:
-  10 = extreme significant for people(e.g., war or global pendemic)
-  5 = nationally important (e.g., major policy change)
-  1 = routine/local news (e.g., expected rainfall in an area))
-
-RETURN ONLY UNWRAPPED JSON ARRAY OF 10 ITEMS. DO NOT WRAP IN XML OR OTHER MARKUP."
-}
-]
-
-}
-
 List of pages i'm planning to create:-
 
 1.  about
@@ -82,6 +47,18 @@ List of pages i'm planning to create:-
 4.  resources/stack
 5.  signin/login
 6.  forget password.
-7.  creating multiple pages for about-
+7.  Insight
+8.  creating multiple pages for about-
 
 - update is we are using Gnews if google to fetch news and feeding all thoses news to ai then filling field that are not traditionally available for anews like rating
+- Ask public if they want a like feature and all
+
+Things i need to work on-
+
+1.  News tags, rn ai is giving very niche tag, keep only new_about as niche tags should be more general
+2.  create a page or disclaimer stating "This site aggregates publicly available news links. We do not own or publish the content. For full details, please visit the original source."
+
+the final plan of this website -
+
+1. infobox will be used to give info about city or the location user select
+2. while news will be given according to the country.

@@ -18,11 +18,11 @@
     --foreground: #f0f0f0;
   }
 }
-
+/*  see if you want to use roboto serif */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Inter", "Roboto Serif", "Lugrasimo", Arial, Helvetica,
-    sans-serif;
+
+  font-family: "Inter", "Lugrasimo", Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }

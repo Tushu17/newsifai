@@ -58,7 +58,6 @@ const Signup = () => {
       }
 
       if (data) {
-        console.log("Signup success:", data);
         toast.success("Check your email for a confirmation link! Then login.");
         setName("");
         setEmail("");

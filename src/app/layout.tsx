@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoSerif.variable} ${geistInter.variable} ${geistMono.variable} antialiased`}
+        className={`${geistInter.variable} ${geistMono.variable} antialiased`}
       >
         <Loadingbar />
         <Navbar />

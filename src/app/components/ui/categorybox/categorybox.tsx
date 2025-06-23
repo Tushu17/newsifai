@@ -28,7 +28,7 @@ const Categorybox = () => {
       education: "border-indigo-500 hover:border-indigo-600",
       sports: "border-orange-500 hover:border-orange-600",
       entertainment: "border-pink-500 hover:border-pink-600",
-      global: "border-gray-500 hover:border-gray-600",
+      global: "border-rose-500 hover:border-rose-600",
     };
 
     return (
@@ -47,7 +47,7 @@ const Categorybox = () => {
       education: "text-indigo-500 group-hover:text-indigo-600",
       sports: "text-orange-500 group-hover:text-orange-600",
       entertainment: "text-pink-500 group-hover:text-pink-600",
-      global: "text-gray-500 group-hover:text-gray-600",
+      global: "text-rose-500 group-hover:text-rose-600",
     };
 
     return (
@@ -63,31 +63,31 @@ const Categorybox = () => {
 
   return (
     <>
-      <div className="w-full h-auto   text-gray-950 dark:text-gray-200 md:w-[42%]">
+      <div className="w-full h-auto   text-gray-950 dark:text-gray-200 lg:w-[60%]">
         {/* Header */}
-        <div className="mb-1">
+        {/* <div className="mb-1">
           <div className="flex items-center">
             <span className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></span>
             <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
               Read by flair
             </h2>
           </div>
-        </div>
+        </div> */}
 
         {/* Categories Grid */}
-        <div className="p-2 overflow-scroll rounded-xl shadow-lg border border-gray-700">
+        <div className="p-2 overflow-scroll rounded-xl shadow-lg border border-gray-700 lg:w-[20vw] bg-gray-200 dark:bg-gray-900">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {categoryList.map((category) => (
               <button
                 key={category}
                 onClick={() => handleCategoryClick(category)}
-                className={`cursor-pointer group relative overflow-hidden rounded-lg py-2 transition-all duration-300 hover:scale-105 hover:shadow-lg bg-white dark:bg-gray-800 border-2 ${getCategoryColor(
+                className={`cursor-pointer group relative overflow-hidden rounded-lg py-2 transition-all duration-300 hover:scale-105 hover:shadow-lg bg-gray-300 dark:bg-gray-800 border-2 ${getCategoryColor(
                   category
                 )}`}
               >
                 <div className="relative z-10">
                   <h3
-                    className={`text-sm font-semibold capitalize ${getCategoryTextColor(
+                    className={`text-xs font-semibold capitalize ${getCategoryTextColor(
                       category
                     )}`}
                   >

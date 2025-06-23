@@ -11,21 +11,6 @@ const Scroller = () => {
   const [loading, setLoading] = useState(false);
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
-  const [queryTag, setQueryTag] = useState<string | null>(null);
-
-  const categoryList = [
-    "Global",
-    "politics",
-    "environment",
-    "technology",
-    "economy",
-    "healthcare",
-    "growth",
-    "education",
-    "sports",
-    "entertainment",
-  ];
-
   // Helper function to normalize tags
   const normalizeTags = (tags: string | string[]): string[] => {
     if (!tags) return [];
@@ -63,7 +48,8 @@ const Scroller = () => {
   const fetchNews = useCallback(async () => {
     setLoading(true);
     try {
-      const { data, error } = await fetchNewsItems(queryTag);
+      // Ask it to fetch news items with news_rating greater than 5
+      const { data, error } = await fetchNewsItems();
 
       if (error) {
         console.error("Failed to fetch news items:", error);
@@ -82,7 +68,7 @@ const Scroller = () => {
     } finally {
       setLoading(false);
     }
-  }, [queryTag]); // Fixed dependency - should be queryTag, not selectedCategory
+  }, []); // Fixed dependency - should be queryTag, not selectedCategory
 
   useEffect(() => {
     fetchNews();
@@ -94,7 +80,7 @@ const Scroller = () => {
 
   if (loading) {
     return (
-      <div className="flex-1 flex flex-col min-h-0 mb-5 pt-20">
+      <div className="flex-1 overflow-y-auto rounded-xl shadow-xl    dark:bg-gray-900 bg-gray-200 w-[30vw] min-h-[70vh]">
         <div className="mb-1 w-full">
           <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
             Loading News...
@@ -126,35 +112,9 @@ const Scroller = () => {
   return (
     <div className="flex-1 flex flex-col min-h-0 mb-5">
       <>
-        {/* Header */}
-        <div className="mb-1">
-          <div className="flex items-center">
-            <span className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></span>
-            <select
-              value={queryTag || "Global"}
-              id="selectNews"
-              className="text-lg font-bold text-gray-950 dark:text-gray-200 bg-transparent border-none outline-none cursor-pointer hover:text-orange-500 transition-colors duration-300"
-              onChange={(e) => {
-                const value = e.target.value;
-                setQueryTag(value === "Global" ? null : value);
-              }}
-            >
-              {categoryList.map((item) => (
-                <option
-                  value={item}
-                  className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200"
-                  key={item}
-                >
-                  {item}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 min-h-0 dark:bg-gray-900 bg-gray-200">
-          <div className="p-4 space-y-3">
+          <div className="p-2 space-y-3">
             {newsItems.length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-gray-600 dark:text-gray-400">
@@ -205,7 +165,7 @@ const Scroller = () => {
                     </h3>
 
                     {/* Summary */}
-                    <p className="text-xs text-gray-800 dark:text-gray-300 leading-relaxed line-clamp-2">
+                    <p className="text-xs text-gray-800 dark:text-gray-300 leading-relaxed line-clamp-3">
                       {item.summary || "No summary available"}
                     </p>
 
@@ -228,6 +188,7 @@ const Scroller = () => {
           />
         )}
       </>
+      <div className="h-0.5 bg-gradient-to-r from-fuchsia-500 to-emerald-700 rounded-b-lg mb-4"></div>
     </div>
   );
 };
