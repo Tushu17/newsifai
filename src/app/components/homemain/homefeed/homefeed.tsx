@@ -42,7 +42,7 @@ const Homefeed = () => {
               <div className="flex items-center">
                 <span className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></span>
                 <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
-                  Important News
+                  Info for the day in {selectedPlace}
                 </h2>
               </div>
             </div>
@@ -72,7 +72,7 @@ const Homefeed = () => {
               <div className="flex items-center">
                 <span className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></span>
                 <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
-                  Important News
+                  Read by flag
                 </h2>
               </div>
             </div>
