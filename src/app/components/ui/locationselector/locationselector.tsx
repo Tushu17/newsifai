@@ -18,7 +18,7 @@ const LocationSelector = () => {
       if (error || !data || data.length === 0) {
         setPlaceList(["india", "america", "europe"]); // Fallback
       } else {
-        const places = data.map((item: any) => item.place);
+        const places = data.map((item: { place: string }) => item.place);
         setPlaceList(places);
       }
     };

@@ -80,7 +80,7 @@ const Scroller = () => {
 
   if (loading) {
     return (
-      <div className="flex-1 overflow-y-auto rounded-xl shadow-xl    dark:bg-gray-900 bg-gray-200 w-[30vw] min-h-[70vh]">
+      <div className="flex-1 overflow-y-auto rounded-xl shadow-xl    dark:bg-gray-900 bg-gray-200 lg:w-[36vw] min-h-[70vh] lg:h-[72vh]">
         <div className="mb-1 w-full">
           <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
             Loading News...
@@ -110,11 +110,11 @@ const Scroller = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 mb-5">
+    <div className="flex-1 flex flex-col min-h-0 mb-5  lg:h-[72vh] ">
       <>
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 min-h-0 dark:bg-gray-900 bg-gray-200">
-          <div className="p-2 space-y-3">
+        <div className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 dark:bg-gray-900 bg-gray-200 mb-3 md:mb-0 w-full min-h-[50vh] h-auto lg:w-[35vw] lg:h-[72vh]">
+          <div className="p-2 space-y-3 ">
             {newsItems.length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-gray-600 dark:text-gray-400">
@@ -188,7 +188,7 @@ const Scroller = () => {
           />
         )}
       </>
-      <div className="h-0.5 bg-gradient-to-r from-fuchsia-500 to-emerald-700 rounded-b-lg mb-4"></div>
+      <div className="h-0.5 bg-gradient-to-r from-fuchsia-500 to-emerald-700 animate-pulse rounded-b-lg mt-3"></div>
     </div>
   );
 };

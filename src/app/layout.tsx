@@ -2,7 +2,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/footer/footer";
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Roboto_Serif } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 import Loadingbar from "./components/ui/loadingbar/loadingbar";
@@ -17,10 +17,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const robotoSerif = Roboto_Serif({
-  variable: "--font-roboto-serif",
-  subsets: ["latin"],
-});
+// const robotoSerif = Roboto_Serif({
+//   variable: "--font-roboto-serif",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "Quick-nws - All the info you need!",

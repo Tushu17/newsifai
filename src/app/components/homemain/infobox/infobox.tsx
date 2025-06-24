@@ -33,7 +33,7 @@ const Infobox: React.FC<InfoboxProps> = ({ selectedPlace }) => {
 
   if (loading) {
     return (
-      <div className="mr-0 lg:mr-2 mb-3 lg:mb-0 w-[80vw] min-h-[70vh] h-auto lg:w-[31vw] lg:h-full bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-100 dark:bg-gray-900 dark:text-gray-200">
+      <div className="mr-0 mb-3 lg:mb-0 w-full min-h-[50vh] h-full lg:w-[31vw] lg:h-[72vh] bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-100 dark:bg-gray-900 dark:text-gray-200">
         <div className="flex flex-col items-center max-w-xl gap-4 mt-20">
           <div className="animate-pulse rounded-full h-20 w-20 bg-gray-400 mb-4"></div>
           <div className="h-5 bg-gray-400 rounded w-1/2"></div>
@@ -48,7 +48,7 @@ const Infobox: React.FC<InfoboxProps> = ({ selectedPlace }) => {
 
   if (!infoData) {
     return (
-      <div className="mr-0 lg:mr-2 mb-3 lg:mb-0 w-full min-h-[50vh] h-auto lg:w-[31vw] lg:h-full dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
+      <div className="mr-0 mb-3 lg:mb-0 w-full min-h-[50vh] h-auto lg:w-[31vw] lg:h-[72vh] dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
         <div className="p-4 text-center text-gray-950 dark:text-gray-200">
           No data available for {selectedPlace}.
         </div>
@@ -57,7 +57,7 @@ const Infobox: React.FC<InfoboxProps> = ({ selectedPlace }) => {
   }
 
   return (
-    <div className="mr-0 lg:mr-2 mb-3 md:mb-0 w-full min-h-[50vh] h-auto lg:w-[31vw] lg:h-[77vh] ">
+    <div className="mr-0 mb-3 md:mb-0 w-full min-h-[50vh] h-auto lg:w-[31vw] lg:h-[77vh] ">
       {/* <div className="mb-1">
         <div className="flex items-center">
           <span className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></span>

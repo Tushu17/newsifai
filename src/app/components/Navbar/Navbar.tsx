@@ -50,8 +50,8 @@ const Navbar = () => {
         pauseOnHover
         theme="light"
       />
-      <nav className="bg-gray-100 border-gray-200 py-1 lg:py-2.5 dark:bg-gray-900 sticky top-0 z-50">
-        <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto border rounded-2xl border-gray-400  lg:p-2 min-h-14">
+      <nav className=" py-1 lg:py-2.5  sticky top-0 z-50">
+        <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto border rounded-2xl border-gray-400 shadow-lg lg:p-2 min-h-14 bg-gray-100 dark:bg-gray-900">
           <Link href="/" className="flex items-center">
             <Image
               src="/logo.png"
@@ -87,7 +87,7 @@ const Navbar = () => {
                   <VscAccount className="text-3xl " />
                 </button>
                 {dropDown && (
-                  <div className="absolute right-0 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50 ">
+                  <div className="absolute right-0 w-40 bg-white dark:bg-gray-800 rounded-md  z-50 ">
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                       <li>
                         <Link
