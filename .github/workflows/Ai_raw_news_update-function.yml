@@ -2,7 +2,7 @@ name: Trigger Ai_raw_news_update
 
 on:
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: "0 */2 * * *"
   workflow_dispatch:
 
 jobs:
@@ -15,15 +15,3 @@ jobs:
             -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
             -H 'Content-Type: application/json' \
             --data '{"name":"Functions"}'
-
-      - name: Call news_insertion Function
-        run: |
-          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/news_insertion' \
-          -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
-          -H 'Content-Type: application/json' \
-          --data '{"name":"Functions"}'
-
-
-
-
-

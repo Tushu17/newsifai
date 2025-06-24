@@ -12,7 +12,6 @@ jobs:
       - name: Call Ai_raw_news_update Function
         run: |
           curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/news_fetch' \
-          -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5c3RtemF4bGJ5bXdjc3JzZXJyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2MzEzODUsImV4cCI6MjA2MzIwNzM4NX0.9_6ldtxnbuyH16lHD7uVcuU_v5KLDc5HGkeJrDmOfE4' \
+          -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
           -H 'Content-Type: application/json' \
           --data '{"name":"Functions"}'
-      
