@@ -16,7 +16,7 @@ jobs:
             -H 'Content-Type: application/json' \
             --data '{"name":"Functions"}'
 
-  - name: Call news_insertion
+      - name: Call news_insertion Function
         run: |
           curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/news_insertion' \
           -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
