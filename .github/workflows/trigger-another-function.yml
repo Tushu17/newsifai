@@ -10,19 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20    # Optional: job will be killed if it runs longer than 10 minutes
     steps:
- - name: Call Ai_raw_news_update
+ - name: Call Ai_raw_news_update Function
         run: |
           curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/Ai_raw_news_update' \
-  -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
-  -H 'Content-Type: application/json' \
-  --data '{"name":"Functions"}'
+            -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
+            -H 'Content-Type: application/json' \
+            --data '{"name":"Functions"}'
 
   - name: Call news_insertion
         run: |
           curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/news_insertion' \
-  -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
-  -H 'Content-Type: application/json' \
-  --data '{"name":"Functions"}'`
+          -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
+          -H 'Content-Type: application/json' \
+          --data '{"name":"Functions"}'`
 
 
 
