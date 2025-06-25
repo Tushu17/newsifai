@@ -22,16 +22,23 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 });
 
 /**
- * Fetch all news items from the news_items table
+ * Fetch news items from the news_items table with pagination support
+ * @param queryTag - Optional tag to filter by
+ * @param offset - Number of items to skip (for pagination)
+ * @param limit - Number of items to fetch (default: 30)
  * @returns {Promise<{data: NewsItem[] | null, error: any | null}>} Object with data and error
  */
-export async function fetchNewsItems(queryTag: string | null = null) {
+export async function fetchNewsItems(
+  queryTag: string | null = null,
+  offset: number = 0,
+  limit: number = 30
+) {
   try {
     const query = supabase
       .from("news_items")
       .select("*")
       .order("published_at", { ascending: false })
-      .limit(50);
+      .range(offset, offset + limit - 1);
 
     const finalQuery = queryTag ? query.contains("tags", [queryTag]) : query;
     const { data, error } = await finalQuery;

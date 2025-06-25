@@ -5,7 +5,7 @@ const Homepage = () => {
   return (
     // there is the scrolling scene
 
-    <section className="h-screen">
+    <section className="h-full">
       <Homefeed />
     </section>
   );

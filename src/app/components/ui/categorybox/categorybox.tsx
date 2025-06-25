@@ -101,7 +101,8 @@ const Categorybox = () => {
 
         {/* Bottom accent */}
       </div>
-      <div className="h-0.5 bg-gradient-to-r from-emerald-500 to-red-500 rounded-b-lg mb-4"></div>
+
+      <div className="h-0.5 bg-gradient-to-r from-emerald-500 to-red-500 animate-pulse rounded-b-lg mt-3"></div>
     </>
   );
 };

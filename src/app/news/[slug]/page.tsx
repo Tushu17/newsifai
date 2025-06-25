@@ -70,7 +70,7 @@ const CategoryPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 mb-2">
       {/* Header */}
       <div className="bg-white dark:bg-gray-800 shadow-md p-4 mb-6">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white capitalize">
@@ -110,7 +110,6 @@ const CategoryPage = () => {
                   />
                   <div className="absolute top-2 right-2 flex flex-col">
                     <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">
-                      {news.news_rating}
                       {Array.isArray(news.tags)
                         ? news.tags[0]
                         : news.tags?.split(",")[0] || "General"}

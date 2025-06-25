@@ -3,36 +3,59 @@ import React, { useState, useEffect, useRef } from "react";
 import { supabase } from "../../../../libs/utils/supabaseClient";
 import { CiLocationOn } from "react-icons/ci";
 
+// Define the interface for place data
+interface PlaceData {
+  id: number;
+  place: string;
+  region?: string;
+  country?: string;
+}
+
 const LocationSelector = () => {
-  const [placeList, setPlaceList] = useState<string[]>([]);
-  const [selectedPlace, setSelectedPlace] = useState<string>("");
+  const [placeList, setPlaceList] = useState<PlaceData[]>([]);
+  const [selectedPlace, setSelectedPlace] = useState<PlaceData | null>(null);
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     const fetchPlaces = async () => {
-      const { data, error } = await supabase
-        .from("places_config")
-        .select("place");
+      const { data, error } = await supabase.from("places_config").select("*");
       if (error || !data || data.length === 0) {
-        setPlaceList(["india", "america", "europe"]); // Fallback
+        // Fallback with basic structure
+        const fallbackPlaces: PlaceData[] = [
+          { id: 1, place: "india", region: "Asia", country: "India" },
+          { id: 2, place: "america", region: "Americas", country: "USA" },
+          { id: 3, place: "europe", region: "Europe", country: "Europe" },
+        ];
+        setPlaceList(fallbackPlaces);
       } else {
-        const places = data.map((item: { place: string }) => item.place);
-        setPlaceList(places);
+        setPlaceList(data as PlaceData[]);
       }
     };
     fetchPlaces();
   }, []);
 
   useEffect(() => {
-    const storedPlace = localStorage.getItem("selectedPlace");
-    if (storedPlace && placeList.includes(storedPlace)) {
-      setSelectedPlace(storedPlace);
-    } else if (placeList.length > 0) {
+    const storedPlaceData = localStorage.getItem("selectedPlaceData");
+    if (storedPlaceData) {
+      try {
+        const parsedData = JSON.parse(storedPlaceData);
+        const foundPlace = placeList.find((p) => p.place === parsedData.place);
+        if (foundPlace) {
+          setSelectedPlace(foundPlace);
+          return;
+        }
+      } catch (error) {
+        console.error("Error parsing stored place data:", error);
+      }
+    }
+
+    // Fallback to first place if no stored data or stored place not found
+    if (placeList.length > 0) {
       const defaultPlace = placeList[0];
       setSelectedPlace(defaultPlace);
-      localStorage.setItem("selectedPlace", defaultPlace);
+      localStorage.setItem("selectedPlaceData", JSON.stringify(defaultPlace));
     }
   }, [placeList]);
 
@@ -57,9 +80,9 @@ const LocationSelector = () => {
     };
   }, [open]);
 
-  const handlePlaceChange = (place: string) => {
+  const handlePlaceChange = (place: PlaceData) => {
     setSelectedPlace(place);
-    localStorage.setItem("selectedPlace", place);
+    localStorage.setItem("selectedPlaceData", JSON.stringify(place));
     window.dispatchEvent(new Event("storage"));
     setOpen(false);
   };
@@ -86,15 +109,17 @@ const LocationSelector = () => {
         >
           {placeList.map((item) => (
             <li
-              key={item}
+              key={item.id}
               onClick={() => handlePlaceChange(item)}
               className={`px-4 py-2 cursor-pointer text-sm capitalize rounded transition-colors text-slate-700 hover:bg-purple-100 ${
-                item === selectedPlace ? "bg-purple-200 font-bold" : ""
+                item.place === selectedPlace?.place
+                  ? "bg-purple-200 font-bold"
+                  : ""
               }`}
               role="option"
-              aria-selected={item === selectedPlace}
+              aria-selected={item.place === selectedPlace?.place}
             >
-              {item}
+              {item.place}
             </li>
           ))}
         </ul>
