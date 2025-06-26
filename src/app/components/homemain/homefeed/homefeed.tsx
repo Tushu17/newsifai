@@ -98,15 +98,13 @@ const Homefeed = () => {
             <div className="mb-4">
               <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
                 <div className="flex items-center">
-                  {/* Clean accent bar */}
                   <div className="mr-4">
                     <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
                   </div>
 
                   <div className="flex items-center justify-between w-full">
-                    {/* Clean typography */}
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                      Read by flag
+                      Info for the day in {selectedPlaceData.place}
                     </h2>
 
                     {/* Simple toggle buttons */}
@@ -146,18 +144,15 @@ const Homefeed = () => {
             <div className="mb-4">
               <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
                 <div className="flex items-center">
-                  {/* Clean accent bar */}
                   <div className="mr-4">
                     <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
                   </div>
 
                   <div className="flex items-center justify-between w-full">
-                    {/* Clean typography */}
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                      Read by flag
+                      Important news
                     </h2>
 
-                    {/* Simple toggle buttons */}
                     {isSmallScreen && (
                       <>
                         {isOpen !== "scroller" ? (
@@ -188,7 +183,7 @@ const Homefeed = () => {
 
         {/* Categorybox Section */}
         <span>
-          <div className="lg:mr-3 my-2">
+          <div className="lg:mr-3 my-3">
             <div className="mb-4">
               <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
                 <div className="flex items-center">
