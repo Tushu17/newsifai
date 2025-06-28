@@ -136,7 +136,7 @@ const AiTopicScroller = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 mb-5 lg:h-[72vh] h-full">
+    <div className="flex-1 flex flex-col min-h-0 mb-5 lg:h-[72vh] h-[72vh]">
       {/* 2x4 Grid of Topic Boxes */}
       <div
         ref={scrollContainerRef}

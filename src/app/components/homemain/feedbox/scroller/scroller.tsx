@@ -172,7 +172,7 @@ const Scroller = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 mb-5  lg:h-[72vh] h-full">
+    <div className="flex-1 flex flex-col min-h-0 mb-5  lg:h-[72vh] h-[72vh]">
       <>
         {/* Scrollable Content */}
         <div

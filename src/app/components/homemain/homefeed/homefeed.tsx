@@ -95,8 +95,8 @@ const Homefeed = () => {
       <div className="flex flex-col lg:flex-row justify-around">
         {/* Infobox Section */}
         <span>
-          <div className="lg:mr-3 lg:h-[82vh] h-full mt-3">
-            <div className="mb-4">
+          <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
+            <div className="mb-1">
               <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
                 <div className="flex items-center">
                   <div className="mr-4">
@@ -134,16 +134,18 @@ const Homefeed = () => {
             </div>
             {/* Show component on large screens OR when selected on small screens */}
             {(!isSmallScreen || isOpen === "infobox") && (
-              // <Infobox selectedPlace={selectedPlaceData.place} />
-              <AiTopicScroller />
+              <>
+                {/* // <Infobox selectedPlace={selectedPlaceData.place} /> */}
+                <AiTopicScroller />
+              </>
             )}
           </div>
         </span>
 
         {/* Scroller Section */}
         <span>
-          <div className="lg:mr-3 lg:h-[82vh] h-full mt-3">
-            <div className="mb-4">
+          <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
+            <div className="mb-1">
               <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
                 <div className="flex items-center">
                   <div className="mr-4">
@@ -186,7 +188,7 @@ const Homefeed = () => {
         {/* Categorybox Section */}
         <span>
           <div className="lg:mr-3 my-3">
-            <div className="mb-4">
+            <div className="mb-1">
               <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
                 <div className="flex items-center">
                   {/* Clean accent bar */}
