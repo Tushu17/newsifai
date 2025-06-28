@@ -75,8 +75,8 @@ const Categorybox = () => {
         </div> */}
 
         {/* Categories Grid */}
-        <div className="p-2 overflow-scroll rounded-xl shadow-lg border border-gray-700 lg:w-[20vw] bg-gray-200 dark:bg-gray-900">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div className="p-2 overflow-scroll rounded-xl shadow-lg border border-gray-700 lg:w-[15vw] bg-gray-200 dark:bg-gray-900">
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-3">
             {categoryList.map((category) => (
               <button
                 key={category}

@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Infobox from "../infobox/infobox";
+// import Infobox from "../infobox/infobox";
 import Categorybox from "../../ui/categorybox/categorybox";
 import Scroller from "../feedbox/scroller/scroller";
 import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
+import AiTopicScroller from "../aitopicscroller/aitopicscroller";
 
 // Define the interface for place data
 interface PlaceData {
@@ -133,7 +134,8 @@ const Homefeed = () => {
             </div>
             {/* Show component on large screens OR when selected on small screens */}
             {(!isSmallScreen || isOpen === "infobox") && (
-              <Infobox selectedPlace={selectedPlaceData.place} />
+              // <Infobox selectedPlace={selectedPlaceData.place} />
+              <AiTopicScroller />
             )}
           </div>
         </span>
@@ -150,7 +152,7 @@ const Homefeed = () => {
 
                   <div className="flex items-center justify-between w-full">
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                      Important news
+                      Read by yourself
                     </h2>
 
                     {isSmallScreen && (

@@ -2,6 +2,7 @@
 import { fetchInfoData } from "@/helper/getinfoData";
 import React, { useCallback, useEffect, useState } from "react";
 import { InfoData } from "@/models/infodata";
+import Matrix from "../../ui/matrix/matrix";
 interface InfoboxProps {
   selectedPlace: string;
 }
@@ -68,101 +69,88 @@ const Infobox: React.FC<InfoboxProps> = ({ selectedPlace }) => {
       </div> */}
       <div className="p-1.5 lg:h-[calc(100%-3rem)] flex flex-col min-h-[50vh] lg:min-h-0 dark:bg-gray-900 bg-gray-200 rounded-lg shadow-lg border border-gray-700 text-gray-950 dark:text-gray-200">
         {/* 2x2 Grid */}
-        <div className="grid grid-cols-2 gap-3 flex-1 min-h-[35vh] lg:min-h-0">
-          {/* Quote Section */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0 overflow-scroll">
-            <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
-              <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>
-              Quote for today
-            </h2>
-            <blockquote className="text-gray-800 dark:text-gray-300 text-xs leading-relaxed mb-2 italic">
-              “{infoData?.quote}“
-            </blockquote>
-            <cite className="text-gray-600 text-xs">
-              — {infoData?.quote_author}
-            </cite>
-          </div>
-
-          {/* Transportation */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-green-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0 overflow-scroll">
-            <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
-              <span className="w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></span>
-              Transportation
-            </h2>
-            <div className="space-y-1">
-              {infoData?.transportation?.map((item: string, index: number) => (
-                <div key={index} className="flex items-start">
-                  <span className="w-1 h-1 bg-green-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                  <p className="text-gray-800 dark:text-gray-300 text-xs leading-tight">
-                    {item}
-                  </p>
-                </div>
-              ))}
+        <div className="grid grid-rows-2 gap-3 flex-1 min-h-[35vh] lg:min-h-0">
+          <div className="grid grid-cols-2 gap-3">
+            {/* Quote Section */}
+            <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0 overflow-scroll">
+              <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
+                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></span>
+                Quote for today
+              </h2>
+              <blockquote className="text-gray-800 dark:text-gray-300 text-xs leading-relaxed mb-2 italic">
+                “{infoData?.quote}“
+              </blockquote>
+              <cite className="text-gray-600 text-xs">
+                — {infoData?.quote_author}
+              </cite>
             </div>
-          </div>
 
-          {/* Markets Section */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-yellow-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0">
-            <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
-              <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-2"></span>
-              Markets
-            </h2>
-            <div className="space-y-2 overflow-scroll">
-              <div>
-                <h3 className="text-xs font-semibold text-yellow-500 mb-1 italic">
-                  Equity Outlook:—
-                </h3>
-                <div className="space-y-0.5">
-                  {infoData?.markets?.equity
-                    ?.slice(0, 2)
-                    .map((item: string, index: number) => (
-                      <div key={index} className="flex items-start">
-                        <span className="w-1 h-1 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                        <p className="text-gray-800 dark:text-gray-300 text-xs leading-tight">
-                          {item}
-                        </p>
-                      </div>
-                    ))}
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xs font-semibold text-yellow-500 mb-1 italic">
-                  Real Estate
-                </h3>
-                <div className="space-y-0.5">
-                  {infoData?.markets?.realEstate
-                    ?.slice(0, 1)
-                    .map((item: string, index: number) => (
-                      <div key={index} className="flex items-start">
-                        <span className="w-1 h-1 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                        <p className="text-gray-800 dark:text-gray-300 text-xs leading-tight">
-                          {item}
-                        </p>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Good to Know */}
-          <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-purple-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0">
-            <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
-              <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>
-              Good to Know
-            </h2>
-            <div className="space-y-1">
-              {infoData?.good_to_know
-                ?.slice(0, 3)
-                .map((item: string, index: number) => (
-                  <div key={index} className="flex items-start">
-                    <span className="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                    <p className="text-gray-800 dark:text-gray-300 text-xs leading-tight">
-                      {item}
-                    </p>
+            {/* market info*/}
+            <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-yellow-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0">
+              <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
+                <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full mr-2"></span>
+                Markets
+              </h2>
+              <div className="space-y-2 overflow-scroll">
+                <div>
+                  <h3 className="text-xs font-semibold text-yellow-500 mb-1 italic">
+                    Equity Outlook:—
+                  </h3>
+                  <div className="space-y-0.5">
+                    {infoData?.markets?.equity
+                      ?.slice(0, 2)
+                      .map((item: string, index: number) => (
+                        <div key={index} className="flex items-start">
+                          <span className="w-1 h-1 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
+                          <p className="text-gray-800 dark:text-gray-300 text-xs leading-tight">
+                            {item}
+                          </p>
+                        </div>
+                      ))}
                   </div>
-                ))}
+                </div>
+                <div>
+                  <h3 className="text-xs font-semibold text-yellow-500 mb-1 italic">
+                    Real Estate
+                  </h3>
+                  <div className="space-y-0.5">
+                    {infoData?.markets?.realEstate
+                      ?.slice(0, 1)
+                      .map((item: string, index: number) => (
+                        <div key={index} className="flex items-start">
+                          <span className="w-1 h-1 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
+                          <p className="text-gray-800 dark:text-gray-300 text-xs leading-tight">
+                            {item}
+                          </p>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <div className="">
+            {/* Matrix colomn */}
+
+            <Matrix />
+            {/* <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-purple-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0">
+              <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
+                <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>
+                Good to Know
+              </h2>
+              <div className="space-y-1">
+                {infoData?.good_to_know
+                  ?.slice(0, 3)
+                  .map((item: string, index: number) => (
+                    <div key={index} className="flex items-start">
+                      <span className="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
+                      <p className="text-gray-800 dark:text-gray-300 text-xs leading-tight">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
+              </div>
+            </div> */}
           </div>
         </div>
 
