@@ -1,10 +1,50 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import Infobox from "../infobox/infobox";
-import Categorybox from "../../ui/categorybox/categorybox";
+import Categorybox from "../categorybox/categorybox";
 import Scroller from "../feedbox/scroller/scroller";
-import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 import AiTopicScroller from "../aitopicscroller/aitopicscroller";
+import { FiHome } from "react-icons/fi";
+import { MdOutlineExplore } from "react-icons/md";
+import { TbCategoryPlus } from "react-icons/tb";
+
+// this component work as a nesting for all three other components
+// it is used to handle the small screen layout and the large screen layout
+// it is also used to handle the storage of the selected place data
+// it is also used to handle the switching of the active menu
+
+// Floating Capsule Menu for small screens
+const menuItems = [
+  { key: "infobox", icon: <FiHome />, label: "Home" },
+  { key: "scroller", icon: <MdOutlineExplore />, label: "Feed" },
+  { key: "categorybox", icon: <TbCategoryPlus />, label: "Categories" },
+];
+
+const FloatingCapsuleMenu = ({
+  active,
+  onSwitch,
+}: {
+  active: string;
+  onSwitch: (key: string) => void;
+}) => (
+  <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden">
+    <div className="flex items-center bg-orange-400 border-4 border-gray-700 rounded-full shadow-2xl px-4 py-2 space-x-4">
+      {menuItems.map((item) => (
+        <button
+          key={item.key}
+          onClick={() => onSwitch(item.key)}
+          className={`flex flex-col items-center justify-center text-2xl transition-all duration-200 ${
+            active === item.key
+              ? "text-gray-900 bg-orange-200 shadow-md"
+              : "text-gray-700 bg-transparent"
+          } rounded-full p-2 hover:bg-orange-300`}
+          aria-label={item.label}
+        >
+          {item.icon}
+        </button>
+      ))}
+    </div>
+  </div>
+);
 
 // Define the interface for place data
 interface PlaceData {
@@ -16,9 +56,7 @@ interface PlaceData {
 }
 
 const Homefeed = () => {
-  const [isOpen, setIsOpen] = useState<"infobox" | "scroller" | "categorybox">(
-    "infobox"
-  );
+  const [activeMenu, setActiveMenu] = useState<string>("infobox");
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
 
   const [selectedPlaceData, setSelectedPlaceData] = useState<PlaceData>(() => {
@@ -84,10 +122,27 @@ const Homefeed = () => {
     };
   }, [selectedPlaceData.place]);
 
-  const toggleModal = (modal: string) => {
-    setIsOpen(modal as "infobox" | "scroller" | "categorybox");
-  };
+  // Only show one main component at a time on small screens
+  if (isSmallScreen) {
+    return (
+      <div className="relative min-h-screen bg-transparent">
+        {activeMenu === "infobox" && (
+          <AiTopicScroller
+            selectedPlaceData={selectedPlaceData.place}
+            isSmallScreen={true}
+            onClose={() => {}}
+          />
+        )}
+        {activeMenu === "scroller" && (
+          <Scroller selectedPlaceData={selectedPlaceData.place} />
+        )}
+        {activeMenu === "categorybox" && <Categorybox />}
+        <FloatingCapsuleMenu active={activeMenu} onSwitch={setActiveMenu} />
+      </div>
+    );
+  }
 
+  // Large screen layout (unchanged)
   return (
     <div
       className={`max-w-screen-xl mx-auto px-1 lg:py-5 lg:px-2 h-full overflow-scroll`}
@@ -96,138 +151,25 @@ const Homefeed = () => {
         {/* Infobox Section */}
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-            <div className="mb-1">
-              <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
-                <div className="flex items-center">
-                  <div className="mr-4">
-                    <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
-                  </div>
-
-                  <div className="flex items-center justify-between w-full">
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                      Info for the day in {selectedPlaceData.place}
-                    </h2>
-
-                    {/* Simple toggle buttons */}
-                    {isSmallScreen && (
-                      <>
-                        {isOpen !== "infobox" ? (
-                          <button
-                            className="p-2.5 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200/50 dark:border-gray-700/50 active:scale-95 transition-transform duration-100"
-                            onClick={() => toggleModal("infobox")}
-                          >
-                            <FaChevronCircleDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                          </button>
-                        ) : (
-                          <button
-                            className="p-2.5 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200/50 dark:border-gray-700/50 active:scale-95 transition-transform duration-100"
-                            onClick={() => toggleModal("scroller")}
-                          >
-                            <FaChevronCircleUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                          </button>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Show component on large screens OR when selected on small screens */}
-            {(!isSmallScreen || isOpen === "infobox") && (
-              <>
-                {/* // <Infobox selectedPlace={selectedPlaceData.place} /> */}
-                <AiTopicScroller />
-              </>
-            )}
+            <AiTopicScroller
+              selectedPlaceData={selectedPlaceData.place}
+              isSmallScreen={false}
+              onClose={() => {}}
+            />
           </div>
         </span>
 
         {/* Scroller Section */}
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-            <div className="mb-1">
-              <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
-                <div className="flex items-center">
-                  <div className="mr-4">
-                    <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
-                  </div>
-
-                  <div className="flex items-center justify-between w-full">
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                      Read by yourself
-                    </h2>
-
-                    {isSmallScreen && (
-                      <>
-                        {isOpen !== "scroller" ? (
-                          <button
-                            className="p-2.5 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200/50 dark:border-gray-700/50 active:scale-95 transition-transform duration-100"
-                            onClick={() => toggleModal("scroller")}
-                          >
-                            <FaChevronCircleDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                          </button>
-                        ) : (
-                          <button
-                            className="p-2.5 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200/50 dark:border-gray-700/50 active:scale-95 transition-transform duration-100"
-                            onClick={() => toggleModal("categorybox")}
-                          >
-                            <FaChevronCircleUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                          </button>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Show component on large screens OR when selected on small screens */}
-            {(!isSmallScreen || isOpen === "scroller") && <Scroller />}
+            <Scroller selectedPlaceData={selectedPlaceData.place} />
           </div>
         </span>
 
         {/* Categorybox Section */}
         <span>
           <div className="lg:mr-3 my-3">
-            <div className="mb-1">
-              <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
-                <div className="flex items-center">
-                  {/* Clean accent bar */}
-                  <div className="mr-4">
-                    <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
-                  </div>
-
-                  <div className="flex items-center justify-between w-full">
-                    {/* Clean typography */}
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                      Read by flag
-                    </h2>
-
-                    {/* Simple toggle buttons */}
-                    {isSmallScreen && (
-                      <>
-                        {isOpen !== "categorybox" ? (
-                          <button
-                            className="p-2.5 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200/50 dark:border-gray-700/50 active:scale-95 transition-transform duration-100"
-                            onClick={() => toggleModal("categorybox")}
-                          >
-                            <FaChevronCircleDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                          </button>
-                        ) : (
-                          <button
-                            className="p-2.5 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200/50 dark:border-gray-700/50 active:scale-95 transition-transform duration-100"
-                            onClick={() => toggleModal("infobox")}
-                          >
-                            <FaChevronCircleUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                          </button>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Show component on large screens OR when selected on small screens */}
-            {(!isSmallScreen || isOpen === "categorybox") && <Categorybox />}
+            <Categorybox />
           </div>
         </span>
       </div>

@@ -1,12 +1,11 @@
 import { fetchNewsItems } from "@/helper/getData";
 import React, { useCallback, useEffect, useState, useRef } from "react";
-// import PopupModal from "../PopupModal";
 import { NewsItem } from "@/models/data";
 import NewsModal from "@/app/components/newsmodal/newsmodal";
 
 // Define the NewsItem interface
 
-const Scroller = () => {
+const Scroller = ({ selectedPlaceData }: { selectedPlaceData: unknown }) => {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -172,105 +171,122 @@ const Scroller = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 mb-5  lg:h-[72vh] h-[72vh]">
-      <>
-        {/* Scrollable Content */}
-        <div
-          ref={scrollContainerRef}
-          className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 dark:bg-gray-900 bg-gray-200 mb-3 md:mb-0 w-full min-h-[50vh] h-auto lg:w-[35vw] lg:h-[72vh]"
-        >
-          <div className="p-2 space-y-3 ">
-            {newsItems.length === 0 ? (
-              <div className="text-center py-8">
-                <p className="text-gray-600 dark:text-gray-400">
-                  No news items available
-                </p>
-                <button
-                  onClick={() => {
-                    setOffset(0);
-                    setHasMore(true);
-                    fetchNews(true);
-                  }}
-                  className="mt-4 px-1 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                >
-                  Refresh
-                </button>
-              </div>
-            ) : (
-              <>
-                {newsItems.map((item) => {
-                  const normalizedTags = normalizeTags(item.tags);
-                  return (
-                    <div
-                      key={item.id}
-                      className="group dark:bg-gray-800 bg-gray-300 rounded-lg p-4 border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 cursor-pointer transform hover:-translate-y-0.5"
-                      onClick={() => handleNewsClick(item)}
-                    >
-                      {/* Category and Time */}
-                      <div className="flex justify-between items-center mb-2">
-                        <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium text-white ${getTagColor(
-                            item.tags
-                          )}`}
-                        >
-                          {normalizedTags[0] || "General"}
-                        </span>
-                        <span className="text-xs text-gray-600 dark:text-gray-400">
-                          {new Date(item.published_at).toLocaleDateString(
-                            "en-US",
-                            {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            }
-                          ) || "Unknown time"}
-                        </span>
-                      </div>
+    <>
+      <div className="mb-1">
+        <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
+          <div className="flex items-center">
+            <div className="mr-4">
+              <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
+            </div>
 
-                      {/* Headline */}
-                      <h3 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 group-hover:text-blue-400 transition-colors duration-300 leading-tight">
-                        {item.headline || "No headline available"}
-                      </h3>
-
-                      {/* Summary */}
-                      <p className="text-xs text-gray-800 dark:text-gray-300 leading-relaxed line-clamp-3">
-                        {item.summary || "No summary available"}
-                      </p>
-
-                      {/* Read More Indicator */}
-                      <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-xs text-blue-400 font-medium">
-                          Read more →
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-
-                {/* Loading indicator for infinite scroll */}
-                {loadingMore && (
-                  <div className="flex justify-center py-4">
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
-                  </div>
-                )}
-
-                {/* Intersection observer target */}
-                <div ref={loadingRef} className="h-4" />
-              </>
-            )}
+            <div className="flex items-center justify-between w-full">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Info for the day in {selectedPlaceData as string}
+              </h2>
+            </div>
           </div>
         </div>
-        {selectedNews && (
-          <NewsModal
-            news={selectedNews}
-            onClose={() => setSelectedNews(null)}
-          />
-        )}
-      </>
-      <div className="h-0.5 bg-gradient-to-r from-fuchsia-500 to-emerald-700 animate-pulse rounded-b-lg mt-3"></div>
-    </div>
+      </div>
+      <div className="flex-1 flex flex-col min-h-0 mb-5  lg:h-[72vh] h-full">
+        <>
+          {/* Scrollable Content */}
+          <div
+            ref={scrollContainerRef}
+            className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 dark:bg-gray-900 bg-gray-200 mb-3 md:mb-0 w-full min-h-[50vh] h-auto lg:w-[35vw] lg:h-[72vh]"
+          >
+            <div className="p-2 space-y-3 ">
+              {newsItems.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-gray-600 dark:text-gray-400">
+                    No news items available
+                  </p>
+                  <button
+                    onClick={() => {
+                      setOffset(0);
+                      setHasMore(true);
+                      fetchNews(true);
+                    }}
+                    className="mt-4 px-1 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  >
+                    Refresh
+                  </button>
+                </div>
+              ) : (
+                <>
+                  {newsItems.map((item) => {
+                    const normalizedTags = normalizeTags(item.tags);
+                    return (
+                      <div
+                        key={item.id}
+                        className="group dark:bg-gray-800 bg-gray-300 rounded-lg p-4 border border-gray-700 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 cursor-pointer transform hover:-translate-y-0.5"
+                        onClick={() => handleNewsClick(item)}
+                      >
+                        {/* Category and Time */}
+                        <div className="flex justify-between items-center mb-2">
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-medium text-white ${getTagColor(
+                              item.tags
+                            )}`}
+                          >
+                            {normalizedTags[0] || "General"}
+                          </span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400">
+                            {new Date(item.published_at).toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              }
+                            ) || "Unknown time"}
+                          </span>
+                        </div>
+
+                        {/* Headline */}
+                        <h3 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 group-hover:text-blue-400 transition-colors duration-300 leading-tight">
+                          {item.headline || "No headline available"}
+                        </h3>
+
+                        {/* Summary */}
+                        <p className="text-xs text-gray-800 dark:text-gray-300 leading-relaxed line-clamp-3">
+                          {item.summary || "No summary available"}
+                        </p>
+
+                        {/* Read More Indicator */}
+                        <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <span className="text-xs text-blue-400 font-medium">
+                            Read more →
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {/* Loading indicator for infinite scroll */}
+                  {loadingMore && (
+                    <div className="flex justify-center py-4">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+                    </div>
+                  )}
+
+                  {/* Intersection observer target */}
+                  <div ref={loadingRef} className="h-4" />
+                </>
+              )}
+            </div>
+          </div>
+          {selectedNews && (
+            <NewsModal
+              news={selectedNews}
+              onClose={() => setSelectedNews(null)}
+            />
+          )}
+        </>
+        <div className="h-0.5 bg-gradient-to-r from-fuchsia-500 to-emerald-700 animate-pulse rounded-b-lg mt-3"></div>
+      </div>
+    </>
   );
 };
 

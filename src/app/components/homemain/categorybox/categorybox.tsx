@@ -63,16 +63,24 @@ const Categorybox = () => {
 
   return (
     <>
-      <div className="w-full h-auto   text-gray-950 dark:text-gray-200 lg:w-[60%]">
-        {/* Header */}
-        {/* <div className="mb-1">
-          <div className="flex items-center">
-            <span className="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></span>
-            <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
-              Read by flair
+      <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
+        <div className="flex items-center">
+          {/* Clean accent bar */}
+          <div className="mr-4">
+            <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
+          </div>
+
+          <div className="flex items-center justify-between w-full">
+            {/* Clean typography */}
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              Read by flag
             </h2>
           </div>
-        </div> */}
+        </div>
+      </div>
+      <div className="w-full h-auto   text-gray-950 dark:text-gray-200 lg:w-[60%]">
+        {/* Header */}
+        <div className="mb-1"></div>
 
         {/* Categories Grid */}
         <div className="p-2 overflow-scroll rounded-xl shadow-lg border border-gray-700 lg:w-[15vw] bg-gray-200 dark:bg-gray-900">
