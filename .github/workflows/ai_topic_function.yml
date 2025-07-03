@@ -1,0 +1,17 @@
+name: Trigger ai_topic_function
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  call-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Ai_raw_news_update Function
+        run: |
+          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/ai_topic_function' \
+          -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
+          -H 'Content-Type: application/json' \
+          --data '{"name":"Functions"}'

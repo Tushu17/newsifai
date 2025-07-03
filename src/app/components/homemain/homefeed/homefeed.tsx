@@ -101,6 +101,10 @@ const Homefeed = () => {
       window.removeEventListener("resize", checkScreenSize);
     };
   }, []);
+  useEffect(() => {
+    if (isSmallScreen) {
+    }
+  }, [isSmallScreen]);
 
   useEffect(() => {
     const handleStorageChange = () => {

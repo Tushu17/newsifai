@@ -62,3 +62,13 @@ the final plan of this website -
 
 1. infobox will be used to give info about city or the location user select
 2. while news will be given according to the country.
+
+lets create a edge function for updating ai_news_topics table using raw_news table, the work flow would be:-
+
+the function will fetch all the topics from ai_news_topics and news from raw_news table then ai will see if each news has a topic/item in ai_news_topics table, if yes then it will update that item, if no similar item exist then it will create a new item, and i've a new colomn in raw_news table named ai_topic_created with timestampz, so that we will only use items from raw_news that are unused, if ai_topic_created already have a date then we wont use it.
+
+function will perform following task;-
+
+- fetch ai_topic_long_summary_json, updated_at and region(and any other field like ai_topic_id, if blv it is usefull) from ai_news_topics table.
+- fetch id, summary and headline of items in raw_news table, where ai_topic_created as null,
+- then it will do its work of checking if there is an exiting item for each news or it needs to create a new topic. in existing item it'll just update the ai_topic_long_summary_json by adding updated data and change the updated_at to current time. in the items of raw_news table it will update each news ai_topic_created with current time, so it wont fetch the news next time
