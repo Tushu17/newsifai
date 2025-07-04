@@ -89,7 +89,7 @@ const Navbar = () => {
                 {dropDown && (
                   <div className="absolute right-0 w-40 bg-white dark:bg-gray-800 rounded-md  z-50 ">
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                      <li>
+                      {/* <li>
                         <Link
                           href="/myaccount"
                           className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 "
@@ -104,7 +104,7 @@ const Navbar = () => {
                         >
                           Admin
                         </Link>
-                      </li>
+                      </li> */}
                       <li>
                         <button
                           onClick={logoutUser}
@@ -161,14 +161,14 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  href="/category"
+                  href="/news/global"
                   className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 ${
-                    currentPath == `/category`
+                    currentPath.includes("/news")
                       ? `text-purple-700 dark:text-white`
                       : `text-gray-700 dark:text-gray-400`
                   }`}
                 >
-                  Category
+                  News
                 </Link>
               </li>
               <li>
@@ -185,9 +185,9 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  href="/category"
+                  href="/membership"
                   className={`block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 ${
-                    currentPath == `/category`
+                    currentPath.includes("membership")
                       ? `text-purple-700 dark:text-white`
                       : `text-gray-700 dark:text-gray-400`
                   }`}

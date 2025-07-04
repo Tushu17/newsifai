@@ -52,7 +52,7 @@ interface PlaceData {
   place: string;
   region?: string;
   country?: string;
-  // Allow for additional fields
+  [key: string]: unknown;
 }
 
 const Homefeed = () => {
@@ -132,13 +132,13 @@ const Homefeed = () => {
       <div className="relative min-h-screen bg-transparent">
         {activeMenu === "infobox" && (
           <AiTopicScroller
-            selectedPlaceData={selectedPlaceData.place}
+            selectedPlaceData={selectedPlaceData}
             isSmallScreen={true}
             onClose={() => {}}
           />
         )}
         {activeMenu === "scroller" && (
-          <Scroller selectedPlaceData={selectedPlaceData.place} />
+          <Scroller selectedPlaceData={selectedPlaceData} />
         )}
         {activeMenu === "categorybox" && <Categorybox />}
         <FloatingCapsuleMenu active={activeMenu} onSwitch={setActiveMenu} />
@@ -156,7 +156,7 @@ const Homefeed = () => {
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
             <AiTopicScroller
-              selectedPlaceData={selectedPlaceData.place}
+              selectedPlaceData={selectedPlaceData}
               isSmallScreen={false}
               onClose={() => {}}
             />
@@ -166,7 +166,7 @@ const Homefeed = () => {
         {/* Scroller Section */}
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-            <Scroller selectedPlaceData={selectedPlaceData.place} />
+            <Scroller selectedPlaceData={selectedPlaceData} />
           </div>
         </span>
 

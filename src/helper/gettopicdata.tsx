@@ -22,31 +22,42 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 });
 
 /**
- * Fetch AI news topics from the ai_news_topics table with progressive scrolling
+ * Fetch AI news topics from the specified table with progressive scrolling
  * @param region - Optional region to filter by
  * @param offset - Number of items to skip (for pagination)
  * @param limit - Number of items to fetch (default: 15)
+ * @param location - Optional location to filter topics by place
+ * @param tableName - Table name to fetch topics from (default: 'ai_news_topics')
  * @returns {Promise<TopicResponse>} Object with data and error
  */
 export async function fetchTopicItems(
   region: string | null = null,
   offset: number = 0,
-  limit: number = 15
+  limit: number = 15,
+  location?: string | null,
+  tableName: string = "ai_news_topics"
 ): Promise<TopicResponse> {
   try {
-    const query = supabase
-      .from("ai_news_topics")
+    let query = supabase
+      .from(tableName)
       .select("*")
       .eq("status", "active")
       .order("last_news_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
     // Add region filter if provided
-    const finalQuery = region ? query.eq("region", region) : query;
-    const { data, error } = await finalQuery;
+    if (region) {
+      query = query.eq("region", region);
+    }
+    // Add location filter if provided (assuming 'place' is the field)
+    if (location) {
+      query = query.eq("place", location);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
-      console.error("Error fetching ai_news_topics:", error);
+      console.error(`Error fetching topics from ${tableName}:`, error);
       return { data: null, error };
     }
 
@@ -87,25 +98,29 @@ export async function fetchTopicById(topicId: string) {
  * @param region - Region to filter by
  * @param offset - Number of items to skip (for pagination)
  * @param limit - Number of items to fetch (default: 15)
+ * @param location - Optional location to filter topics by place
  * @returns {Promise<TopicResponse>} Object with data and error
  */
 export async function fetchTopicsByRegion(
   region: string,
   offset: number = 0,
-  limit: number = 15
+  limit: number = 15,
+  location?: string | null
 ): Promise<TopicResponse> {
-  return fetchTopicItems(region, offset, limit);
+  return fetchTopicItems(region, offset, limit, location);
 }
 
 /**
  * Fetch all active topics with progressive scrolling
  * @param offset - Number of items to skip (for pagination)
  * @param limit - Number of items to fetch (default: 15)
+ * @param location - Optional location to filter topics by place
  * @returns {Promise<TopicResponse>} Object with data and error
  */
 export async function fetchAllTopics(
   offset: number = 0,
-  limit: number = 15
+  limit: number = 15,
+  location?: string | null
 ): Promise<TopicResponse> {
-  return fetchTopicItems(null, offset, limit);
+  return fetchTopicItems(null, offset, limit, location);
 }

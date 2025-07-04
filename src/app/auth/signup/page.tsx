@@ -77,8 +77,8 @@ const Signup = () => {
   return (
     <div>
       <Head>
-        <title>Create Account - Treasrup</title>
-        <meta name="description" content="Create a new account on Treasrup" />
+        <title>Create Account - Newsifai</title>
+        <meta name="description" content="Create a new account on Newsifiai" />
       </Head>
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <ToastContainer
@@ -189,7 +189,7 @@ const Signup = () => {
           </form>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Already have a Treasrup profile?
+            Already have a Newsifai profile?
             <Link
               href={"/auth/login"}
               className="font-semibold text-red-600 hover:text-red-500 mx-1"

@@ -2,12 +2,24 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import TopicModal from "./topicmodal";
 import { AiNewsTopic } from "@/models/topicdata";
 import { fetchTopicItems } from "@/helper/gettopicdata";
+import { CiLocationOn } from "react-icons/ci";
 
 interface AiTopicScrollerProps {
   onClose?: () => void;
   isSmallScreen?: boolean;
-  selectedPlaceData: unknown;
+  selectedPlaceData: {
+    place: string;
+    region?: string;
+    country?: string;
+    [key: string]: unknown;
+  };
 }
+
+const TOPIC_TYPE_OPTIONS = [
+  { label: "Conventional", value: "conventional", table: "ai_news_topics" },
+  { label: "Cult - classic", value: "cult", table: "humour_ai_topics" },
+  { label: "Genz", value: "genz", table: "genz_ai_topics" },
+];
 
 const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
   const [topics, setTopics] = useState<AiNewsTopic[]>([]);
@@ -17,10 +29,35 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
   const [hasMore, setHasMore] = useState(true);
   const [offset, setOffset] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [topicType, setTopicType] = useState(TOPIC_TYPE_OPTIONS[0]);
+  const [openTypeDropdown, setOpenTypeDropdown] = useState(false);
+  const typeButtonRef = useRef<HTMLButtonElement>(null);
+  const typeDropdownRef = useRef<HTMLUListElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const loadingRef = useRef<HTMLDivElement>(null);
 
   const ITEMS_PER_PAGE = 15;
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        typeButtonRef.current &&
+        !typeButtonRef.current.contains(event.target as Node) &&
+        typeDropdownRef.current &&
+        !typeDropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpenTypeDropdown(false);
+      }
+    }
+    if (openTypeDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openTypeDropdown]);
 
   const fetchTopics = useCallback(
     async (isInitialLoad: boolean = true) => {
@@ -33,9 +70,11 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
 
       try {
         const { data, error } = await fetchTopicItems(
-          null,
+          selectedPlaceData.region || null,
           offset,
-          ITEMS_PER_PAGE
+          ITEMS_PER_PAGE,
+          undefined,
+          topicType.table
         );
 
         if (error) {
@@ -74,13 +113,14 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
         setLoadingMore(false);
       }
     },
-    [offset]
+    [offset, selectedPlaceData, topicType]
   );
 
-  // Initial load
   useEffect(() => {
+    setOffset(0);
+    setHasMore(true);
     fetchTopics(true);
-  }, []); // Only run on mount
+  }, [selectedPlaceData, topicType]);
 
   // Intersection Observer for infinite scrolling
   useEffect(() => {
@@ -144,16 +184,55 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
   return (
     <>
       <div className="mb-1">
-        <div className="p-4 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
-          <div className="flex items-center">
-            <div className="mr-4">
-              <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
-            </div>
-
-            <div className="flex items-center justify-between w-full">
+        <div className="p-3 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60">
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center">
+              <div className="mr-4">
+                <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
+              </div>
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                Info for the day in {selectedPlaceData as string}
+                Info for the day in {selectedPlaceData.place}
               </h2>
+            </div>
+            <div className="relative inline-block">
+              <button
+                ref={typeButtonRef}
+                onClick={() => setOpenTypeDropdown((o) => !o)}
+                className="flex rounded-full border border-transparent p-2 text-center transition-all text-gray-700 dark:text-white hover:bg-gray-600 cursor-pointer min-w-0 min-h-0"
+                type="button"
+                aria-haspopup="listbox"
+                aria-expanded={openTypeDropdown}
+                style={{ zIndex: 2 }}
+              >
+                <CiLocationOn className="pointer-events-none text-xl" />
+                <span className="ml-1 text-md">{topicType.value}</span>
+              </button>
+              {openTypeDropdown && (
+                <ul
+                  ref={typeDropdownRef}
+                  role="listbox"
+                  className="absolute right-0 mt-2 min-w-[140px] rounded-lg border border-slate-200 bg-white p-1.5 shadow-lg z-50"
+                >
+                  {TOPIC_TYPE_OPTIONS.map((item) => (
+                    <li
+                      key={item.value}
+                      onClick={() => {
+                        setTopicType(item);
+                        setOpenTypeDropdown(false);
+                      }}
+                      className={`px-4 py-2 cursor-pointer text-sm capitalize rounded transition-colors text-slate-700 hover:bg-purple-100 ${
+                        item.value === topicType.value
+                          ? "bg-purple-200 font-bold"
+                          : ""
+                      }`}
+                      role="option"
+                      aria-selected={item.value === topicType.value}
+                    >
+                      {item.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ Tables :-
 
 1. news_items
    every news would be stored here and it will have many fields
-2. news_fetch_config
+2. news_fetch_config (this table is deleted now)
    basically a city, country or place name that i want to loop though the function
 
    things are looking good today 31-5-25

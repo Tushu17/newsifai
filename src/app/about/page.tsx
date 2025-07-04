@@ -2,15 +2,16 @@
 
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 const AboutPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <Head>
-        <title>About Us - Treasrup</title>
+        <title>About Us - Newsifai</title>
         <meta
           name="description"
-          content="Learn about Treasrup&#39;s journey and vision"
+          content="Learn about Newsifai&#34;s journey and vision"
         />
       </Head>
 
@@ -52,17 +53,17 @@ const AboutPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  AI-Powered News Selection
+                  AI-Powered News Creation
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                This app does use rss news aggregators to fetchnews but final
-                content that user receives is completely depended on ai, it
-                gives importance rating to every news removes irrelavant or
-                duplicate news, create news topic snipets posts, update it. All
-                this a complete autonmous mission with multiple funciton and
-                checks going simultenously to keep the website running and
-                relavant.
+                While this app uses RSS news aggregators to fetch content, what
+                you actually receive is completely AI-curated. Our system
+                assigns importance ratings to every news item, removes
+                irrelevant or duplicate content, creates concise topic snippets,
+                and continuously updates everything. It&#39;s a fully autonomous
+                operation with multiple functions and checks running
+                simultaneously to keep the website current and relevant.
               </p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
@@ -83,16 +84,16 @@ const AboutPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  features and upcoming things
+                  Features and Upcoming Additions
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                There are more genre that i want to include in this website that
-                might appiel a large portion of audience if you want like some
-                sterotipical lingo or something then tell us, we might include
-                that in our website and to improve the accuracy and relavancy of
-                news and topics i want to make content more local like giving
-                priorities to the content closer to your location.
+                There are many more genres I want to include that might appeal
+                to a broader audience. If you&#39;re looking for specific types
+                of content or have suggestions, let us know—we might just add
+                them to our platform. To improve accuracy and relevance, I&#39;m
+                also working on making content more localized by giving priority
+                to news closer to your location.
               </p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
@@ -114,22 +115,23 @@ const AboutPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Subscription and payment
+                  Subscription and Payment
                 </h3>
               </div>
 
               <p className="text-gray-600 dark:text-gray-300">
-                Just like any other project, I also want to commercialize this
-                website but primarly i want to give something that i would
-                personally want to spend money on. The fact is this website no
-                where close to what i want it to be. perhaps it is also true
-                that if i want to improve the quality of content or user
-                interaction i will have to pay for it, good ai models and fast
-                servers and more frequent update are expensive and at some point
-                i&#39;d look for funding those things. i&#39;m aware that i
-                first need to build a good active userbase to understand the
-                public view about this project i&#39;d continue to keep this
-                website completely free for sometime.
+                Like any project, I eventually want to monetize this website—but
+                primarily, I want to create something I&#39;d personally pay
+                for. The truth is, this website is nowhere close to what I
+                envision it becoming. I also realize that improving content
+                quality and user interaction will require investment: better AI
+                models, faster servers, and more frequent updates are expensive.
+                <br />
+                <br />
+                At some point, I&#39;ll need funding for these improvements.
+                I&#39;m aware that I first need to build an active user base to
+                understand public perception of this project, so I&#39;ll
+                continue keeping this website completely free for now.
               </p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
@@ -151,27 +153,29 @@ const AboutPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Content quality and reach
+                  Content Quality and Reach
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                This project quality is directly related to the quality of
-                affordable ai present, like a couple of years back i don&#39;t
-                think it was possible to create this kinda project, now
-                possiblities seems endless to me if you have financial backing,
-                but as a soloprenuer, my budget is limited, hence i&#39;m
-                serving limited locations, genre and so on but with time when
-                smart ai models starts becoming more affordable, I will serve
-                more locations and genre. The quality of content will also leap.
+                This project&#39;s quality is directly tied to the quality of
+                affordable AI available. A couple of years ago, I don&#39;t
+                think this kind of project was possible. Now the possibilities
+                seem endless if you have financial backing—but as a solopreneur,
+                my budget is limited.
                 <br />
-                Right now i&#39;m operating on 7-8 places across 4 continents
-                and content quality is subpar with what i can deliver, if i
-                operate on more niche level and use better ai models like
-                claude-4 and all, but it&#39;ll be expensive, Same with genre,
-                there are multiple genre i want to include but some of them
-                doesn&#39;t sound fun to me and ai is not consitent with some of
-                them but as ai gonna progress, the content quality gonna improve
-                parallel to it.
+                <br />
+                Currently, I&#39;m serving 7-8 locations across 4 continents,
+                and the content quality is subpar compared to what I could
+                deliver operating at a more niche level with better AI models
+                like Claude-4. But that would be expensive. The same goes for
+                genres—there are multiple categories I want to include, but some
+                don&#39;t appeal to me personally, and AI isn&#39;t consistent
+                with others yet.
+                <br />
+                <br />
+                As AI progresses, content quality will improve alongside it.
+                When smarter AI models become more affordable, I&#39;ll serve
+                more locations and genres.
               </p>
             </div>
           </div>
@@ -180,30 +184,71 @@ const AboutPage = () => {
           <div className="space-y-8">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Why Choose QuickNews?
+                Why Choose Newsifai?
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Save up to 2 hours daily on news consumption
+                    Advanced news aggregator that delivers latest news with no
+                    bullshit
                   </p>
                 </div>
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Get personalized news recommendations
+                    A healthy alternative to your passive scrolling habit
                   </p>
                 </div>
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Cost and money
+                    Currently free with no ads—better than 99% of websites
+                    available
                   </p>
                 </div>
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
-                  <p className="text-gray-600 dark:text-gray-300"></p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Makes you smarter and more aware of real-world news
+                  </p>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  The Problem We&#39;re Solving
+                </h3>
+                <div className="bg-white dark:bg-gray-800 p-4 shadow-lg">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    Let&#39;s face it: with the growing internet, we&#39;re all
+                    spending more time online than we should, and we constantly
+                    feel guilty about it because we know we&#39;re not consuming
+                    content we should be. So we look for alternatives—following
+                    &#34;informative&#34; accounts on social media, watching
+                    podcasts, or visiting news sites to compensate and feel less
+                    guilty.
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    But our attention spans have shrunk to the point where 4-5
+                    minute YouTube videos don&#39;t get as many views as
+                    60-second reels or shorts.
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    This is what I want to change. I&#39;m a big promoter of
+                    &#34;infotainment&#34; because that&#39;s the best way to
+                    improve our habits and ourselves. While I think it&#39;s
+                    nearly impossible to achieve content quality as engaging as
+                    memes or Reddit posts, people like me who want to improve
+                    their passive scrolling habits should have a better option
+                    than reading boring news or watching 2-hour podcasts that
+                    give you the ick before you even start.
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    This is where Newsifai comes in. I want to include only
+                    essential news and data that we actually look for while
+                    scrolling Reddit or Instagram—pure information wrapped in
+                    funny or relatable, engaging words. Scrolling that
+                    doesn&#39;t feel like a guilty activity. This is a beta
+                    model, but as we progress, we&#39;ll get closer to our goal.
+                  </p>
                 </div>
               </div>
             </div>
@@ -228,9 +273,11 @@ const AboutPage = () => {
             Join thousands of users who have transformed their news consumption
             experience with Newsifai.
           </p>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300">
-            Get Started Now
-          </button>
+          <Link href={"/auth/signup"}>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300">
+              Get Started Now
+            </button>
+          </Link>
         </div>
       </div>
     </div>

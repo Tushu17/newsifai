@@ -26,22 +26,30 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
  * @param queryTag - Optional tag to filter by
  * @param offset - Number of items to skip (for pagination)
  * @param limit - Number of items to fetch (default: 30)
+ * @param location - Optional location to filter news by place
  * @returns {Promise<{data: NewsItem[] | null, error: any | null}>} Object with data and error
  */
 export async function fetchNewsItems(
   queryTag: string | null = null,
   offset: number = 0,
-  limit: number = 30
+  limit: number = 30,
+  location?: string | null
 ) {
   try {
-    const query = supabase
+    let query = supabase
       .from("news_items")
       .select("*")
       .order("published_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
-    const finalQuery = queryTag ? query.contains("tags", [queryTag]) : query;
-    const { data, error } = await finalQuery;
+    if (queryTag) {
+      query = query.contains("tags", [queryTag]);
+    }
+    if (location) {
+      query = query.eq("place", location);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
       console.error("Error fetching news_items:", error);

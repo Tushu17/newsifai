@@ -102,11 +102,16 @@ const CategoryPage = () => {
               >
                 <div className="relative h-48 sm:h-32 sm:w-1/3 md:w-full md:h-48">
                   <Image
-                    src={news.image_url || "/placeholder-news.jpg"}
+                    src={
+                      news.image_url ||
+                      "https://media1.tenor.com/m/51xvC35-fDEAAAAC/manhunt.gif"
+                    }
                     alt={news.headline}
-                    className="object-cover"
-                    width={1000}
-                    height={1000}
+                    className="w-full h-48 object-cover"
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    style={{ width: "100%", height: "12rem" }}
                   />
                   <div className="absolute top-2 right-2 flex flex-col">
                     <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">

@@ -40,7 +40,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="#"
+              href="/teams"
               className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
               aria-label="Reddit"
             >
@@ -49,16 +49,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="#"
-              className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
-              aria-label="Reddit"
-            >
-              {" "}
-              Privacy{" "}
-            </a>
-
-            <a
-              href="#"
+              href="/cookies"
               className="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
               aria-label="Reddit"
             >
@@ -73,7 +64,7 @@ const Footer = () => {
       <div className="bg-slate-800 pb-0 w-full">
         <div className=" container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className=" text-sm text-center sm:text-left text-slate-400">
-            © 2025 Treasrup.com — All right reserved
+            © 2025 newsifai.com — All right reserved
             <a
               href="https://github.com/Tushu17"
               rel="noopener noreferrer"

@@ -5,7 +5,16 @@ import NewsModal from "@/app/components/newsmodal/newsmodal";
 
 // Define the NewsItem interface
 
-const Scroller = ({ selectedPlaceData }: { selectedPlaceData: unknown }) => {
+const Scroller = ({
+  selectedPlaceData,
+}: {
+  selectedPlaceData: {
+    place: string;
+    region?: string;
+    country?: string;
+    [key: string]: unknown;
+  };
+}) => {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -63,7 +72,8 @@ const Scroller = ({ selectedPlaceData }: { selectedPlaceData: unknown }) => {
         const { data, error } = await fetchNewsItems(
           null,
           offset,
-          ITEMS_PER_PAGE
+          ITEMS_PER_PAGE,
+          selectedPlaceData.place
         );
 
         if (error) {
@@ -100,13 +110,13 @@ const Scroller = ({ selectedPlaceData }: { selectedPlaceData: unknown }) => {
         setLoadingMore(false);
       }
     },
-    [offset]
+    [offset, selectedPlaceData]
   );
 
   // Initial load
   useEffect(() => {
     fetchNews(true);
-  }, []); // Only run on mount
+  }, [selectedPlaceData]); // Only run on mount
 
   // Intersection Observer for infinite scrolling
   useEffect(() => {
@@ -181,7 +191,7 @@ const Scroller = ({ selectedPlaceData }: { selectedPlaceData: unknown }) => {
 
             <div className="flex items-center justify-between w-full">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                Info for the day in {selectedPlaceData as string}
+                Info for the day in {selectedPlaceData.place}
               </h2>
             </div>
           </div>
