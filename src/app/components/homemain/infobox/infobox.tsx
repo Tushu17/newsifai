@@ -2,7 +2,7 @@
 import { fetchInfoData } from "@/helper/getinfoData";
 import React, { useCallback, useEffect, useState } from "react";
 import { InfoData } from "@/models/infodata";
-import Matrix from "../../ui/matrix/matrix";
+
 interface InfoboxProps {
   selectedPlace: string;
 }
@@ -132,7 +132,6 @@ const Infobox: React.FC<InfoboxProps> = ({ selectedPlace }) => {
           <div className="">
             {/* Matrix colomn */}
 
-            <Matrix />
             {/* <div className="dark:bg-gray-800 bg-gray-300 rounded-lg p-1.5 border border-gray-700 hover:border-purple-500 transition-all duration-300 flex flex-col min-h-[16vh] lg:min-h-0">
               <h2 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 flex items-center">
                 <span className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>

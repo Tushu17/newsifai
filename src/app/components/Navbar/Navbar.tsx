@@ -61,7 +61,7 @@ const Navbar = () => {
               alt="Landwind Logo"
             />
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              Quicknws
+              Newsifai
             </span>
           </Link>
           <div className="flex items-center lg:order-2">

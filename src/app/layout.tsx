@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 // });
 
 export const metadata: Metadata = {
-  title: "Quick-nws - All the info you need!",
+  title: "News-if-Ai AI-powered news insights!",
   description: "Ai that saves!",
 };
 
