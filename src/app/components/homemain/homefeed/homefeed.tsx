@@ -74,15 +74,13 @@ const Homefeed = () => {
       return {
         id: 1,
         place: "Delhi",
-        region: "Asia",
-        country: "India",
+        region: "India",
       };
     }
     return {
       id: 1,
       place: "Delhi",
       region: "Asia",
-      country: "India",
     };
   });
 

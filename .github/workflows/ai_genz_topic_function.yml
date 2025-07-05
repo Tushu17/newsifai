@@ -1,0 +1,24 @@
+name: Trigger ai_genz_topics_conversion_function && ai_humour_topics_conversion_function
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+
+jobs:
+  call-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call ai_genz_topics_conversion_function Function
+        run: |
+          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/ai_genz_topics_conversion_function' \
+            -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
+            -H 'Content-Type: application/json' \
+            --data '{"name":"Functions"}'
+
+      - name: call ai_humour_topics_conversion_function Function
+        run: |
+          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/ai_humour_topics_conversion_function' \
+            -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
+            -H 'Content-Type: application/json' \
+            --data '{"name":"Functions"}'

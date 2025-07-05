@@ -9,7 +9,7 @@ jobs:
   call-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Call Ai_raw_news_update Function
+      - name: Call news_fetch Function
         run: |
           curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/news_fetch' \
           -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \

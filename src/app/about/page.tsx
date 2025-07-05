@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900 ">
       <Head>
         <title>About Us - Newsifai</title>
         <meta
@@ -31,11 +31,11 @@ const AboutPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 border-2 rounded-2xl my-2">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Column - Features */}
           <div className="space-y-8">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border-1">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
                   <svg
@@ -66,7 +66,7 @@ const AboutPage = () => {
                 simultaneously to keep the website current and relevant.
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border-1">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
                   <svg
@@ -96,7 +96,7 @@ const AboutPage = () => {
                 to news closer to your location.
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border-1">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-purple-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mr-4">
                   <svg
@@ -134,7 +134,7 @@ const AboutPage = () => {
                 continue keeping this website completely free for now.
               </p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border-1">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4">
                   <svg
@@ -182,7 +182,7 @@ const AboutPage = () => {
 
           {/* Right Column - Stats & Benefits */}
           <div className="space-y-8">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg border-1">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 Why Choose Newsifai?
               </h3>
@@ -216,7 +216,7 @@ const AboutPage = () => {
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   The Problem We&#39;re Solving
                 </h3>
-                <div className="bg-white dark:bg-gray-800 p-4 shadow-lg">
+                <div className="bg-white dark:bg-gray-800 p-4 shadow-lg ">
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     Let&#39;s face it: with the growing internet, we&#39;re all
                     spending more time online than we should, and we constantly
@@ -253,7 +253,7 @@ const AboutPage = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg p-8 text-white">
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg p-8 text-white border-1">
               <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
               <p className="opacity-90">
                 To revolutionize how people consume news by leveraging AI to
@@ -265,8 +265,8 @@ const AboutPage = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-16 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        <div className="mt-16 text-center ">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 ">
             Ready to Save Time?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">

@@ -9,7 +9,7 @@ jobs:
   call-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Call Ai_raw_news_update Function
+      - name: Call delete_old_news Function
         run: |
           curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/delete_old_news' \
           -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \

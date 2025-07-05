@@ -2,7 +2,7 @@
 import React from "react";
 
 const MembershipPage = () => (
-  <div className="max-w-2xl mx-auto py-16 px-4">
+  <div className="max-w-2xl mx-auto py-16 px-4 border-2 rounded-2xl dark:bg-gray-900 bg-white my-12">
     <h1 className="text-4xl font-bold mb-8 text-center">
       Membership Coming Soon
     </h1>
