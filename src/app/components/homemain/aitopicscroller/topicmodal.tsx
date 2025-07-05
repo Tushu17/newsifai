@@ -16,7 +16,7 @@ const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 p-4"
+      className="fixed inset-0 rounded-xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60 flex justify-center items-center z-50 p-4"
       onClick={handleOverlayClick}
     >
       <div className="bg-gray-300 dark:bg-gray-900 rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">

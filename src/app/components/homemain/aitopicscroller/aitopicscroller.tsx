@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import TopicModal from "./topicmodal";
 import { AiNewsTopic } from "@/models/topicdata";
 import { fetchTopicItems } from "@/helper/gettopicdata";
-import { CiLocationOn } from "react-icons/ci";
+import { MdOutlineViewModule } from "react-icons/md";
 
 interface AiTopicScrollerProps {
   onClose?: () => void;
@@ -17,8 +17,12 @@ interface AiTopicScrollerProps {
 
 const TOPIC_TYPE_OPTIONS = [
   { label: "Conventional", value: "conventional", table: "ai_news_topics" },
-  { label: "Cult - classic", value: "cult", table: "humour_ai_topics" },
-  { label: "Genz", value: "genz", table: "genz_ai_topics" },
+  { label: "Lit Feed 🔥", value: "Lit Feed 🔥", table: "genz_ai_topics" },
+  {
+    label: "Cynical Scroll",
+    value: "Cynical Scroll",
+    table: "humour_ai_topics",
+  },
 ];
 
 const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
@@ -194,24 +198,25 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
                 Info for the day in {selectedPlaceData.place}
               </h2>
             </div>
+            {/* this is mode selector div */}
             <div className="relative inline-block">
               <button
                 ref={typeButtonRef}
                 onClick={() => setOpenTypeDropdown((o) => !o)}
-                className="flex rounded-full border border-transparent p-2 text-center transition-all text-gray-700 dark:text-white hover:bg-gray-600 cursor-pointer min-w-0 min-h-0"
+                className="flex items-center rounded-lg border-2 border-orange-400 bg-purple-800 hover:bg-orange-600 px-3 py-2 text-center transition-all text-white font-medium shadow-lg hover:shadow-xl cursor-pointer min-w-0 min-h-0"
                 type="button"
                 aria-haspopup="listbox"
                 aria-expanded={openTypeDropdown}
                 style={{ zIndex: 2 }}
               >
-                <CiLocationOn className="pointer-events-none text-xl" />
-                <span className="ml-1 text-md">{topicType.value}</span>
+                <MdOutlineViewModule className="pointer-events-none text-lg mr-1" />
+                <span className="text-sm font-semibold">{topicType.label}</span>
               </button>
               {openTypeDropdown && (
                 <ul
                   ref={typeDropdownRef}
                   role="listbox"
-                  className="absolute right-0 mt-2 min-w-[140px] rounded-lg border border-slate-200 bg-white p-1.5 shadow-lg z-50"
+                  className="absolute right-0 mt-2 min-w-[160px] rounded-lg border-2 border-orange-200 bg-white p-2 shadow-xl z-50"
                 >
                   {TOPIC_TYPE_OPTIONS.map((item) => (
                     <li
@@ -220,9 +225,9 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
                         setTopicType(item);
                         setOpenTypeDropdown(false);
                       }}
-                      className={`px-4 py-2 cursor-pointer text-sm capitalize rounded transition-colors text-slate-700 hover:bg-purple-100 ${
+                      className={`px-4 py-3 cursor-pointer text-sm font-medium rounded-md transition-all text-gray-700 hover:bg-orange-100 hover:text-orange-700 ${
                         item.value === topicType.value
-                          ? "bg-purple-200 font-bold"
+                          ? "bg-orange-200 text-orange-800 font-bold shadow-sm"
                           : ""
                       }`}
                       role="option"
