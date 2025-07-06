@@ -37,7 +37,7 @@ const LocationSelector = () => {
   }, []);
 
   useEffect(() => {
-    const storedPlaceData = localStorage.getItem("selectedPlaceData");
+    const storedPlaceData = localStorage.getItem("userData");
     if (storedPlaceData) {
       try {
         const parsedData = JSON.parse(storedPlaceData);
@@ -82,7 +82,7 @@ const LocationSelector = () => {
 
   const handlePlaceChange = (place: PlaceData) => {
     setSelectedPlace(place);
-    localStorage.setItem("selectedPlaceData", JSON.stringify(place));
+    localStorage.setItem("userData", JSON.stringify(place));
     window.dispatchEvent(new Event("storage"));
     setOpen(false);
   };

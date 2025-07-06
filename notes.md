@@ -72,3 +72,11 @@ function will perform following task;-
 - fetch ai_topic_long_summary_json, updated_at and region(and any other field like ai_topic_id, if blv it is usefull) from ai_news_topics table.
 - fetch id, summary and headline of items in raw_news table, where ai_topic_created as null,
 - then it will do its work of checking if there is an exiting item for each news or it needs to create a new topic. in existing item it'll just update the ai_topic_long_summary_json by adding updated data and change the updated_at to current time. in the items of raw_news table it will update each news ai_topic_created with current time, so it wont fetch the news next time
+
+/// now tommorow work,
+
+- change the humour function to rest all functions are now working using groq
+
+- just make sure when ai_topic basic function is updating a existing topic it set those values to null, small hack for sometime.
+
+- add auto scrolling to news page and solve error or duplicacy

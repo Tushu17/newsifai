@@ -1,0 +1,17 @@
+name: Trigger ai_humour_topics_conversion_funcion
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  call-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call ai_humour_topics_conversion_funcion Function
+        run: |
+          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/ai_humour_topics_conversion_funcion' \
+          -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
+          -H 'Content-Type: application/json' \
+          --data '{"name":"Functions"}'

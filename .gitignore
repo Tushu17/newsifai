@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Edge functions backup (temporarily removed due to stack changes)
+edge-functions-backup.md
+noted.md

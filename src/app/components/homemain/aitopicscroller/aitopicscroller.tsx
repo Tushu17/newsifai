@@ -33,7 +33,28 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
   const [hasMore, setHasMore] = useState(true);
   const [offset, setOffset] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const [topicType, setTopicType] = useState(TOPIC_TYPE_OPTIONS[0]);
+  const [topicType, setTopicType] = useState(() => {
+    // Initialize from localStorage
+    if (typeof window !== "undefined") {
+      const userData = localStorage.getItem("userData");
+      if (userData) {
+        try {
+          const parsed = JSON.parse(userData);
+          if (parsed.topicType) {
+            const savedTopicType = TOPIC_TYPE_OPTIONS.find(
+              (option) => option.value === parsed.topicType.value
+            );
+            if (savedTopicType) {
+              return savedTopicType;
+            }
+          }
+        } catch (error) {
+          console.error("Error parsing userData:", error);
+        }
+      }
+    }
+    return TOPIC_TYPE_OPTIONS[0];
+  });
   const [openTypeDropdown, setOpenTypeDropdown] = useState(false);
   const typeButtonRef = useRef<HTMLButtonElement>(null);
   const typeDropdownRef = useRef<HTMLUListElement>(null);
@@ -41,6 +62,31 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
   const loadingRef = useRef<HTMLDivElement>(null);
 
   const ITEMS_PER_PAGE = 15;
+
+  // Save topicType to localStorage whenever it changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const userData = localStorage.getItem("userData");
+      let parsedUserData = {};
+
+      if (userData) {
+        try {
+          parsedUserData = JSON.parse(userData);
+        } catch (error) {
+          console.error("Error parsing userData:", error);
+          parsedUserData = {};
+        }
+      }
+
+      // Update userData with new topicType
+      parsedUserData = {
+        ...parsedUserData,
+        topicType: topicType,
+      };
+
+      localStorage.setItem("userData", JSON.stringify(parsedUserData));
+    }
+  }, [topicType]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

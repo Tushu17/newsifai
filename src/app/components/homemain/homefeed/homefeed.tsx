@@ -61,7 +61,7 @@ const Homefeed = () => {
 
   const [selectedPlaceData, setSelectedPlaceData] = useState<PlaceData>(() => {
     if (typeof window !== "undefined") {
-      const storedPlaceData = localStorage.getItem("selectedPlaceData");
+      const storedPlaceData = localStorage.getItem("userData");
       if (storedPlaceData) {
         try {
           return JSON.parse(storedPlaceData);
@@ -106,7 +106,7 @@ const Homefeed = () => {
 
   useEffect(() => {
     const handleStorageChange = () => {
-      const storedPlaceData = localStorage.getItem("selectedPlaceData");
+      const storedPlaceData = localStorage.getItem("userData");
       if (storedPlaceData) {
         try {
           const parsedData = JSON.parse(storedPlaceData);
