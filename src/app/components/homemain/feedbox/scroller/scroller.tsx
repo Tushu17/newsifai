@@ -292,7 +292,7 @@ const Scroller = ({
                         <div className="w-8 h-0.5 bg-gradient-to-l from-transparent to-gray-400"></div>
                       </div>
                       <p className="text-gray-600 dark:text-gray-400 text-sm">
-                        You've reached the end of news for{" "}
+                        You&#39;ve reached the end of news for{" "}
                         {selectedPlaceData.place}, comeback after a while for
                         fresh news.
                       </p>

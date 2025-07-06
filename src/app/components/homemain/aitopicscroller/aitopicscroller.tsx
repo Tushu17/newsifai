@@ -360,7 +360,7 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
                       <div className="w-8 h-0.5 bg-gradient-to-l from-transparent to-gray-400"></div>
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      You've reached the end of AI topics for{" "}
+                      You&#39;ve reached the end of AI topics for{" "}
                       {selectedPlaceData.place}
                     </p>
                     <p className="text-gray-500 dark:text-gray-500 text-xs mt-1">
