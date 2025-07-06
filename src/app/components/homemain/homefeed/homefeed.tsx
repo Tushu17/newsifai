@@ -146,9 +146,7 @@ const Homefeed = () => {
 
   // Large screen layout (unchanged)
   return (
-    <div
-      className={`max-w-screen-xl mx-auto px-1 lg:py-5 lg:px-2 h-full overflow-scroll`}
-    >
+    <div className={`max-w-screen-xl mx-auto px-1 lg:py-5 lg:px-2 h-full `}>
       <div className="flex flex-col lg:flex-row justify-around">
         {/* Infobox Section */}
         <span>

@@ -281,6 +281,27 @@ const Scroller = ({
                     </div>
                   )}
 
+                  {/* End of news message */}
+                  {!hasMore && newsItems.length > 0 && !loadingMore && (
+                    <div className="text-center py-6">
+                      <div className="flex items-center justify-center space-x-2 mb-2">
+                        <div className="w-8 h-0.5 bg-gradient-to-r from-transparent to-gray-400"></div>
+                        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+                          📰
+                        </span>
+                        <div className="w-8 h-0.5 bg-gradient-to-l from-transparent to-gray-400"></div>
+                      </div>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">
+                        You've reached the end of news for{" "}
+                        {selectedPlaceData.place}, comeback after a while for
+                        fresh news.
+                      </p>
+                      <p className="text-gray-500 dark:text-gray-500 text-xs mt-1">
+                        Check back later for more updates
+                      </p>
+                    </div>
+                  )}
+
                   {/* Intersection observer target */}
                   <div ref={loadingRef} className="h-4" />
                 </>

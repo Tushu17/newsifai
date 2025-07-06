@@ -1,5 +1,5 @@
 import { AiNewsTopic } from "@/models/topicdata";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface TopicModalProps {
   topic: AiNewsTopic;
@@ -7,6 +7,23 @@ interface TopicModalProps {
 }
 
 const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
+  // Handle browser back button
+  useEffect(() => {
+    const handlePopState = () => {
+      onClose();
+    };
+
+    // Push a new state when modal opens
+    window.history.pushState({ modal: "topic" }, "", window.location.pathname);
+
+    // Listen for popstate (back button)
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [onClose]);
+
   // Close modal if clicking on overlay background
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {

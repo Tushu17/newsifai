@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NewsItem } from "@/models/data";
 import Image from "next/image";
 import { FiExternalLink } from "react-icons/fi";
@@ -9,6 +9,22 @@ interface NewsModalProps {
 }
 
 const NewsModal: React.FC<NewsModalProps> = ({ news, onClose }) => {
+  // Handle browser back button
+  useEffect(() => {
+    const handlePopState = () => {
+      onClose();
+    };
+
+    // Push a new state when modal opens
+    window.history.pushState({ modal: "news" }, "", window.location.pathname);
+
+    // Listen for popstate (back button)
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [onClose]);
   return (
     <div className="fixed inset-0 bg-gray-100/10 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
