@@ -241,7 +241,7 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
                 <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
               </div>
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                Info for the day in {selectedPlaceData.place}
+                AI&#39;s Take on {selectedPlaceData.place}
               </h2>
             </div>
             {/* this is mode selector div */}

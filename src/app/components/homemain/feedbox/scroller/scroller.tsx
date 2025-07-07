@@ -2,6 +2,7 @@ import { fetchNewsItems } from "@/helper/getData";
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { NewsItem } from "@/models/data";
 import NewsModal from "@/app/components/newsmodal/newsmodal";
+import NewsRating from "@/app/components/ui/newsrating/newsrating";
 
 // Define the NewsItem interface
 
@@ -191,7 +192,7 @@ const Scroller = ({
 
             <div className="flex items-center justify-between w-full">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                Info for the day in {selectedPlaceData.place}
+                Today&#39;s Top Stories – {selectedPlaceData.place}
               </h2>
             </div>
           </div>
@@ -233,13 +234,16 @@ const Scroller = ({
                       >
                         {/* Category and Time */}
                         <div className="flex justify-between items-center mb-2">
-                          <span
-                            className={`px-2 py-1 rounded-full text-xs font-medium text-white ${getTagColor(
-                              item.tags
-                            )}`}
-                          >
-                            {normalizedTags[0] || "General"}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs font-medium text-white ${getTagColor(
+                                item.tags
+                              )}`}
+                            >
+                              {normalizedTags[0] || "General"}
+                            </span>
+                            <NewsRating rating={item.news_rating} />
+                          </div>
                           <span className="text-xs text-gray-600 dark:text-gray-400">
                             {new Date(item.published_at).toLocaleDateString(
                               "en-US",
@@ -253,17 +257,14 @@ const Scroller = ({
                             ) || "Unknown time"}
                           </span>
                         </div>
-
                         {/* Headline */}
                         <h3 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-2 group-hover:text-blue-400 transition-colors duration-300 leading-tight">
                           {item.headline || "No headline available"}
                         </h3>
-
                         {/* Summary */}
                         <p className="text-xs text-gray-800 dark:text-gray-300 leading-relaxed line-clamp-3">
                           {item.summary || "No summary available"}
                         </p>
-
                         {/* Read More Indicator */}
                         <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <span className="text-xs text-blue-400 font-medium">

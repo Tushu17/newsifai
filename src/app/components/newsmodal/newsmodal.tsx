@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { NewsItem } from "@/models/data";
 import Image from "next/image";
 import { FiExternalLink } from "react-icons/fi";
+import NewsRating from "@/app/components/ui/newsrating/newsrating";
 
 interface NewsModalProps {
   news: NewsItem;
@@ -39,9 +40,10 @@ const NewsModal: React.FC<NewsModalProps> = ({ news, onClose }) => {
           <div className="absolute top-4 left-4">
             <div className="relative">
               <div className="absolute top-3 left-3 z-10">
-                <div className="w-10 h-10 rounded-full bg-orange-600 text-white flex items-center justify-center shadow-md text-sm font-bold border-2 border-white">
-                  {news.news_rating}
-                </div>
+                <NewsRating
+                  rating={news.news_rating}
+                  className="w-10 h-10 flex items-center justify-center text-base border-2 border-white"
+                />
               </div>
 
               {/* Stamp effect shadow */}
