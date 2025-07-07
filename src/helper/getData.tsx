@@ -25,14 +25,14 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
  * Fetch news items from the news_items table with pagination support
  * @param queryTag - Optional tag to filter by
  * @param offset - Number of items to skip (for pagination)
- * @param limit - Number of items to fetch (default: 30)
+ * @param limit - Number of items to fetch (default: 20)
  * @param location - Optional location to filter news by place
  * @returns {Promise<{data: NewsItem[] | null, error: any | null}>} Object with data and error
  */
 export async function fetchNewsItems(
   queryTag: string | null = null,
   offset: number = 0,
-  limit: number = 30,
+  limit: number = 20,
   location?: string | null
 ) {
   try {
@@ -59,6 +59,32 @@ export async function fetchNewsItems(
     return { data: data as NewsItem[], error: null };
   } catch (err) {
     console.error("Unexpected error fetching news_items:", err);
+    return { data: null, error: err };
+  }
+}
+
+/**
+ * Fetch news items by an array of IDs from the news_items table
+ * @param newsIds - Array of news item IDs
+ * @returns {Promise<{data: NewsItem[] | null, error: any | null}>} Object with data and error
+ */
+export async function fetchNewsItemsByIds(newsIds: number[]) {
+  if (!newsIds || newsIds.length === 0) {
+    return { data: [], error: null };
+  }
+  try {
+    const { data, error } = await supabase
+      .from("news_items")
+      .select("*")
+      .in("id", newsIds);
+
+    if (error) {
+      console.error("Error fetching news_items by IDs:", error);
+      return { data: null, error };
+    }
+    return { data: data as NewsItem[], error: null };
+  } catch (err) {
+    console.error("Unexpected error fetching news_items by IDs:", err);
     return { data: null, error: err };
   }
 }

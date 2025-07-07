@@ -1,5 +1,7 @@
 import { AiNewsTopic } from "@/models/topicdata";
-import React, { useEffect } from "react";
+import { NewsItem } from "@/models/data";
+import React, { useEffect, useState } from "react";
+import { fetchNewsItemsByIds } from "@/helper/getData";
 
 interface TopicModalProps {
   topic: AiNewsTopic;
@@ -29,6 +31,38 @@ const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
+  };
+
+  // Fetch related news items
+  const [relatedNews, setRelatedNews] = useState<NewsItem[] | null>(null);
+  const [relatedNewsLoading, setRelatedNewsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchRelated = async () => {
+      if (
+        topic.ai_topic_related_news_ids &&
+        topic.ai_topic_related_news_ids.length > 0
+      ) {
+        setRelatedNewsLoading(true);
+        const { data, error } = await fetchNewsItemsByIds(
+          topic.ai_topic_related_news_ids
+        );
+        if (!error) {
+          setRelatedNews(data || []);
+        } else {
+          setRelatedNews([]);
+        }
+        setRelatedNewsLoading(false);
+      } else {
+        setRelatedNews([]);
+      }
+    };
+    fetchRelated();
+  }, [topic.ai_topic_related_news_ids]);
+
+  // Helper to get news item by ID
+  const getNewsById = (id: number) => {
+    return relatedNews?.find((item) => item.id === id);
   };
 
   return (
@@ -120,19 +154,53 @@ const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
                         })}
                       </h4>
                       <ul className="space-y-2">
-                        {dateEntry.bullets.map((bullet, bulletIndex) => (
-                          <li key={bulletIndex} className="flex items-start">
-                            <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <div className="flex-1">
-                              <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-                                {bullet.text}
-                              </p>
+                        {dateEntry.bullets.map((bullet, bulletIndex) => {
+                          let newsContent = null;
+                          if (relatedNewsLoading) {
+                            newsContent = (
                               <span className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                                News ID: {bullet.news_id}
+                                Loading...
                               </span>
-                            </div>
-                          </li>
-                        ))}
+                            );
+                          } else {
+                            const news = getNewsById(bullet.news_id);
+                            if (news) {
+                              newsContent = news.url ? (
+                                <a
+                                  href={news.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 dark:text-blue-300 underline ml-1"
+                                >
+                                  {news.source || "News Source"}
+                                </a>
+                              ) : (
+                                <span className="text-xs text-gray-500 dark:text-gray-500 mt-1 ml-1">
+                                  Link not available
+                                </span>
+                              );
+                            } else {
+                              newsContent = (
+                                <span className="text-xs text-gray-500 dark:text-gray-500 mt-1 ml-1">
+                                  Link not available
+                                </span>
+                              );
+                            }
+                          }
+                          return (
+                            <li key={bulletIndex} className="flex items-start">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                              <div className="flex-1">
+                                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                                  {bullet.text}
+                                </p>
+                                <span className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                                  Source: {newsContent}
+                                </span>
+                              </div>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   ))}
@@ -140,23 +208,53 @@ const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
               </div>
             )}
 
-          {/* Related News IDs */}
+          {/* Related News IDs - Enhanced */}
           {topic.ai_topic_related_news_ids &&
             topic.ai_topic_related_news_ids.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                   Related News Articles
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  {topic.ai_topic_related_news_ids.map((newsId, index) => (
-                    <span
-                      key={index}
-                      className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm"
-                    >
-                      #{newsId}
-                    </span>
-                  ))}
-                </div>
+                {relatedNewsLoading ? (
+                  <div className="text-gray-500 dark:text-gray-400 text-sm">
+                    Loading related news...
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {topic.ai_topic_related_news_ids.map((newsId) => {
+                      const news = getNewsById(newsId);
+                      if (news) {
+                        return news.url ? (
+                          <a
+                            key={newsId}
+                            href={news.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-semibold hover:underline"
+                          >
+                            {news.source || "News Source"}
+                          </a>
+                        ) : (
+                          <span
+                            key={newsId}
+                            className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm"
+                          >
+                            Link not available
+                          </span>
+                        );
+                      } else {
+                        return (
+                          <span
+                            key={newsId}
+                            className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm"
+                          >
+                            Link not available
+                          </span>
+                        );
+                      }
+                    })}
+                  </div>
+                )}
               </div>
             )}
 

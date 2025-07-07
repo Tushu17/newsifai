@@ -42,7 +42,7 @@ export async function fetchTopicItems(
       .from(tableName)
       .select("*")
       .eq("status", "active")
-      .order("last_news_at", { ascending: false })
+      .order("updated_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
     // Add region filter if provided

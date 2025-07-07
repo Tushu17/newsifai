@@ -31,7 +31,7 @@ export default function AuthCallback() {
         );
 
         toast.success("Successfully signed in with Google!");
-        router.push("/");
+        window.location.replace("/");
       } else {
         router.push("/auth/login");
       }
