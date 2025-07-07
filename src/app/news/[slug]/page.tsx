@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import { NewsItem } from "@/models/data";
 import { fetchNewsItems } from "@/helper/getData";
@@ -9,7 +9,24 @@ import NewsModal from "@/app/components/newsmodal/newsmodal";
 import Image from "next/image";
 
 const CategoryPage = () => {
+  const categoryList = [
+    "global",
+    "business",
+    "technology",
+    "sports",
+    "health",
+    "entertainment",
+    "Global",
+    "politics",
+    "environment",
+    "economy",
+    "healthcare",
+    "growth",
+    "education",
+  ];
+
   const params = useParams();
+  const router = useRouter();
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
@@ -71,11 +88,23 @@ const CategoryPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 mb-2">
-      {/* Header */}
+      {/* Header is also working as a selector for category */}
       <div className="bg-white dark:bg-gray-800 shadow-md p-4 mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white capitalize">
-          {params.slug} News
-        </h1>
+        <select
+          value={params.slug}
+          onChange={(e) => router.push(`/news/${e.target.value}`)}
+          className="text-2xl font-bold text-gray-900 dark:text-white capitalize bg-transparent border-none focus:ring-0"
+        >
+          {categoryList.map((category) => (
+            <option
+              key={category}
+              value={category}
+              className="text-gray-900 dark:text-white"
+            >
+              {category} News
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Main Content */}

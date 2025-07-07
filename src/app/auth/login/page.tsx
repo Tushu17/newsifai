@@ -8,11 +8,13 @@ import { supabase } from "@/helper/getinfoData";
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("myuser");
@@ -31,29 +33,59 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    setIsLoading(true);
 
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("You have been logged-in successfully!");
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-      if (data.user) {
-        localStorage.setItem(
-          "myuser",
-          JSON.stringify({
-            user_id: data.user.id,
-            token: data.session.access_token,
-            email: data.user.email,
-          })
-        );
-        setTimeout(() => {
-          router.push("/");
-        }, 1000);
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success("You have been logged-in successfully!");
+
+        if (data.user) {
+          localStorage.setItem(
+            "myuser",
+            JSON.stringify({
+              user_id: data.user.id,
+              token: data.session.access_token,
+              email: data.user.email,
+            })
+          );
+          setTimeout(() => {
+            router.push("/");
+          }, 1000);
+        }
       }
+    } catch {
+      toast.error("An unexpected error occurred");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (error) {
+        toast.error(error.message);
+        setIsLoading(false);
+      }
+      // If successful, the user will be redirected to the callback URL
+    } catch {
+      toast.error("An unexpected error occurred");
+      setIsLoading(false);
     }
   };
 
@@ -148,12 +180,38 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                disabled={isLoading}
+                className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                sign in
+                {isLoading ? "Signing in..." : "Sign in"}
               </button>
             </div>
           </form>
+
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white dark:bg-gray-900 text-gray-500">
+                Or continue with
+              </span>
+            </div>
+          </div>
+
+          {/* Google Sign In Button */}
+          <div>
+            <button
+              onClick={handleGoogleSignIn}
+              disabled={isLoading}
+              className="flex w-full justify-center items-center rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-1.5 text-sm/6 font-semibold text-gray-700 dark:text-gray-200 shadow-xs hover:bg-gray-50 dark:hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500 disabled:opacity-50 disabled:cursor-not-allowed
+              cursor-pointer"
+            >
+              <FcGoogle className="w-5 h-5 mr-2" />
+              {isLoading ? "Signing in..." : "Sign in with Google"}
+            </button>
+          </div>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             Don&apos;t have a Newsifai profile?

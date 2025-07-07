@@ -53,16 +53,22 @@ const Navbar = () => {
       <nav className=" py-1 lg:py-2.5  sticky top-0 z-50">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto border rounded-2xl border-gray-400 shadow-lg lg:p-2 min-h-14 bg-gray-100 dark:bg-gray-900">
           <Link href="/" className="flex items-center">
-            <Image
-              src="/logo.png"
-              width={33}
-              height={33}
-              className=" mr-3 sm:h-9"
-              alt="Landwind Logo"
-            />
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              Newsifai
-            </span>
+            <div className="flex items-center">
+              <Image
+                src="/logo.png"
+                width={33}
+                height={33}
+                className=" mr-3 sm:h-9"
+                alt="Landwind Logo"
+              />
+
+              <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                Newsifai
+              </span>
+              <div className="bg-orange-500 text-white rounded-full px-2 py-1 text-sm ml-2">
+                Beta
+              </div>
+            </div>
           </Link>
           <div className="flex items-center lg:order-2">
             <span
