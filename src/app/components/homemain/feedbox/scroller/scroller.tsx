@@ -88,13 +88,29 @@ const Scroller = ({
         if (data && Array.isArray(data)) {
           if (isInitialLoad) {
             setNewsItems(data);
+            setOffset(data.length); // Set offset to the number of items fetched
           } else {
-            setNewsItems((prev) => [...prev, ...data]);
+            // Filter out duplicates by id
+            setNewsItems((prev) => {
+              const existingIds = new Set(prev.map((item) => item.id));
+              const newItems = data.filter((item) => !existingIds.has(item.id));
+              // Debug: log IDs
+              console.log("Existing IDs:", Array.from(existingIds));
+              console.log(
+                "Fetched IDs:",
+                data.map((item) => item.id)
+              );
+              console.log(
+                "New unique items:",
+                newItems.map((item) => item.id)
+              );
+              return [...prev, ...newItems];
+            });
+            setOffset((prev) => prev + data.length);
           }
 
           // Check if we have more data to load
           setHasMore(data.length === ITEMS_PER_PAGE);
-          setOffset((prev) => prev + data.length);
         } else {
           if (isInitialLoad) {
             setNewsItems([]);
