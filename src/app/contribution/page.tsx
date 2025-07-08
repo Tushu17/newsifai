@@ -12,12 +12,12 @@ const ContributionPage = () => (
       <section className="shadow-lg p-8">
         <h2 className="text-2xl font-bold mb-4">My Journey So Far</h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
-          It&#39;s been 2-3 months since I started this project, and honestly,
-          I&#39;m a pretty average to below-average coder who takes a good
-          amount of help from AI to code. But here&#39;s what I&#39;ve learned:
-          whenever I look at this project, I see endless things that can be
-          improved, and instead of getting overwhelmed, I try to focus on fixing
-          one thing right in front of my eyes.
+          I started this project a couple of months ago. I won&#39;t call myself
+          a coding wizard — I rely on AI and learn as I go. But here&#39;s what
+          this journey has taught me: every time I look at the project, I notice
+          countless ways it can get better. Instead of feeling overwhelmed,
+          I&#39;ve trained myself to focus on just one thing at a time — and
+          improve that. Step by step, it adds up.
         </p>
         <p className="text-gray-600 dark:text-gray-300">
           This approach has kept me moving forward, and now I&#39;m excited to
