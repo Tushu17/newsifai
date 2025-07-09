@@ -23,8 +23,40 @@ const geistMono = Geist_Mono({
 // });
 
 export const metadata: Metadata = {
-  title: "News-if-Ai AI-powered news insights!",
-  description: "Ai that saves!",
+  title: "Newsifai – Information wrapped in entertainment",
+  description:
+    "Newsifai is an AI-powered news platform that curates the most relevant, concise, and intelligent news from across the world — making you smarter with every scroll.",
+  keywords: [
+    "AI News",
+    "AI news aggregator",
+    "Newsifai",
+    "intelligent news",
+    "latest headlines",
+    "AI-curated news",
+    "real-time news",
+    "global news",
+    "smart news app",
+    "Entertaining news",
+  ],
+  authors: [{ name: "Newsifai Team", url: "https://newsifai.com" }],
+  creator: "Newsifai",
+  publisher: "Newsifai",
+  openGraph: {
+    title: "Newsifai – AI-Powered News",
+    description:
+      "Your daily AI-curated news digest. No spam. No scroll guilt. Just pure signal.",
+    url: "https://newsifai.com",
+    siteName: "Newsifai",
+    images: [
+      {
+        url: "https://systmzaxlbymwcsrserr.supabase.co/storage/v1/object/public/images//logo.png", // update with your OG image URL
+        width: 1200,
+        height: 630,
+        alt: "Newsifai Open Graph Image",
+      },
+    ],
+    type: "website",
+  },
 };
 
 export default function RootLayout({
