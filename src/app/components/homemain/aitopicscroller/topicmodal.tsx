@@ -110,7 +110,7 @@ const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
                 %
               </span>
               <span>
-                Last Updated:{" "}
+                Last News from:{" "}
                 {topic.last_news_at || topic.updated_at
                   ? new Date(
                       topic.last_news_at || topic.updated_at!

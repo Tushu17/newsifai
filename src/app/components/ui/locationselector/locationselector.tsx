@@ -31,31 +31,44 @@ const LocationSelector = () => {
         setPlaceList(fallbackPlaces);
       } else {
         setPlaceList(data as PlaceData[]);
+        console.log(data);
       }
     };
     fetchPlaces();
   }, []);
 
   useEffect(() => {
-    const storedPlaceData = localStorage.getItem("userData");
-    if (storedPlaceData) {
+    const storedUserData = localStorage.getItem("userData");
+    if (storedUserData) {
       try {
-        const parsedData = JSON.parse(storedPlaceData);
-        const foundPlace = placeList.find((p) => p.place === parsedData.place);
+        const parsedData = JSON.parse(storedUserData);
+        const foundPlace = placeList.find(
+          (p) => p.place === parsedData.selectedPlaceData?.place
+        );
         if (foundPlace) {
           setSelectedPlace(foundPlace);
           return;
         }
       } catch (error) {
-        console.error("Error parsing stored place data:", error);
+        console.error("Error parsing stored user data:", error);
       }
     }
-
     // Fallback to first place if no stored data or stored place not found
     if (placeList.length > 0) {
       const defaultPlace = placeList[0];
       setSelectedPlace(defaultPlace);
-      localStorage.setItem("selectedPlaceData", JSON.stringify(defaultPlace));
+      // Set userData with selectedPlaceData
+      const userData = localStorage.getItem("userData");
+      let parsedUserData = {};
+      if (userData) {
+        try {
+          parsedUserData = JSON.parse(userData);
+        } catch (error) {
+          parsedUserData = {};
+        }
+      }
+      parsedUserData = { ...parsedUserData, selectedPlaceData: defaultPlace };
+      localStorage.setItem("userData", JSON.stringify(parsedUserData));
     }
   }, [placeList]);
 
@@ -82,7 +95,18 @@ const LocationSelector = () => {
 
   const handlePlaceChange = (place: PlaceData) => {
     setSelectedPlace(place);
-    localStorage.setItem("userData", JSON.stringify(place));
+    // Update userData.selectedPlaceData
+    const userData = localStorage.getItem("userData");
+    let parsedUserData = {};
+    if (userData) {
+      try {
+        parsedUserData = JSON.parse(userData);
+      } catch (error) {
+        parsedUserData = {};
+      }
+    }
+    parsedUserData = { ...parsedUserData, selectedPlaceData: place };
+    localStorage.setItem("userData", JSON.stringify(parsedUserData));
     window.dispatchEvent(new Event("storage"));
     setOpen(false);
   };

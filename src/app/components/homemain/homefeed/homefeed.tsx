@@ -59,28 +59,31 @@ const Homefeed = () => {
   const [activeMenu, setActiveMenu] = useState<string>("infobox");
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
 
-  const [selectedPlaceData, setSelectedPlaceData] = useState<PlaceData>(() => {
+  const [userData, setUserData] = useState(() => {
     if (typeof window !== "undefined") {
-      const storedPlaceData = localStorage.getItem("userData");
-      if (storedPlaceData) {
+      const storedUserData = localStorage.getItem("userData");
+      if (storedUserData) {
         try {
-          return JSON.parse(storedPlaceData);
+          return JSON.parse(storedUserData);
         } catch (error) {
-          console.error("Error parsing stored place data:", error);
+          console.error("Error parsing stored user data:", error);
         }
       }
-
       // Default fallback
       return {
-        id: 1,
-        place: "Delhi",
-        region: "India",
+        selectedPlaceData: {
+          id: 1,
+          place: "Delhi",
+          region: "India",
+        },
       };
     }
     return {
-      id: 1,
-      place: "Delhi",
-      region: "Asia",
+      selectedPlaceData: {
+        id: 1,
+        place: "Delhi",
+        region: "Asia",
+      },
     };
   });
 
@@ -106,15 +109,12 @@ const Homefeed = () => {
 
   useEffect(() => {
     const handleStorageChange = () => {
-      const storedPlaceData = localStorage.getItem("userData");
-      if (storedPlaceData) {
+      const storedUserData = localStorage.getItem("userData");
+      if (storedUserData) {
         try {
-          const parsedData = JSON.parse(storedPlaceData);
-          if (parsedData.place !== selectedPlaceData.place) {
-            setSelectedPlaceData(parsedData);
-          }
+          setUserData(JSON.parse(storedUserData));
         } catch (error) {
-          console.error("Error parsing stored place data:", error);
+          console.error("Error parsing stored user data:", error);
         }
       }
     };
@@ -122,7 +122,7 @@ const Homefeed = () => {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, [selectedPlaceData.place]);
+  }, []);
 
   // Only show one main component at a time on small screens
   if (isSmallScreen) {
@@ -130,13 +130,13 @@ const Homefeed = () => {
       <div className="relative min-h-screen bg-transparent">
         {activeMenu === "infobox" && (
           <AiTopicScroller
-            selectedPlaceData={selectedPlaceData}
+            selectedPlaceData={userData.selectedPlaceData}
             isSmallScreen={true}
             onClose={() => {}}
           />
         )}
         {activeMenu === "scroller" && (
-          <Scroller selectedPlaceData={selectedPlaceData} />
+          <Scroller selectedPlaceData={userData.selectedPlaceData} />
         )}
         {activeMenu === "categorybox" && <Categorybox />}
         <FloatingCapsuleMenu active={activeMenu} onSwitch={setActiveMenu} />
@@ -152,7 +152,7 @@ const Homefeed = () => {
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
             <AiTopicScroller
-              selectedPlaceData={selectedPlaceData}
+              selectedPlaceData={userData.selectedPlaceData}
               isSmallScreen={false}
               onClose={() => {}}
             />
@@ -162,7 +162,7 @@ const Homefeed = () => {
         {/* Scroller Section */}
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-            <Scroller selectedPlaceData={selectedPlaceData} />
+            <Scroller selectedPlaceData={userData.selectedPlaceData} />
           </div>
         </span>
 

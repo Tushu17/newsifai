@@ -9,13 +9,20 @@ import NewsRating from "@/app/components/ui/newsrating/newsrating";
 const Scroller = ({
   selectedPlaceData,
 }: {
-  selectedPlaceData: {
+  selectedPlaceData?: {
     place: string;
     region?: string;
     country?: string;
     [key: string]: unknown;
   };
 }) => {
+  if (!selectedPlaceData || !selectedPlaceData.place) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <span className="text-gray-500">Loading location...</span>
+      </div>
+    );
+  }
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);

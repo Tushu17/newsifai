@@ -25,7 +25,17 @@ const TOPIC_TYPE_OPTIONS = [
   },
 ];
 
-const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
+const AiTopicScroller = ({
+  selectedPlaceData,
+  ...props
+}: AiTopicScrollerProps) => {
+  if (!selectedPlaceData || !selectedPlaceData.place) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <span className="text-gray-500">Loading location...</span>
+      </div>
+    );
+  }
   const [topics, setTopics] = useState<AiNewsTopic[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
