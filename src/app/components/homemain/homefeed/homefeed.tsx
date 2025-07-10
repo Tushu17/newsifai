@@ -47,13 +47,13 @@ const FloatingCapsuleMenu = ({
 );
 
 // Define the interface for place data
-interface PlaceData {
-  id: number;
-  place: string;
-  region?: string;
-  country?: string;
-  [key: string]: unknown;
-}
+// interface PlaceData {
+//   id: number;
+//   place: string;
+//   region?: string;
+//   country?: string;
+//   [key: string]: unknown;
+// }
 
 const Homefeed = () => {
   const [activeMenu, setActiveMenu] = useState<string>("infobox");

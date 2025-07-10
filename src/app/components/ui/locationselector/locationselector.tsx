@@ -65,6 +65,7 @@ const LocationSelector = () => {
           parsedUserData = JSON.parse(userData);
         } catch (error) {
           parsedUserData = {};
+          console.log(error);
         }
       }
       parsedUserData = { ...parsedUserData, selectedPlaceData: defaultPlace };
@@ -103,6 +104,7 @@ const LocationSelector = () => {
         parsedUserData = JSON.parse(userData);
       } catch (error) {
         parsedUserData = {};
+        console.log(error);
       }
     }
     parsedUserData = { ...parsedUserData, selectedPlaceData: place };

@@ -16,13 +16,7 @@ const Scroller = ({
     [key: string]: unknown;
   };
 }) => {
-  if (!selectedPlaceData || !selectedPlaceData.place) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <span className="text-gray-500">Loading location...</span>
-      </div>
-    );
-  }
+  // All hooks at the top!
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -81,7 +75,7 @@ const Scroller = ({
           null,
           offset,
           ITEMS_PER_PAGE,
-          selectedPlaceData.place
+          selectedPlaceData!.place
         );
 
         if (error) {
@@ -168,6 +162,14 @@ const Scroller = ({
       }
     };
   }, [hasMore, loadingMore, loading, fetchNews]);
+
+  if (!selectedPlaceData || !selectedPlaceData.place) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <span className="text-gray-500">Loading location...</span>
+      </div>
+    );
+  }
 
   const handleNewsClick = (news: NewsItem) => {
     setSelectedNews(news);
