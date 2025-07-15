@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React from "react";
 
 const AboutPage = () => {
@@ -12,7 +13,7 @@ const AboutPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Nature (Large) */}
           <div className="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-2xl shadow-lg group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxuYXR1cmV8ZW58MHwwfHx8MTcyMTA0MjYwMXww&ixlib=rb-4.0.3&q=80&w=1080"
               alt="Scenic nature landscape"
               width={1080}
@@ -33,7 +34,7 @@ const AboutPage = () => {
 
           {/* Food */}
           <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1493770348161-369560ae357d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxmb29kfGVufDB8MHx8fDE3MjEwNDI2MTR8MA&ixlib=rb-4.0.3&q=80&w=1080"
               alt="Delicious culinary dish"
               width={1080}
@@ -51,7 +52,7 @@ const AboutPage = () => {
 
           {/* Technology */}
           <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHx0ZWNobm9sb2d5fGVufDB8MHx8fDE3MjEwNDI2Mjh8MA&ixlib=rb-4.0.3&q=80&w=1080"
               alt="Modern technology devices"
               width={1080}
@@ -69,7 +70,7 @@ const AboutPage = () => {
 
           {/* Travel */}
           <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHx0cmF2ZWx8ZW58MHwwfHx8MTcyMTA0MjY0MXww&ixlib=rb-4.0.3&q=80&w=1080"
               alt="Travel destination scene"
               width={1080}
@@ -87,7 +88,7 @@ const AboutPage = () => {
 
           {/* Art */}
           <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxhcnR8ZW58MHwwfHx8MTcyMTA0MjY5Nnww&ixlib=rb-4.0.3&q=80&w=1080"
               alt="Artistic painting"
               width={1080}
@@ -105,7 +106,7 @@ const AboutPage = () => {
 
           {/* Swimming */}
           <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1530549387789-4c1017266635?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwyfHxzd2ltbWluZ3xlbnwwfDB8fHwxNzIxMDQzMjkxfDA&ixlib=rb-4.0.3&q=80&w=1080"
               alt="Swimmer in pool"
               width={1080}
@@ -121,7 +122,7 @@ const AboutPage = () => {
 
           {/* Chess */}
           <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1611195974226-a6a9be9dd763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMnx8Y2hlc3N8ZW58MHwwfHx8MTcyMTA0MzI0Nnww&ixlib=rb-4.0.3&q=80&w=1080"
               alt="Chess board game"
               width={1080}
@@ -137,7 +138,7 @@ const AboutPage = () => {
 
           {/* Football */}
           <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxmb290YmFsbHxlbnwwfDB8fHwxNzIxMDQzMjExfDA&ixlib=rb-4.0.3&q=80&w=1080"
               alt="Football match"
               width={1080}
@@ -153,7 +154,7 @@ const AboutPage = () => {
 
           {/* Cricket */}
           <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw3fHxjcmlja2V0fGVufDB8MHx8fDE3MjEwNDMxNTh8MA&ixlib=rb-4.0.3&q=80&w=1080"
               alt="Cricket game"
               width={1080}

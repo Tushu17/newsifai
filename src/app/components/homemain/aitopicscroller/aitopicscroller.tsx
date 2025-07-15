@@ -66,6 +66,7 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
 
   // Save topicType to localStorage whenever it changes
   useEffect(() => {
+    console.log("this is selectedplacedata", selectedPlaceData);
     if (typeof window !== "undefined") {
       const userData = localStorage.getItem("userData");
       let parsedUserData = {};
@@ -223,7 +224,7 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
     return (
       <div className="flex-1 overflow-y-auto rounded-xl shadow-xl dark:bg-gray-900 bg-gray-200 lg:w-[36vw] min-h-[70vh] lg:h-[72vh h-full">
         <div className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 min-h-0 dark:bg-gray-900 bg-gray-200">
-          <div className="p-4">
+          <div className="p-2">
             <div className="grid grid-cols-2 gap-4">
               {[...Array(8)].map((_, index) => (
                 <div
@@ -303,7 +304,7 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
           ref={scrollContainerRef}
           className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 dark:bg-gray-900 bg-gray-200 mb-3 md:mb-0 w-full min-h-[50vh] h-auto lg:w-[35vw] lg:h-[72vh]"
         >
-          <div className="p-4">
+          <div className="p-2">
             {error ? (
               <div className="text-center py-8">
                 <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>

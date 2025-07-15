@@ -24,9 +24,9 @@ const LocationSelector = () => {
       if (error || !data || data.length === 0) {
         // Fallback with basic structure
         const fallbackPlaces: PlaceData[] = [
-          { id: 1, place: "india", region: "Asia", country: "India" },
-          { id: 2, place: "america", region: "Americas", country: "USA" },
-          { id: 3, place: "europe", region: "Europe", country: "Europe" },
+          { id: 1, place: "Delhi", region: "India" },
+          { id: 2, place: "California", region: "USA" },
+          { id: 3, place: "Paris", region: "France" },
         ];
         setPlaceList(fallbackPlaces);
       } else {
@@ -64,8 +64,8 @@ const LocationSelector = () => {
         try {
           parsedUserData = JSON.parse(userData);
         } catch (error) {
-          parsedUserData = {};
           console.log(error);
+          parsedUserData = {};
         }
       }
       parsedUserData = { ...parsedUserData, selectedPlaceData: defaultPlace };
@@ -103,8 +103,8 @@ const LocationSelector = () => {
       try {
         parsedUserData = JSON.parse(userData);
       } catch (error) {
-        parsedUserData = {};
         console.log(error);
+        parsedUserData = {};
       }
     }
     parsedUserData = { ...parsedUserData, selectedPlaceData: place };

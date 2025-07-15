@@ -46,46 +46,44 @@ const FloatingCapsuleMenu = ({
   </div>
 );
 
-// Define the interface for place data
-// interface PlaceData {
-//   id: number;
-//   place: string;
-//   region?: string;
-//   country?: string;
-//   [key: string]: unknown;
-// }
+// Define the type for userData
+interface UserData {
+  selectedPlaceData: {
+    id: number;
+    place: string;
+    region: string;
+  };
+}
 
 const Homefeed = () => {
   const [activeMenu, setActiveMenu] = useState<string>("infobox");
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
 
-  const [userData, setUserData] = useState(() => {
+  const [userData, setUserData] = useState<UserData | undefined>(undefined);
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUserData = localStorage.getItem("userData");
       if (storedUserData) {
         try {
-          return JSON.parse(storedUserData);
+          setUserData(JSON.parse(storedUserData));
+          console.log("this is userData", userData);
         } catch (error) {
-          console.error("Error parsing stored user data:", error);
+          console.log(error);
         }
       }
-      // Default fallback
-      return {
-        selectedPlaceData: {
-          id: 1,
-          place: "Delhi",
-          region: "India",
-        },
-      };
+      // this data is solely stored for the first time users when there is userData is undefined or localstorage has no saved data
+      if (!storedUserData) {
+        setUserData({
+          selectedPlaceData: {
+            id: 1,
+            place: "Delhi",
+            region: "India",
+          },
+        });
+      }
     }
-    return {
-      selectedPlaceData: {
-        id: 1,
-        place: "Delhi",
-        region: "Asia",
-      },
-    };
-  });
+  }, []);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -110,6 +108,7 @@ const Homefeed = () => {
   useEffect(() => {
     const handleStorageChange = () => {
       const storedUserData = localStorage.getItem("userData");
+
       if (storedUserData) {
         try {
           setUserData(JSON.parse(storedUserData));
@@ -123,6 +122,10 @@ const Homefeed = () => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
+  if (!userData || !userData.selectedPlaceData) {
+    return <div>Loading...</div>;
+  }
 
   // Only show one main component at a time on small screens
   if (isSmallScreen) {

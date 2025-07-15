@@ -17,11 +17,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// const robotoSerif = Roboto_Serif({
-//   variable: "--font-roboto-serif",
-//   subsets: ["latin"],
-// });
-
 export const metadata: Metadata = {
   title: "Newsifai – Information wrapped in entertainment",
   description:
@@ -44,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Newsifai – AI-Powered News",
     description:
-      "Your daily AI-curated news digest. No spam. No scroll guilt. Just pure signal.",
+      "Your daily AI-curated news digest. No spam. No scroll guilt. Just pure infotainment.",
     url: "https://newsifai.com",
     siteName: "Newsifai",
     images: [
