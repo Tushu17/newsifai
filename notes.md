@@ -80,3 +80,10 @@ function will perform following task;-
 - just make sure when ai_topic basic function is updating a existing topic it set those values to null, small hack for sometime.
 
 - add auto scrolling to news page and solve error or duplicacy
+
+thing to learn-
+
+- In scroller and ai topic scroller, learn the differeence between useRef based scroller and offset based scroller.
+
+good news voila i've created newsifai's profile and presence on mulitple platforms,
+linkedin, twitter, insta and reddit.

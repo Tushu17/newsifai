@@ -32,7 +32,6 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState<AiNewsTopic | null>(null);
   const [hasMore, setHasMore] = useState(true);
-  const [offset, setOffset] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [topicType, setTopicType] = useState(() => {
     // Initialize from localStorage
@@ -61,6 +60,8 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
   const typeDropdownRef = useRef<HTMLUListElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const loadingRef = useRef<HTMLDivElement>(null);
+
+  const offsetRef = useRef(0);
 
   const ITEMS_PER_PAGE = 15;
 
@@ -116,14 +117,17 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
       if (isInitialLoad) {
         setLoading(true);
         setError(null);
+        offsetRef.current = 0;
       } else {
         setLoadingMore(true);
       }
 
       try {
+        const currentOffset = offsetRef.current;
+
         const { data, error } = await fetchTopicItems(
           selectedPlaceData.region || null,
-          offset,
+          currentOffset,
           ITEMS_PER_PAGE,
           undefined,
           topicType.table
@@ -142,12 +146,23 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
           if (isInitialLoad) {
             setTopics(data);
           } else {
-            setTopics((prev) => [...prev, ...data]);
+            // Filter out duplicates based on unique ID
+            setTopics((prev) => {
+              const existingIds = new Set(
+                prev.map((topic) => topic.ai_topic_id)
+              );
+              const newTopics = data.filter(
+                (topic) => !existingIds.has(topic.ai_topic_id)
+              );
+              return [...prev, ...newTopics];
+            });
           }
+
+          // Update offset ref immediately
+          offsetRef.current = currentOffset + data.length;
 
           // Check if we have more data to load
           setHasMore(data.length === ITEMS_PER_PAGE);
-          setOffset((prev) => prev + data.length);
         } else {
           if (isInitialLoad) {
             setTopics([]);
@@ -159,27 +174,28 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
         setError("An unexpected error occurred");
         if (isInitialLoad) {
           setTopics([]);
+          offsetRef.current = 0;
         }
       } finally {
         setLoading(false);
         setLoadingMore(false);
       }
     },
-    [offset, selectedPlaceData, topicType]
+    [selectedPlaceData, topicType] // Clean dependencies
   );
 
   useEffect(() => {
-    setOffset(0);
+    offsetRef.current = 0;
     setHasMore(true);
     fetchTopics(true);
   }, [selectedPlaceData, topicType]);
 
-  // Intersection Observer for infinite scrolling
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
         if (entry.isIntersecting && hasMore && !loadingMore && !loading) {
+          console.log("Loading more items..."); // Debug log
           fetchTopics(false);
         }
       },
@@ -201,15 +217,14 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
     };
   }, [hasMore, loadingMore, loading, fetchTopics]);
 
-  const handleTopicClick = (topic: AiNewsTopic) => {
-    setSelectedTopic(topic);
-  };
-
   const handleRefresh = () => {
-    setOffset(0);
+    offsetRef.current = 0;
     setHasMore(true);
     setError(null);
     fetchTopics(true);
+  };
+  const handleTopicClick = (topic: AiNewsTopic) => {
+    setSelectedTopic(topic);
   };
 
   if (!selectedPlaceData || !selectedPlaceData.place) {

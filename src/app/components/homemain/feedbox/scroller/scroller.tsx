@@ -22,9 +22,9 @@ const Scroller = ({
   const [loadingMore, setLoadingMore] = useState(false);
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   const [hasMore, setHasMore] = useState(true);
-  const [offset, setOffset] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const loadingRef = useRef<HTMLDivElement>(null);
+  const offSetRef = useRef(0);
 
   const ITEMS_PER_PAGE = 30;
 
@@ -66,14 +66,16 @@ const Scroller = ({
     async (isInitialLoad: boolean = true) => {
       if (isInitialLoad) {
         setLoading(true);
+        offSetRef.current = 0;
       } else {
         setLoadingMore(true);
       }
 
       try {
+        const currectOffSet = offSetRef.current;
         const { data, error } = await fetchNewsItems(
           null,
-          offset,
+          currectOffSet,
           ITEMS_PER_PAGE,
           selectedPlaceData!.place
         );
@@ -89,7 +91,7 @@ const Scroller = ({
         if (data && Array.isArray(data)) {
           if (isInitialLoad) {
             setNewsItems(data);
-            setOffset(data.length); // Set offset to the number of items fetched
+            // Set offset to the number of items fetched
           } else {
             // Filter out duplicates by id
             setNewsItems((prev) => {
@@ -107,7 +109,7 @@ const Scroller = ({
               );
               return [...prev, ...newItems];
             });
-            setOffset((prev) => prev + data.length);
+            offSetRef.current = currectOffSet + data.length;
           }
 
           // Check if we have more data to load
@@ -115,6 +117,7 @@ const Scroller = ({
         } else {
           if (isInitialLoad) {
             setNewsItems([]);
+            offSetRef.current = 0;
           }
           setHasMore(false);
         }
@@ -128,7 +131,7 @@ const Scroller = ({
         setLoadingMore(false);
       }
     },
-    [offset, selectedPlaceData]
+    [selectedPlaceData]
   );
 
   // Initial load
@@ -238,7 +241,7 @@ const Scroller = ({
                   </p>
                   <button
                     onClick={() => {
-                      setOffset(0);
+                      offSetRef.current = 0;
                       setHasMore(true);
                       fetchNews(true);
                     }}
