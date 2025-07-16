@@ -31,7 +31,6 @@ const LocationSelector = () => {
         setPlaceList(fallbackPlaces);
       } else {
         setPlaceList(data as PlaceData[]);
-        console.log(data);
       }
     };
     fetchPlaces();

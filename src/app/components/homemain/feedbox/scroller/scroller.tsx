@@ -97,16 +97,7 @@ const Scroller = ({
             setNewsItems((prev) => {
               const existingIds = new Set(prev.map((item) => item.id));
               const newItems = data.filter((item) => !existingIds.has(item.id));
-              // Debug: log IDs
-              console.log("Existing IDs:", Array.from(existingIds));
-              console.log(
-                "Fetched IDs:",
-                data.map((item) => item.id)
-              );
-              console.log(
-                "New unique items:",
-                newItems.map((item) => item.id)
-              );
+              // Filter out duplicates by id
               return [...prev, ...newItems];
             });
             offSetRef.current = currectOffSet + data.length;

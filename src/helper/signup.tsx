@@ -31,8 +31,6 @@ export async function signUpAccount() {
       .limit(1);
     if (error) {
       console.error("Supabase connection error:", error);
-    } else {
-      console.log("Supabase connection successful");
     }
     //comback if error
     localStorage.setItem("data", JSON.stringify(data));

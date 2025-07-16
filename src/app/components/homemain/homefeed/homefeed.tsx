@@ -67,7 +67,6 @@ const Homefeed = () => {
       if (storedUserData) {
         try {
           setUserData(JSON.parse(storedUserData));
-          console.log("this is userData", userData);
         } catch (error) {
           console.log(error);
         }

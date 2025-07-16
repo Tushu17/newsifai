@@ -67,7 +67,6 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
 
   // Save topicType to localStorage whenever it changes
   useEffect(() => {
-    console.log("this is selectedplacedata", selectedPlaceData);
     if (typeof window !== "undefined") {
       const userData = localStorage.getItem("userData");
       let parsedUserData = {};
@@ -195,7 +194,6 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
       (entries) => {
         const [entry] = entries;
         if (entry.isIntersecting && hasMore && !loadingMore && !loading) {
-          console.log("Loading more items..."); // Debug log
           fetchTopics(false);
         }
       },
