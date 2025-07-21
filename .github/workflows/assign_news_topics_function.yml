@@ -1,4 +1,4 @@
-name: Trigger news_fetch
+name: Trigger assign-news-topics
 
 on:
   schedule:
@@ -9,9 +9,9 @@ jobs:
   call-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Call news_fetch Function
+      - name: Call assign-news-topics Function
         run: |
-          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/news_fetch' \
+          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/assign-news-topics' \
           -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
           -H 'Content-Type: application/json' \
           --data '{"name":"Functions"}'

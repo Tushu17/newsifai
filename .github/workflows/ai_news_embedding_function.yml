@@ -1,4 +1,4 @@
-name: Trigger news_fetch
+name: Trigger news_embedding_function
 
 on:
   schedule:
@@ -9,9 +9,9 @@ jobs:
   call-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Call news_fetch Function
+      - name: Call news_embedding_function
         run: |
-          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/news_fetch' \
+          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/news_embedding_function' \
           -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
           -H 'Content-Type: application/json' \
           --data '{"name":"Functions"}'

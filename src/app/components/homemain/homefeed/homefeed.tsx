@@ -122,9 +122,7 @@ const Homefeed = () => {
     };
   }, []);
 
-  if (!userData || !userData.selectedPlaceData) {
-    return <div>Loading...</div>;
-  }
+  // Remove top-level loading state; always render children and let them handle loading
 
   // Only show one main component at a time on small screens
   if (isSmallScreen) {
@@ -132,13 +130,13 @@ const Homefeed = () => {
       <div className="relative min-h-screen bg-transparent">
         {activeMenu === "infobox" && (
           <AiTopicScroller
-            selectedPlaceData={userData.selectedPlaceData}
+            selectedPlaceData={userData?.selectedPlaceData}
             isSmallScreen={true}
             onClose={() => {}}
           />
         )}
         {activeMenu === "scroller" && (
-          <Scroller selectedPlaceData={userData.selectedPlaceData} />
+          <Scroller selectedPlaceData={userData?.selectedPlaceData} />
         )}
         {activeMenu === "categorybox" && <Categorybox />}
         <FloatingCapsuleMenu active={activeMenu} onSwitch={setActiveMenu} />
@@ -154,7 +152,7 @@ const Homefeed = () => {
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
             <AiTopicScroller
-              selectedPlaceData={userData.selectedPlaceData}
+              selectedPlaceData={userData?.selectedPlaceData}
               isSmallScreen={false}
               onClose={() => {}}
             />
@@ -164,7 +162,7 @@ const Homefeed = () => {
         {/* Scroller Section */}
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-            <Scroller selectedPlaceData={userData.selectedPlaceData} />
+            <Scroller selectedPlaceData={userData?.selectedPlaceData} />
           </div>
         </span>
 

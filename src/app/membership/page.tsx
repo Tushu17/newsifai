@@ -22,11 +22,15 @@ const MembershipPage = () => (
         membership option soon.
       </p>
       <p>
-        Membership will never be about restricting access or making you feel
-        left out. Instead, it will be a way for those who find value here to
-        contribute and help sustain the platform. There will be no aggressive
-        pop-ups, no guilt trips, and no &#34;subscribe or else&#34; tactics.
-        Just a simple, honest way to support the work if you choose.
+        Membership will never be about restricting access to the core
+        functionality of the website. However, some current features—like
+        genre-based news topics—and a few upcoming features will be available
+        only to premium users. That said, the website will continue to offer the
+        same value to everyone, though perhaps in a less entertaining or
+        intriguing way. Membership is simply a way for those who find value here
+        to contribute and help sustain the platform. There will be no aggressive
+        pop-ups, no guilt trips, and no &#34;subscribe or else&#34; tactics—just
+        a simple, honest way to support the work if you choose.
       </p>
       <p>
         If you&#39;re interested in becoming a member, please stay tuned! More

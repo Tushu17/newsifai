@@ -16,17 +16,17 @@ const AboutPage = () => {
       </Head>
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl font-bold mb-4">
-              Your Time-Saving News Companion
-            </h1>
-            <p className="text-xl opacity-90">
-              AI-powered news aggregation that brings you the most relevant
-              updates, saving you hours of browsing.
-            </p>
-          </div>
+      <div className="flex justify-center items-center py-4">
+        <div className="max-w-3xl w-full mx-auto text-center rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 px-3 py-4">
+          <h1 className="text-2xl font-normal mb-2 text-gray-900 dark:text-white">
+            About -{" "}
+            <span className="font-extrabold text-3xl bg-gradient-to-r from-orange-500 to-blue-600 bg-clip-text text-transparent">
+              Newsifai
+            </span>
+          </h1>
+          <p className="text-base opacity-80 text-gray-700 dark:text-gray-300">
+            One of the First Complete AI Content Creation Websites
+          </p>
         </div>
       </div>
 
@@ -53,17 +53,22 @@ const AboutPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  AI-Powered News Creation
+                  Our Goal 🎯
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                While this app uses RSS news aggregators to fetch content, what
-                you actually receive is completely AI-curated. Our system
-                assigns importance ratings to every news item, removes
-                irrelevant or duplicate content, creates concise topic snippets,
-                and continuously updates everything. It&#39;s a fully autonomous
-                operation with multiple functions and checks running
-                simultaneously to keep the website current and relevant.
+                My goal is to create the first AI-based content creation
+                platform that truly serves people. I believe this platform is a
+                great start to that journey. While this app uses RSS news
+                aggregators to fetch content, everything you receive is fully
+                managed and created by AI. Every topic, news item, and piece of
+                information is selected, molded, updated, and managed by AI with
+                complete automation. My role is to keep improving the algorithms
+                and functions. The AI assigns importance ratings to every news
+                item, removes irrelevant or duplicate content, creates concise
+                topic snippets, and continuously updates everything. It’s a
+                fully autonomous operation, with multiple functions and checks
+                running simultaneously to keep the website current and relevant.
               </p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border-1">
@@ -122,10 +127,10 @@ const AboutPage = () => {
               <p className="text-gray-600 dark:text-gray-300">
                 Like any project, I eventually want to monetize this website—but
                 primarily, I want to create something I&#39;d personally pay
-                for. The truth is, this website is nowhere close to what I
-                envision it becoming. I also realize that improving content
-                quality and user interaction will require investment: better AI
-                models, faster servers, and more frequent updates are expensive.
+                for. The truth is, this website is not yet what I envision it
+                becoming. I also realize that improving content quality and user
+                interaction will require investment: better AI models, faster
+                servers, and more frequent updates are expensive.
                 <br />
                 <br />
                 At some point, I&#39;ll need funding for these improvements.
@@ -165,9 +170,9 @@ const AboutPage = () => {
                 <br />
                 <br />
                 Currently, I&#39;m serving 7-8 locations across 4 continents,
-                and the content quality is subpar compared to what I could
-                deliver operating at a more niche level with better AI models
-                like Claude-4. But that would be expensive. The same goes for
+                and the content quality is not as high as it could be if I
+                operated at a more niche level with better AI models like
+                Claude-4. But that would be expensive. The same goes for
                 genres—there are multiple categories I want to include, but some
                 don&#39;t appeal to me personally, and AI isn&#39;t consistent
                 with others yet.
@@ -190,8 +195,8 @@ const AboutPage = () => {
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Advanced news aggregator that delivers latest news with no
-                    bullshit
+                    Advanced news aggregator that delivers the latest news with
+                    no nonsense.
                   </p>
                 </div>
                 <div className="flex items-center">
@@ -203,8 +208,8 @@ const AboutPage = () => {
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Currently free with no ads—better than 99% of websites
-                    available
+                    Currently free with no ads- When was the last time you saw a
+                    website with no ads?
                   </p>
                 </div>
                 <div className="flex items-center">
@@ -243,9 +248,9 @@ const AboutPage = () => {
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
                     This is where Newsifai comes in. I want to include only
-                    essential news and data that we actually look for while
-                    scrolling Reddit or Instagram—pure information wrapped in
-                    funny or relatable, engaging words. Scrolling that
+                    essential news and information that we actually look for
+                    while scrolling Reddit or Instagram—pure information wrapped
+                    in funny or relatable, engaging words. Scrolling that
                     doesn&#39;t feel like a guilty activity. This is a beta
                     model, but as we progress, we&#39;ll get closer to our goal.
                   </p>

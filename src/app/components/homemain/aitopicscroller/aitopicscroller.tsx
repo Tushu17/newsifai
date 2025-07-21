@@ -7,7 +7,7 @@ import { MdOutlineViewModule } from "react-icons/md";
 interface AiTopicScrollerProps {
   onClose?: () => void;
   isSmallScreen?: boolean;
-  selectedPlaceData: {
+  selectedPlaceData?: {
     place: string;
     region?: string;
     country?: string;
@@ -125,7 +125,7 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
         const currentOffset = offsetRef.current;
 
         const { data, error } = await fetchTopicItems(
-          selectedPlaceData.region || null,
+          selectedPlaceData?.region || null,
           currentOffset,
           ITEMS_PER_PAGE,
           undefined,
@@ -236,6 +236,11 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
   if (loading) {
     return (
       <div className="flex-1 overflow-y-auto rounded-xl shadow-xl dark:bg-gray-900 bg-gray-200 lg:w-[36vw] min-h-[70vh] lg:h-[72vh h-full">
+        <div className="mb-1 w-full">
+          <h2 className="text-lg font-bold text-gray-950 dark:text-gray-200">
+            Loading Ai topics...
+          </h2>
+        </div>
         <div className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 min-h-0 dark:bg-gray-900 bg-gray-200">
           <div className="p-2">
             <div className="grid grid-cols-2 gap-4">
