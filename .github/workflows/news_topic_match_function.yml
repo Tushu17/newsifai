@@ -1,0 +1,17 @@
+name: Trigger news_topic_match_function
+
+on:
+  schedule:
+    - cron: "0 */4 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  call-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call news_topic_match_function
+        run: |
+          curl -L -X POST 'https://systmzaxlbymwcsrserr.supabase.co/functions/v1/news_topic_match_function' \
+          -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
+          -H 'Content-Type: application/json' \
+          --data '{"name":"Functions"}'
