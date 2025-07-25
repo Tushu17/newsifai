@@ -2,7 +2,7 @@ name: Trigger ai_topic_creation_function
 
 on:
   schedule:
-    - cron: "0 */4 * * *"
+    - cron: "0 */3 * * *"
   workflow_dispatch: {}
 
 jobs:
