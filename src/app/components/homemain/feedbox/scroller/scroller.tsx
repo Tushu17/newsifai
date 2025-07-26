@@ -179,6 +179,7 @@ const Scroller = ({
         </div>
         <div className="flex-1 overflow-y-auto rounded-xl shadow-xl border border-gray-700 min-h-0 dark:bg-gray-900 bg-gray-200">
           <div className="p-4 space-y-3">
+            {/* Skeleton loading placeholders */}
             {[...Array(3)].map((_, index) => (
               <div
                 key={index}

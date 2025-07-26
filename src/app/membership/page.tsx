@@ -4,7 +4,7 @@ import React from "react";
 const MembershipPage = () => (
   <div className="max-w-2xl mx-auto py-16 px-4 border-2 rounded-2xl dark:bg-gray-900 bg-white my-12">
     <h1 className="text-4xl font-bold mb-8 text-center">
-      Membership Coming Soon
+      Membership Coming Soon!
     </h1>
     <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-8 text-gray-800 dark:text-gray-200 text-justify space-y-6">
       <p>

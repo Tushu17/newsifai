@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/footer/footer";
+import SigninWrapper from "./components/signinwrapper/signinwrapper";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -64,10 +65,12 @@ export default function RootLayout({
       <body
         className={`${geistInter.variable} ${geistMono.variable} antialiased`}
       >
-        <Loadingbar />
-        <Navbar />
-        {children}
-        <Footer />
+        <SigninWrapper>
+          <Loadingbar />
+          <Navbar />
+          {children}
+          <Footer />
+        </SigninWrapper>
       </body>
     </html>
   );

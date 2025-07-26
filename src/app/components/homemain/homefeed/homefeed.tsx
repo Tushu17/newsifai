@@ -6,6 +6,7 @@ import AiTopicScroller from "../aitopicscroller/aitopicscroller";
 import { FiHome } from "react-icons/fi";
 import { MdOutlineExplore } from "react-icons/md";
 import { TbCategoryPlus } from "react-icons/tb";
+import SignupRequestModal from "../../ui/signuprequestmodal/signuprequestmodal";
 
 // this component work as a nesting for all three other components
 // it is used to handle the small screen layout and the large screen layout
@@ -121,7 +122,31 @@ const Homefeed = () => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
-
+  if (!userData || !userData.selectedPlaceData) {
+    return (
+      <div className="min-h-screen bg-transparent">
+        <div className="max-w-screen-xl mx-auto px-1 lg:py-5 lg:px-2 h-full">
+          <div className="flex flex-col lg:flex-row justify-around">
+            <span>
+              <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
+                <div className="w-full h-64 bg-gray-200 animate-pulse rounded-lg"></div>
+              </div>
+            </span>
+            <span>
+              <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
+                <div className="w-full h-64 bg-gray-200 animate-pulse rounded-lg"></div>
+              </div>
+            </span>
+            <span>
+              <div className="lg:mr-3 my-3">
+                <div className="w-full h-32 bg-gray-200 animate-pulse rounded-lg"></div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
   // Remove top-level loading state; always render children and let them handle loading
 
   // Only show one main component at a time on small screens
@@ -130,13 +155,13 @@ const Homefeed = () => {
       <div className="relative min-h-screen bg-transparent">
         {activeMenu === "infobox" && (
           <AiTopicScroller
-            selectedPlaceData={userData?.selectedPlaceData}
+            selectedPlaceData={userData.selectedPlaceData}
             isSmallScreen={true}
             onClose={() => {}}
           />
         )}
         {activeMenu === "scroller" && (
-          <Scroller selectedPlaceData={userData?.selectedPlaceData} />
+          <Scroller selectedPlaceData={userData.selectedPlaceData} />
         )}
         {activeMenu === "categorybox" && <Categorybox />}
         <FloatingCapsuleMenu active={activeMenu} onSwitch={setActiveMenu} />
@@ -152,7 +177,7 @@ const Homefeed = () => {
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
             <AiTopicScroller
-              selectedPlaceData={userData?.selectedPlaceData}
+              selectedPlaceData={userData.selectedPlaceData}
               isSmallScreen={false}
               onClose={() => {}}
             />
@@ -162,7 +187,7 @@ const Homefeed = () => {
         {/* Scroller Section */}
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-            <Scroller selectedPlaceData={userData?.selectedPlaceData} />
+            <Scroller selectedPlaceData={userData.selectedPlaceData} />
           </div>
         </span>
 
