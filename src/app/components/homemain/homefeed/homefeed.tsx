@@ -6,8 +6,6 @@ import AiTopicScroller from "../aitopicscroller/aitopicscroller";
 import { FiHome } from "react-icons/fi";
 import { MdOutlineExplore } from "react-icons/md";
 import { TbCategoryPlus } from "react-icons/tb";
-import SignupRequestModal from "../../ui/signuprequestmodal/signuprequestmodal";
-
 // this component work as a nesting for all three other components
 // it is used to handle the small screen layout and the large screen layout
 // it is also used to handle the storage of the selected place data
