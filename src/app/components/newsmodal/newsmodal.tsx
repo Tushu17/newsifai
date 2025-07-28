@@ -26,6 +26,19 @@ const NewsModal: React.FC<NewsModalProps> = ({ news, onClose }) => {
       window.removeEventListener("popstate", handlePopState);
     };
   }, [onClose]);
+  // Disable body scrolling when modal is open
+  useEffect(() => {
+    // Store original overflow style
+    const originalOverflow = document.body.style.overflow;
+
+    // Disable scrolling
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      // Re-enable scrolling when modal closes
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
   return (
     <div className="fixed inset-0 bg-gray-100/10 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">

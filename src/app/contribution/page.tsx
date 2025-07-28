@@ -88,15 +88,7 @@ const ContributionPage = () => (
               me what you think could be better. Every perspective is valuable.
             </p>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-2">
-              Documentation & Testing
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Help improve documentation, test features, or create guides that
-              make the project more accessible to others.
-            </p>
-          </div>
+
           <div>
             <h3 className="text-lg font-semibold mb-2">Spread the Word</h3>
             <p className="text-gray-600 dark:text-gray-300">
@@ -124,7 +116,7 @@ const ContributionPage = () => (
             href="mailto:myemail@gmail.com"
             className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-3 rounded-lg transition-colors"
           >
-            Email me at myemail@gmail.com
+            Email me at tusharshrivastav1711@gmail.com
           </a>
         </div>
       </section>

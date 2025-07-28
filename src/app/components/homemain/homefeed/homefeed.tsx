@@ -120,26 +120,39 @@ const Homefeed = () => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
+  // this is to show for loading face
   if (!userData || !userData.selectedPlaceData) {
     return (
-      <div className="min-h-screen bg-transparent">
-        <div className="max-w-screen-xl mx-auto px-1 lg:py-5 lg:px-2 h-full">
-          <div className="flex flex-col lg:flex-row justify-around">
-            <span>
-              <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-                <div className="w-full h-64 bg-gray-200 animate-pulse rounded-lg"></div>
-              </div>
-            </span>
-            <span>
-              <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-                <div className="w-full h-64 bg-gray-200 animate-pulse rounded-lg"></div>
-              </div>
-            </span>
-            <span>
-              <div className="lg:mr-3 my-3">
-                <div className="w-full h-32 bg-gray-200 animate-pulse rounded-lg"></div>
-              </div>
-            </span>
+      <div className="min-h-screen bg-gray-200 dark:bg-gray-900 flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          {/* Logo with pulse animation */}
+          <div className="relative">
+            <img
+              src="/logo.png"
+              alt="Newsifai"
+              className="w-20 h-20 animate-pulse"
+            />
+            {/* Optional: Add a subtle glow effect */}
+            <div className="absolute inset-0 w-20 h-20 bg-blue-500/20 rounded-full animate-ping"></div>
+          </div>
+
+          {/* Loading text (optional) */}
+          <div className="mt-6 text-gray-600 dark:text-gray-400 text-sm font-medium">
+            Loading...
+          </div>
+
+          {/* Loading dots animation */}
+          <div className="flex space-x-1 mt-2">
+            <div className="w-2 h-2 bg-gray-400 dark:bg-gray-600 rounded-full animate-bounce"></div>
+            <div
+              className="w-2 h-2 bg-gray-400 dark:bg-gray-600 rounded-full animate-bounce"
+              style={{ animationDelay: "0.1s" }}
+            ></div>
+            <div
+              className="w-2 h-2 bg-gray-400 dark:bg-gray-600 rounded-full animate-bounce"
+              style={{ animationDelay: "0.2s" }}
+            ></div>
           </div>
         </div>
       </div>

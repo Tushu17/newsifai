@@ -59,16 +59,16 @@ const AboutPage = () => {
               <p className="text-gray-600 dark:text-gray-300">
                 My goal is to create the first AI-based content creation
                 platform that truly serves people. I believe this platform is a
-                great start to that journey. While this app uses RSS news
-                aggregators to fetch content, everything you receive is fully
-                managed and created by AI. Every topic, news item, and piece of
-                information is selected, molded, updated, and managed by AI with
-                complete automation. My role is to keep improving the algorithms
-                and functions. The AI assigns importance ratings to every news
-                item, removes irrelevant or duplicate content, creates concise
-                topic snippets, and continuously updates everything. It’s a
-                fully autonomous operation, with multiple functions and checks
-                running simultaneously to keep the website current and relevant.
+                great start to that journey. While this app uses RSS aggregators
+                to fetch news, everything you receive is fully managed and
+                created by AI. Every topic, news item, and piece of information
+                is selected, molded, updated, and managed by AI with complete
+                automation. My role is to keep improving the algorithms and
+                functions. The AI assigns importance ratings to every news item,
+                removes irrelevant or duplicate content, creates concise topic
+                snippets, and continuously updates everything. It’s a fully
+                autonomous operation, with multiple functions and checks running
+                simultaneously to keep the website current and relevant.
               </p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border-1">

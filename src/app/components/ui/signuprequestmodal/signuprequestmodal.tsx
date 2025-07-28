@@ -31,7 +31,7 @@ const SignupRequestModal: React.FC<SignupRequestModalProps> = ({
   isOpen,
   onClose,
   title = "Sign Up — Help Us Help You 🧠",
-  message = "When you sign up, we can tailor the news just for you — sharper topics, better niche coverage, and AI that learns what you care about. Plus, it helps us make Newsifai even better for everyone. (No spam, just smart stuff.)",
+  message = "When you sign up, we can tailor the news just for you — sharper topics, better niche coverage, and personalized insights. First 200 subscribers may get free access to premium features when we launch them. Plus, it helps us make Newsifai even better for everyone. (No spam, just smart stuff.)",
   showBenefits = false,
   variant = "default",
 }) => {
@@ -252,7 +252,7 @@ const SignupRequestModal: React.FC<SignupRequestModalProps> = ({
 
           {/* Footer text */}
           <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-6">
-            Free forever • No spam • Cancel anytime
+            Secure • No spam • Early access
           </p>
         </div>
       </div>

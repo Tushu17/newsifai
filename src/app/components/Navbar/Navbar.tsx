@@ -60,6 +60,7 @@ const Navbar = () => {
                 height={33}
                 className=" mr-3 sm:h-9"
                 alt="Landwind Logo"
+                style={{ height: "auto" }}
               />
 
               <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
