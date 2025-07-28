@@ -8,6 +8,12 @@ import { fetchNewsItems } from "@/helper/getData";
 import NewsModal from "@/app/components/newsmodal/newsmodal";
 import Image from "next/image";
 
+declare global {
+  interface Window {
+    getNewsPerformanceMetrics?: () => unknown; // You can specify a more precise return type if desired
+  }
+}
+
 const CategoryPage = () => {
   const categoryList = [
     "global",
@@ -270,7 +276,7 @@ const CategoryPage = () => {
   // Expose performance metrics to window for testing (development only)
   useEffect(() => {
     if (process.env.NODE_ENV === "development") {
-      (window as any).getNewsPerformanceMetrics = getPerformanceMetrics;
+      window.getNewsPerformanceMetrics = getPerformanceMetrics;
     }
   }, [getPerformanceMetrics]);
 
@@ -485,7 +491,7 @@ const CategoryPage = () => {
                     aria-hidden="true"
                   ></div>
                   <span className="text-sm font-medium">
-                    You've reached the end
+                    You&#39;ve reached the end
                   </span>
                   <div
                     className="h-px bg-gray-300 dark:bg-gray-600 w-16"
