@@ -7,6 +7,7 @@ import { NewsItem } from "@/models/data";
 import { fetchNewsItems } from "@/helper/getData";
 import NewsModal from "@/app/components/newsmodal/newsmodal";
 import Image from "next/image";
+import NewsRating from "@/app/components/ui/newsrating/newsrating";
 
 declare global {
   interface Window {
@@ -411,12 +412,13 @@ const CategoryPage = () => {
                       sizes="100vw"
                       style={{ width: "100%", height: "12rem" }}
                     />
-                    <div className="absolute top-2 right-2 flex flex-col">
+                    <div className="absolute top-2 right-2 flex flex-col gap-2 items-end">
                       <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">
                         {Array.isArray(news.tags)
                           ? news.tags[0]
                           : news.tags?.split(",")[0] || "General"}
                       </span>
+                      <NewsRating rating={news.news_rating} />
                     </div>
                   </div>
                   <div className="p-4 sm:w-2/3 md:w-full">

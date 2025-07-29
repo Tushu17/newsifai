@@ -53,10 +53,7 @@ const NewsModal: React.FC<NewsModalProps> = ({ news, onClose }) => {
           <div className="absolute top-4 left-4">
             <div className="relative">
               <div className="absolute top-3 left-3 z-10">
-                <NewsRating
-                  rating={news.news_rating}
-                  className="w-10 h-10 flex items-center justify-center text-base border-2 border-white"
-                />
+                <NewsRating rating={news.news_rating} className="z-10" />
               </div>
 
               {/* Stamp effect shadow */}

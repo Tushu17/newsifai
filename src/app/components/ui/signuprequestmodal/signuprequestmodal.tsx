@@ -234,9 +234,7 @@ const SignupRequestModal: React.FC<SignupRequestModalProps> = ({
               disabled={isNavigating}
               className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center group focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              <span>
-                {isNavigating ? "Redirecting..." : "Create Free Account"}
-              </span>
+              <span>{isNavigating ? "Redirecting..." : "Create Account"}</span>
               {!isNavigating && (
                 <FiArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               )}

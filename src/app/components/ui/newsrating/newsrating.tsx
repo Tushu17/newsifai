@@ -24,9 +24,37 @@ const NewsRating: React.FC<NewsRatingProps> = ({
   return (
     <Tooltip content={tooltipText || defaultTooltip}>
       <span
-        className={`px-2 py-1 rounded-full text-xs font-bold bg-yellow-400 text-black shadow-sm border border-yellow-500 ${className}`}
+        className={`px-2.5 py-1.5 rounded-full text-sm font-extrabold bg-yellow-400 text-black border-2 border-yellow-600 shadow-lg shadow-yellow-200/60 ring-2 ring-yellow-300/60 flex items-center gap-1 ${className}`}
+        style={{ letterSpacing: "0.03em" }}
         tabIndex={0}
       >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="text-yellow-600 mr-1"
+          aria-hidden="true"
+        >
+          <circle
+            cx="10"
+            cy="10"
+            r="8"
+            fill="#fde047"
+            stroke="#facc15"
+            strokeWidth="2"
+          />
+          <text
+            x="10"
+            y="15"
+            textAnchor="middle"
+            fontSize="10"
+            fontWeight="bold"
+            fill="#b45309"
+          >
+            AI
+          </text>
+        </svg>
         {rating}
       </span>
     </Tooltip>
