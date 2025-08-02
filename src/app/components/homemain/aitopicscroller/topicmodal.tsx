@@ -160,70 +160,81 @@ const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
                     scrollbarColor: "#ff6900 #e5e7eb",
                   }}
                 >
-                  {topic.ai_topic_long_summary_json.map((dateEntry, index) => (
-                    <div
-                      key={index}
-                      className="border-l-4 border-blue-500 pl-4"
-                    >
-                      <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
-                        {new Date(dateEntry.date).toLocaleDateString("en-US", {
-                          weekday: "long",
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </h4>
-                      <ul className="space-y-2">
-                        {dateEntry.bullets.map((bullet, bulletIndex) => {
-                          let newsContent = null;
-                          if (relatedNewsLoading) {
-                            newsContent = (
-                              <span className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                                Loading...
-                              </span>
-                            );
-                          } else {
-                            const news = getNewsById(bullet.news_id);
-                            if (news) {
-                              newsContent = news.url ? (
-                                <a
-                                  href={news.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-blue-600 dark:text-blue-300 underline ml-1"
-                                >
-                                  {news.source || "News Source"}
-                                </a>
-                              ) : (
-                                <span className="text-xs text-gray-500 dark:text-gray-500 mt-1 ml-1">
-                                  Link not available
+                  {topic.ai_topic_long_summary_json
+                    .sort(
+                      (a, b) =>
+                        new Date(b.date).getTime() - new Date(a.date).getTime()
+                    )
+                    .map((dateEntry, index) => (
+                      <div
+                        key={index}
+                        className="border-l-4 border-blue-500 pl-4"
+                      >
+                        <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                          {new Date(dateEntry.date).toLocaleDateString(
+                            "en-US",
+                            {
+                              weekday: "long",
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
+                        </h4>
+                        <ul className="space-y-2">
+                          {dateEntry.bullets.map((bullet, bulletIndex) => {
+                            let newsContent = null;
+                            if (relatedNewsLoading) {
+                              newsContent = (
+                                <span className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                                  Loading...
                                 </span>
                               );
                             } else {
-                              newsContent = (
-                                <span className="text-xs text-gray-500 dark:text-gray-500 mt-1 ml-1">
-                                  Link not available
-                                </span>
-                              );
+                              const news = getNewsById(bullet.news_id);
+                              if (news) {
+                                newsContent = news.url ? (
+                                  <a
+                                    href={news.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-600 dark:text-blue-300 underline ml-1"
+                                  >
+                                    {news.source || "News Source"}
+                                  </a>
+                                ) : (
+                                  <span className="text-xs text-gray-500 dark:text-gray-500 mt-1 ml-1">
+                                    Link not available
+                                  </span>
+                                );
+                              } else {
+                                newsContent = (
+                                  <span className="text-xs text-gray-500 dark:text-gray-500 mt-1 ml-1">
+                                    Link not available
+                                  </span>
+                                );
+                              }
                             }
-                          }
-                          return (
-                            <li key={bulletIndex} className="flex items-start">
-                              <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                              <div className="flex-1">
-                                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-                                  {bullet.text}
-                                </p>
-                                <span className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                                  Source: {newsContent}
-                                </span>
-                              </div>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  ))}
+                            return (
+                              <li
+                                key={bulletIndex}
+                                className="flex items-start"
+                              >
+                                <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                <div className="flex-1">
+                                  <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                                    {bullet.text}
+                                  </p>
+                                  <span className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                                    Source: {newsContent}
+                                  </span>
+                                </div>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    ))}
                 </div>
               </div>
             )}

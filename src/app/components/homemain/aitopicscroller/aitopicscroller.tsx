@@ -3,6 +3,8 @@ import TopicModal from "./topicmodal";
 import { AiNewsTopic } from "@/models/topicdata";
 import { fetchTopicItems } from "@/helper/gettopicdata";
 import { MdOutlineViewModule } from "react-icons/md";
+import { IoWarningOutline } from "react-icons/io5";
+import Tooltip from "@/app/components/ui/tooltip/tooltip";
 
 interface AiTopicScrollerProps {
   onClose?: () => void;
@@ -14,6 +16,8 @@ interface AiTopicScrollerProps {
     [key: string]: unknown;
   };
 }
+const aiContentWarning =
+  "This content is AI-generated and may contain translation inaccuracies or unintended interpretations. Viewer discretion is advised. Please report any concerns.";
 
 const TOPIC_TYPE_OPTIONS = [
   { label: "Conventional", value: "conventional", table: "ai_news_topics" },
@@ -268,9 +272,14 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
               <div className="mr-4">
                 <span className="block w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></span>
               </div>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                AI&#39;s Take on {selectedPlaceData.place}
-              </h2>
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                  AI&#39;s Take on {selectedPlaceData.place}
+                </h2>
+                <Tooltip content={aiContentWarning}>
+                  <IoWarningOutline className="text-yellow-500 text-lg hover:text-yellow-400 transition-colors" />
+                </Tooltip>
+              </div>
             </div>
             {/* this is mode selector div */}
             <div className="relative inline-block">
