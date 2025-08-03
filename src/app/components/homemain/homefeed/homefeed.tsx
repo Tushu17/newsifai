@@ -60,6 +60,11 @@ const Homefeed = () => {
 
   const [userData, setUserData] = useState<UserData | undefined>(undefined);
 
+  // this is to scroll component to top when a small screen user swithces between component
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [activeMenu]);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUserData = localStorage.getItem("userData");

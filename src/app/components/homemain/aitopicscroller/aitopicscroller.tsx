@@ -274,7 +274,7 @@ const AiTopicScroller = ({ selectedPlaceData }: AiTopicScrollerProps) => {
               </div>
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  AI&#39;s Take on {selectedPlaceData.place}
+                  AI Topics - {selectedPlaceData.place}
                 </h2>
                 <Tooltip content={aiContentWarning}>
                   <IoWarningOutline className="text-yellow-500 text-lg hover:text-yellow-400 transition-colors" />
