@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Categorybox from "../categorybox/categorybox";
-import Scroller from "../feedbox/scroller/scroller";
+import Scroller from "../scroller/scroller";
 import AiTopicScroller from "../aitopicscroller/aitopicscroller";
 import { FiHome } from "react-icons/fi";
 import { MdOutlineExplore } from "react-icons/md";

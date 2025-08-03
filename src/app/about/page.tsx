@@ -57,18 +57,18 @@ const AboutPage = () => {
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                My goal is to create the first AI-based content creation
-                platform that truly serves people. I believe this platform is a
-                great start to that journey. While this app uses RSS aggregators
-                to fetch news, everything you receive is fully managed and
-                created by AI. Every topic, news item, and piece of information
-                is selected, molded, updated, and managed by AI with complete
-                automation. My role is to keep improving the algorithms and
-                functions. The AI assigns importance ratings to every news item,
-                removes irrelevant or duplicate content, creates concise topic
-                snippets, and continuously updates everything. It’s a fully
-                autonomous operation, with multiple functions and checks running
-                simultaneously to keep the website current and relevant.
+                My goal is to build the first truly people-centric, AI-powered
+                content platform. I see this project as the foundation of that
+                vision. While the platform fetches over 150 news items per
+                location every day through aggregators, every piece of content
+                you see is selected, refined, and presented by AI — not by a
+                human editor. The AI handles everything: identifying relevant
+                topics, assigning importance scores, removing noise and
+                duplicates, crafting concise summaries, and keeping the feed
+                updated in real-time. My job is to continuously improve the
+                algorithms and workflows that make this autonomy possible.
+                Multiple AI systems and checks work in parallel to ensure the
+                platform stays fresh, useful, and fully automated.
               </p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border-1">
@@ -93,12 +93,14 @@ const AboutPage = () => {
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                There are many more genres I want to include that might appeal
-                to a broader audience. If you&#39;re looking for specific types
-                of content or have suggestions, let us know—we might just add
-                them to our platform. To improve accuracy and relevance, I&#39;m
-                also working on making content more localized by giving priority
-                to news closer to your location.
+                There are a few forthcoming features in the pipeline that
+                I&#39;d prefer to keep secluded for now. But just to share the
+                immediate vision — there are many more genres I want to include
+                that might appeal to a broader audience. If you&#39;re looking
+                for specific types of content or have suggestions, let us know —
+                I might just add them to the platform. To improve accuracy and
+                relevance, I&#39;m also working on making content more localized
+                by giving priority to news closer to your location.
               </p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border-1">
@@ -171,11 +173,10 @@ const AboutPage = () => {
                 <br />
                 Currently, I&#39;m serving 7-8 locations across 4 continents,
                 and the content quality is not as high as it could be if I
-                operated at a more niche level with better AI models like
-                Claude-4. But that would be expensive. The same goes for
-                genres—there are multiple categories I want to include, but some
-                don&#39;t appeal to me personally, and AI isn&#39;t consistent
-                with others yet.
+                operated at a more niche level with better AI models. But that
+                would be expensive. The same goes for genres—there are multiple
+                categories I want to include, but some don&#39;t appeal to me
+                personally, and AI isn&#39;t consistent with others yet.
                 <br />
                 <br />
                 As AI progresses, content quality will improve alongside it.
@@ -224,18 +225,17 @@ const AboutPage = () => {
                 <div className="bg-white dark:bg-gray-800 p-4 shadow-lg ">
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     Let&#39;s face it: with the growing internet, we&#39;re all
-                    spending more time online than we should, and we constantly
-                    feel guilty about it because we know we&#39;re not consuming
-                    content we should be. So we look for alternatives—following
-                    &#34;informative&#34; accounts on social media, watching
-                    podcasts, or visiting news sites to compensate and feel less
-                    guilty.
+                    spending more time or I&#39;d say most of our free time
+                    online, and we constantly feel guilty about it because we
+                    know we&#39;re not consuming content we should be. So we
+                    look for alternatives—following &#34;informative&#34;
+                    accounts on social media, watching podcasts, or visiting
+                    news sites to compensate and feel less guilty. Our attention
+                    spans have shrunk to the point where 4-5 minute YouTube
+                    videos don&#39;t get as many views as 60-second reels or
+                    shorts.
                   </p>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    But our attention spans have shrunk to the point where 4-5
-                    minute YouTube videos don&#39;t get as many views as
-                    60-second reels or shorts.
-                  </p>
+
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     This is what I want to change. I&#39;m a big promoter of
                     &#34;infotainment&#34; because that&#39;s the best way to
@@ -246,13 +246,24 @@ const AboutPage = () => {
                     than reading boring news or watching 2-hour podcasts that
                     give you the ick before you even start.
                   </p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    But beyond just making scrolling feel productive, the core
+                    idea is simple: this generation isn&#39;t starting the day
+                    with a newspaper—it starts with a scroll. So why not design
+                    something that fits into that habit but actually adds value?
+                    Newsifai gives you a clean, curated daily info-feed—no
+                    clutter, no ragebait—just the important stuff, presented in
+                    a way you&#39;ll enjoy. It&#39;s a habit-forming utility
+                    disguised as casual content.
+                  </p>
+
                   <p className="text-gray-600 dark:text-gray-300">
-                    This is where Newsifai comes in. I want to include only
-                    essential news and information that we actually look for
-                    while scrolling Reddit or Instagram—pure information wrapped
-                    in funny or relatable, engaging words. Scrolling that
-                    doesn&#39;t feel like a guilty activity. This is a beta
-                    model, but as we progress, we&#39;ll get closer to our goal.
+                    I want to include only essential news and information that
+                    we actually look for while scrolling Reddit or
+                    Instagram—pure information wrapped in funny or relatable,
+                    engaging words. Scrolling that doesn&#39;t feel like a
+                    guilty activity. This is a beta model, but as we progress,
+                    we&#39;ll get closer to our goal.
                   </p>
                 </div>
               </div>

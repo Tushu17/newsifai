@@ -31,7 +31,7 @@ const SignupRequestModal: React.FC<SignupRequestModalProps> = ({
   isOpen,
   onClose,
   title = "Sign Up — Help Us Help You 🧠",
-  message = "When you sign up, we can tailor the news just for you — sharper topics, better niche coverage, and personalized insights. First 200 subscribers may get free access to premium features when we launch them. Plus, it helps us make Newsifai even better for everyone. (No spam, just smart stuff.)",
+  message = "When you sign up, we can tailor the news just for you — sharper topics, better niche coverage, and personalized insights. First 200 subscribers may get free access to premium features for a month when we launch them. Plus, it helps us make Newsifai even better for everyone. (No spam, just smart stuff.)",
   showBenefits = false,
   variant = "default",
 }) => {
@@ -45,8 +45,6 @@ const SignupRequestModal: React.FC<SignupRequestModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       previousFocusRef.current = document.activeElement as HTMLElement;
-      // Prevent body scroll
-      document.body.style.overflow = "hidden";
 
       // Trigger animation after a small delay to ensure DOM is ready
       const timer = setTimeout(() => {
@@ -72,17 +70,11 @@ const SignupRequestModal: React.FC<SignupRequestModalProps> = ({
       };
     } else {
       setIsAnimating(false);
-      // Restore body scroll
-      document.body.style.overflow = "unset";
       // Return focus to previous element
       if (previousFocusRef.current) {
         previousFocusRef.current.focus();
       }
     }
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
   }, [isOpen]);
 
   // Handle keyboard events

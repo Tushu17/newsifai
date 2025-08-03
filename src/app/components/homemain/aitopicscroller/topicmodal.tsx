@@ -137,10 +137,16 @@ const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
           {/* Short Summary */}
           {topic.ai_topic_short_summary && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 ">
                 Summary
               </h3>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p
+                className="text-gray-700 dark:text-gray-300 leading-relaxed overflow-y-auto max-h-24"
+                style={{
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "#ff6900 #e5e7eb",
+                }}
+              >
                 {topic.ai_topic_short_summary}
               </p>
             </div>
