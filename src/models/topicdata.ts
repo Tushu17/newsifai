@@ -21,6 +21,11 @@ export interface AiNewsTopic {
   created_at?: string; // ISO 8601 timestamp
   updated_at?: string; // ISO 8601 timestamp
   last_news_at?: string; // ISO 8601 timestamp
+  place?: string;
+  genz_conversion?: string;
+  humour_conversion?: string;
+  topic_score?: string;
+  topic_status?: string;
 }
 
 // For creating new topics (without auto-generated fields)

@@ -2,13 +2,59 @@ import { AiNewsTopic } from "@/models/topicdata";
 import { NewsItem } from "@/models/data";
 import React, { useEffect, useState } from "react";
 import { fetchNewsItemsByIds } from "@/helper/getData";
+import { markTopicAsSeen } from "@/helper/userTopicInteraction";
+import { createClient } from "@supabase/supabase-js";
 
 interface TopicModalProps {
   topic: AiNewsTopic;
+  topicType: string;
   onClose: () => void;
 }
 
-const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
+if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+  throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL environment variable");
+}
+if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  throw new Error("Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable");
+}
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+const TopicModal: React.FC<TopicModalProps> = ({
+  topic,
+  topicType,
+  onClose,
+}) => {
+  // Mark topic as seen when modal opens
+  useEffect(() => {
+    const markSeen = async () => {
+      const supabase = createClient(supabaseUrl, supabaseAnonKey);
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // Use last_news_at as version, fallback to updated_at or created_at
+      const topicVersion =
+        topic.last_news_at || topic.updated_at || topic.created_at;
+      if (!topicVersion || !topic.ai_topic_id) return;
+
+      try {
+        await markTopicAsSeen({
+          userId: user.id,
+          topicId: topic.ai_topic_id,
+          topicType,
+          topicVersion,
+        });
+      } catch (error) {
+        console.error("Failed to mark topic as seen:", error);
+      }
+    };
+
+    markSeen();
+  }, [topic, topicType]);
+
   // Disable body scrolling when modal is open
   useEffect(() => {
     // Store original overflow style
@@ -84,7 +130,7 @@ const TopicModal: React.FC<TopicModalProps> = ({ topic, onClose }) => {
       className="fixed inset-0 rounded-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60 flex justify-center items-center z-50 p-4"
       onClick={handleOverlayClick}
     >
-      <div className="bg-gray-300 dark:bg-gray-900 rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] relative flex flex-col">
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] relative flex flex-col">
         {/* Close Button */}
         <button
           onClick={onClose}

@@ -3,19 +3,10 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import { NewsItem } from "@/models/data";
 import NewsModal from "@/app/components/newsmodal/newsmodal";
 import NewsRating from "@/app/components/ui/newsrating/newsrating";
+import { useUserData } from "@/contexts";
 
-// Define the NewsItem interface
-
-const Scroller = ({
-  selectedPlaceData,
-}: {
-  selectedPlaceData?: {
-    place: string;
-    region?: string;
-    country?: string;
-    [key: string]: unknown;
-  };
-}) => {
+const Scroller = () => {
+  const { selectedPlace } = useUserData();
   // All hooks at the top!
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(false);
@@ -77,7 +68,7 @@ const Scroller = ({
           null,
           currectOffSet,
           ITEMS_PER_PAGE,
-          selectedPlaceData!.place
+          selectedPlace?.place
         );
 
         if (error) {
@@ -122,13 +113,15 @@ const Scroller = ({
         setLoadingMore(false);
       }
     },
-    [selectedPlaceData]
+    [selectedPlace]
   );
 
   // Initial load
   useEffect(() => {
-    fetchNews(true);
-  }, [selectedPlaceData]); // Only run on mount
+    if (selectedPlace?.place) {
+      fetchNews(true);
+    }
+  }, [selectedPlace, fetchNews]);
 
   // Intersection Observer for infinite scrolling
   useEffect(() => {
@@ -157,7 +150,7 @@ const Scroller = ({
     };
   }, [hasMore, loadingMore, loading, fetchNews]);
 
-  if (!selectedPlaceData || !selectedPlaceData.place) {
+  if (!selectedPlace || !selectedPlace.place) {
     return (
       <div className="flex items-center justify-center h-full">
         <span className="text-gray-500">Loading location...</span>
@@ -212,7 +205,7 @@ const Scroller = ({
 
             <div className="flex items-center justify-between w-full">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                Today&#39;s Top Stories – {selectedPlaceData.place}
+                Today&#39;s Top Stories – {selectedPlace.place}
               </h2>
             </div>
           </div>
@@ -314,8 +307,8 @@ const Scroller = ({
                       </div>
                       <p className="text-gray-600 dark:text-gray-400 text-sm">
                         You&#39;ve reached the end of news for{" "}
-                        {selectedPlaceData.place}, comeback after a while for
-                        fresh news.
+                        {selectedPlace.place}, comeback after a while for fresh
+                        news.
                       </p>
                       <p className="text-gray-500 dark:text-gray-500 text-xs mt-1">
                         Check back later for more updates

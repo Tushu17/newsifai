@@ -2,18 +2,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { supabase } from "../../../../libs/utils/supabaseClient";
 import { CiLocationOn } from "react-icons/ci";
-
-// Define the interface for place data
-interface PlaceData {
-  id: number;
-  place: string;
-  region?: string;
-  country?: string;
-}
+import { useUserData, type PlaceData } from "@/contexts";
 
 const LocationSelector = () => {
+  const { selectedPlace, updatePlace, loading } = useUserData();
   const [placeList, setPlaceList] = useState<PlaceData[]>([]);
-  const [selectedPlace, setSelectedPlace] = useState<PlaceData | null>(null);
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
@@ -24,8 +17,8 @@ const LocationSelector = () => {
       if (error || !data || data.length === 0) {
         // Fallback with basic structure
         const fallbackPlaces: PlaceData[] = [
-          { id: 1, place: "Delhi", region: "India" },
-          { id: 2, place: "California", region: "USA" },
+          { id: 1, place: "California", region: "USA" },
+          { id: 2, place: "Delhi", region: "India" },
           { id: 3, place: "Paris", region: "France" },
         ];
         setPlaceList(fallbackPlaces);
@@ -36,41 +29,16 @@ const LocationSelector = () => {
     fetchPlaces();
   }, []);
 
+  // Update selected place if it's not in the current place list
   useEffect(() => {
-    const storedUserData = localStorage.getItem("userData");
-    if (storedUserData) {
-      try {
-        const parsedData = JSON.parse(storedUserData);
-        const foundPlace = placeList.find(
-          (p) => p.place === parsedData.selectedPlaceData?.place
-        );
-        if (foundPlace) {
-          setSelectedPlace(foundPlace);
-          return;
-        }
-      } catch (error) {
-        console.error("Error parsing stored user data:", error);
+    if (placeList.length > 0 && selectedPlace && !loading) {
+      const foundPlace = placeList.find((p) => p.place === selectedPlace.place);
+      if (!foundPlace) {
+        // If current selected place is not in the list, update to first place
+        updatePlace(placeList[0]);
       }
     }
-    // Fallback to first place if no stored data or stored place not found
-    if (placeList.length > 0) {
-      const defaultPlace = placeList[0];
-      setSelectedPlace(defaultPlace);
-      // Set userData with selectedPlaceData
-      const userData = localStorage.getItem("userData");
-      let parsedUserData = {};
-      if (userData) {
-        try {
-          parsedUserData = JSON.parse(userData);
-        } catch (error) {
-          console.log(error);
-          parsedUserData = {};
-        }
-      }
-      parsedUserData = { ...parsedUserData, selectedPlaceData: defaultPlace };
-      localStorage.setItem("userData", JSON.stringify(parsedUserData));
-    }
-  }, [placeList]);
+  }, [placeList, selectedPlace, updatePlace, loading]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -94,25 +62,11 @@ const LocationSelector = () => {
   }, [open]);
 
   const handlePlaceChange = (place: PlaceData) => {
-    setSelectedPlace(place);
-    // Update userData.selectedPlaceData
-    const userData = localStorage.getItem("userData");
-    let parsedUserData = {};
-    if (userData) {
-      try {
-        parsedUserData = JSON.parse(userData);
-      } catch (error) {
-        console.log(error);
-        parsedUserData = {};
-      }
-    }
-    parsedUserData = { ...parsedUserData, selectedPlaceData: place };
-    localStorage.setItem("userData", JSON.stringify(parsedUserData));
-    window.dispatchEvent(new Event("storage"));
+    updatePlace(place);
     setOpen(false);
   };
 
-  if (!placeList.length) return null;
+  if (!placeList.length || loading) return null;
 
   return (
     <div className="relative inline-block">

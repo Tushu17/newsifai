@@ -31,7 +31,8 @@ const SignupRequestModal: React.FC<SignupRequestModalProps> = ({
   isOpen,
   onClose,
   title = "Sign Up — Help Us Help You 🧠",
-  message = "When you sign up, we can tailor the news just for you — sharper topics, better niche coverage, and personalized insights. First 200 subscribers may get free access to premium features for a month when we launch them. Plus, it helps us make Newsifai even better for everyone. (No spam, just smart stuff.)",
+  message = "Save time by tracking what you've already read. Sign up to see only new topics and unread news — no more scrolling through the same content twice. First 200 subscribers may get free access to premium features for a month when we launch them. Plus, it helps us make Newsifai even better for everyone.",
+
   showBenefits = false,
   variant = "default",
 }) => {

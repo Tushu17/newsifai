@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import Categorybox from "../categorybox/categorybox";
 import Scroller from "../scroller/scroller";
 import AiTopicScroller from "../aitopicscroller/aitopicscroller";
+import { useUserData } from "@/contexts";
 import { FiHome } from "react-icons/fi";
 import { MdOutlineExplore } from "react-icons/md";
 import { TbCategoryPlus } from "react-icons/tb";
 // this component work as a nesting for all three other components
 // it is used to handle the small screen layout and the large screen layout
-// it is also used to handle the storage of the selected place data
 // it is also used to handle the switching of the active menu
 
 // Floating Capsule Menu for small screens
@@ -45,48 +45,15 @@ const FloatingCapsuleMenu = ({
   </div>
 );
 
-// Define the type for userData
-interface UserData {
-  selectedPlaceData: {
-    id: number;
-    place: string;
-    region: string;
-  };
-}
-
 const Homefeed = () => {
+  const { selectedPlace, loading } = useUserData();
   const [activeMenu, setActiveMenu] = useState<string>("infobox");
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
-
-  const [userData, setUserData] = useState<UserData | undefined>(undefined);
 
   // this is to scroll component to top when a small screen user swithces between component
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [activeMenu]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUserData = localStorage.getItem("userData");
-      if (storedUserData) {
-        try {
-          setUserData(JSON.parse(storedUserData));
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      // this data is solely stored for the first time users when there is userData is undefined or localstorage has no saved data
-      if (!storedUserData) {
-        setUserData({
-          selectedPlaceData: {
-            id: 1,
-            place: "Delhi",
-            region: "India",
-          },
-        });
-      }
-    }
-  }, []);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -108,26 +75,8 @@ const Homefeed = () => {
     }
   }, [isSmallScreen]);
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const storedUserData = localStorage.getItem("userData");
-
-      if (storedUserData) {
-        try {
-          setUserData(JSON.parse(storedUserData));
-        } catch (error) {
-          console.error("Error parsing stored user data:", error);
-        }
-      }
-    };
-    window.addEventListener("storage", handleStorageChange);
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
-
-  // this is to show for loading face
-  if (!userData || !userData.selectedPlaceData) {
+  // Show loading state while context is initializing
+  if (loading || !selectedPlace) {
     return (
       <div className="min-h-screen bg-gray-200 dark:bg-gray-900 flex items-center justify-center">
         <div className="flex flex-col items-center">
@@ -169,16 +118,8 @@ const Homefeed = () => {
   if (isSmallScreen) {
     return (
       <div className="relative min-h-screen bg-transparent">
-        {activeMenu === "infobox" && (
-          <AiTopicScroller
-            selectedPlaceData={userData.selectedPlaceData}
-            isSmallScreen={true}
-            onClose={() => {}}
-          />
-        )}
-        {activeMenu === "scroller" && (
-          <Scroller selectedPlaceData={userData.selectedPlaceData} />
-        )}
+        {activeMenu === "infobox" && <AiTopicScroller />}
+        {activeMenu === "scroller" && <Scroller />}
         {activeMenu === "categorybox" && <Categorybox />}
         <FloatingCapsuleMenu active={activeMenu} onSwitch={setActiveMenu} />
       </div>
@@ -192,18 +133,14 @@ const Homefeed = () => {
         {/* Infobox Section */}
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-            <AiTopicScroller
-              selectedPlaceData={userData.selectedPlaceData}
-              isSmallScreen={false}
-              onClose={() => {}}
-            />
+            <AiTopicScroller />
           </div>
         </span>
 
         {/* Scroller Section */}
         <span>
           <div className="lg:mr-3 lg:h-[82vh] h-full mt-2">
-            <Scroller selectedPlaceData={userData.selectedPlaceData} />
+            <Scroller />
           </div>
         </span>
 

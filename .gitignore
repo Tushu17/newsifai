@@ -47,3 +47,5 @@ design.md
 
 # Ignore all Supabase edge function source files
 supabase/
+
+documentation/

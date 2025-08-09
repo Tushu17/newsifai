@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/footer/footer";
 import SigninWrapper from "./components/signinwrapper/signinwrapper";
+import { UserDataProvider } from "@/contexts";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -17,6 +18,17 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-serif",
   subsets: ["latin"],
 });
+
+// this is because navbar is scrolling up in mobile devices
+export function generateViewport() {
+  return {
+    width: "device-width",
+    initialScale: 1,
+    userScalable: true,
+    maximumScale: 2.0,
+    minimumScale: 1,
+  };
+}
 
 export const metadata: Metadata = {
   title: "Newsifai – Information wrapped in entertainment",
@@ -65,12 +77,14 @@ export default function RootLayout({
       <body
         className={`${geistInter.variable} ${geistMono.variable} antialiased`}
       >
-        <SigninWrapper>
-          <Loadingbar />
-          <Navbar />
-          {children}
-          <Footer />
-        </SigninWrapper>
+        <UserDataProvider>
+          <SigninWrapper>
+            <Loadingbar />
+            <Navbar />
+            {children}
+            <Footer />
+          </SigninWrapper>
+        </UserDataProvider>
       </body>
     </html>
   );
