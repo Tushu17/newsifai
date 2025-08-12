@@ -55,15 +55,13 @@ export const metadata: Metadata = {
       "Your daily AI-curated news digest. No spam. No scroll guilt. Just pure infotainment.",
     url: "https://newsifai.com",
     siteName: "Newsifai",
-    images: [
-      {
-        url: "https://systmzaxlbymwcsrserr.supabase.co/storage/v1/object/public/images//logo.png", // update with your OG image URL
-        width: 1200,
-        height: 630,
-        alt: "Newsifai Open Graph Image",
-      },
-    ],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Newsifai – AI-Powered News",
+    description:
+      "Your daily AI-curated news digest. No spam. No scroll guilt. Just pure infotainment.",
   },
 };
 
