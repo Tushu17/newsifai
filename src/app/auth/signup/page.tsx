@@ -14,6 +14,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordErrors, setPasswordErrors] = useState<string[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,19 +28,55 @@ const Signup = () => {
     }
   }, [router]);
 
+  // Password validation function
+  const validatePassword = (password: string): string[] => {
+    const errors: string[] = [];
+
+    if (password.length < 8) {
+      errors.push("At least 8 characters long");
+    }
+    if (!/[A-Z]/.test(password)) {
+      errors.push("At least one uppercase letter");
+    }
+    if (!/[a-z]/.test(password)) {
+      errors.push("At least one lowercase letter");
+    }
+    if (!/\d/.test(password)) {
+      errors.push("At least one number");
+    }
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+      errors.push("At least one special character");
+    }
+
+    return errors;
+  };
+
+  const isPasswordStrong = (password: string): boolean => {
+    return validatePassword(password).length === 0;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name == "name") {
       setName(e.target.value);
     } else if (e.target.name == "email") {
       setEmail(e.target.value);
     } else if (e.target.name == "password") {
-      setPassword(e.target.value);
+      const newPassword = e.target.value;
+      setPassword(newPassword);
+      setPasswordErrors(validatePassword(newPassword));
     }
   };
 
   // Supabase handleSubmit
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Check password strength before submitting
+    if (!isPasswordStrong(password)) {
+      toast.error("Please ensure your password meets all requirements");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -198,15 +235,76 @@ const Signup = () => {
                   autoComplete="off"
                   required
                   placeholder="A!B@c#$@1234"
-                  className="w-full py-1 px-3 leading-8 text-slate-900 border border-slate-300 rounded-lg bg-slate-100 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-slate-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className={`w-full py-1 px-3 leading-8 text-slate-900 border rounded-lg bg-slate-100 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-slate-200 dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                    password && passwordErrors.length > 0
+                      ? "border-red-500 dark:border-red-500"
+                      : password && passwordErrors.length === 0
+                      ? "border-green-500 dark:border-green-500"
+                      : "border-slate-300"
+                  }`}
                 />
               </div>
+
+              {/* Password Requirements */}
+              {password && (
+                <div className="mt-2 space-y-1">
+                  <p className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                    Password requirements:
+                  </p>
+                  <div className="space-y-1">
+                    {[
+                      {
+                        check: password.length >= 8,
+                        text: "At least 8 characters long",
+                      },
+                      {
+                        check: /[A-Z]/.test(password),
+                        text: "At least one uppercase letter",
+                      },
+                      {
+                        check: /[a-z]/.test(password),
+                        text: "At least one lowercase letter",
+                      },
+                      {
+                        check: /\d/.test(password),
+                        text: "At least one number",
+                      },
+                      {
+                        check: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(
+                          password
+                        ),
+                        text: "At least one special character",
+                      },
+                    ].map((requirement, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            requirement.check ? "bg-green-500" : "bg-red-500"
+                          }`}
+                        ></div>
+                        <span
+                          className={`text-xs ${
+                            requirement.check
+                              ? "text-green-600 dark:text-green-400"
+                              : "text-red-600 dark:text-red-400"
+                          }`}
+                        >
+                          {requirement.text}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div>
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={
+                  isLoading ||
+                  (password.length > 0 && !isPasswordStrong(password))
+                }
                 className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? "Signing up..." : "Sign up"}
