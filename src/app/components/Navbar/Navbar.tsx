@@ -56,11 +56,10 @@ const Navbar = () => {
             <div className="flex items-center">
               <Image
                 src="/logo.png"
-                width={33}
-                height={33}
-                className=" mr-3 sm:h-9"
-                alt="Landwind Logo"
-                style={{ height: "auto" }}
+                width={36}
+                height={36}
+                className="w-8 h-8 sm:w-9 sm:h-9 object-contain aspect-square mr-3"
+                alt="Newsifai Logo"
               />
 
               <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
